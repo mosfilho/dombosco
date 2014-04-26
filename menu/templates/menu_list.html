@@ -1,0 +1,15 @@
+{% load menus %}
+<ul>
+{% for menu in menus %}
+   <li>
+      <a href = "{{ menu.get_absolute_url }}"> {{ menu.title }} </a>
+      {% if not menu.is_child %}
+         <ul>
+            {% for sub_menu in menu|get_submenus %}
+               <li><a href="{{ sub_menu.get_absolute_url }}">{{ sub_menu.title }}</a></li>
+            {% endfor %}
+         </ul>
+      {% endif %}
+   </li>
+{% endfor %}
+</ul>

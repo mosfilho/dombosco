@@ -1,0 +1,94 @@
+
+{% extends "base.html" %}
+{% block css %}
+   <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/content.css">
+{% endblock %}
+{% block content %}
+   <div class="container">
+      <div class="row">
+         <section class="col-md-8">
+            <ol class="breadcrumb" style="font-size: 90%">
+              <li><a href="#">Página Inicial</a></li>
+              <li><a href="#">Portal</a></li>
+              <li><a href="#">Galeria de Fotos</a></li>
+              <li class="active">Confira o novo site</li>
+            </ol>
+
+            <h3 class="title">Confira o novo site</h3>
+
+            <div class="col-xs-6 col-md-4">
+               <a href="#" class="thumbnail">
+                 <img data-src="holder.js/100%x180" alt="...">
+               </a>
+            </div>
+
+            <div class="col-xs-6 col-md-4">
+               <a href="#" class="thumbnail">
+                 <img data-src="holder.js/100%x180" alt="...">
+               </a>
+            </div>
+
+            <div class="col-xs-6 col-md-4">
+               <a href="#" class="thumbnail">
+                 <img data-src="holder.js/100%x180" alt="...">
+               </a>
+            </div>
+
+            <div class="col-xs-6 col-md-4">
+               <a href="#" class="thumbnail">
+                 <img data-src="holder.js/100%x180" alt="...">
+               </a>
+            </div>
+
+            <div class="col-xs-6 col-md-4">
+               <a href="#" class="thumbnail">
+                 <img data-src="holder.js/100%x180" alt="...">
+               </a>
+            </div>
+
+            <div class="col-xs-6 col-md-4">
+               <a href="#" class="thumbnail">
+                 <img data-src="holder.js/100%x180" alt="...">
+               </a>
+            </div>
+
+            <div class="col-xs-6 col-md-4">
+               <a href="#" class="thumbnail">
+                 <img data-src="holder.js/100%x180" alt="...">
+               </a>
+            </div>
+
+            <div class="col-xs-6 col-md-4">
+               <a href="#" class="thumbnail">
+                 <img data-src="holder.js/100%x180" alt="...">
+               </a>
+            </div>
+
+            <div class="col-xs-6 col-md-4">
+               <a href="#" class="thumbnail">
+                 <img data-src="holder.js/100%x180" alt="...">
+               </a>
+            </div>
+
+            <div class="col-xs-6 col-md-4">
+               <a href="#" class="thumbnail">
+                 <img data-src="holder.js/100%x180" alt="...">
+               </a>
+            </div>
+
+          </section>
+
+          <aside class="col-md-4">
+              {% include "last-contents.html" %}
+              {% include "hot-contents.html" %}
+          </aside>
+
+          <div style="clear: both"></div>
+
+          <section class="col-md-12">
+              {% include "related-contents.html" %}
+          </div>
+
+       </div>
+    </div>
+{% endblock %}

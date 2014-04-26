@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block css %}
+   <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/content.css">
+{% endblock %}
+{% block content %}
+   <div class="container">
+      <div class="row">
+         <section class="col-md-8">
+            <ol class="breadcrumb" style="font-size: 90%">
+              <li><a href="#">Página Inicial</a></li>
+              <li><a href="#">Portal</a></li>
+              <li><a href="#">Artigo</a></li>
+              <li class="active">Novo visual do site é implatado, confira o que mudou</li>
+            </ol>
+            <article class="content-article">
+               <p><span class="glyphicon glyphicon-calendar"></span> <small>11/04/2014 19h04 - Atualizado em 11/04/2014 19h28</small></p>
+               <h1>Novo visual do site é implatado, confira o que mudou</h1>
+               <hr />
+               <p class="author">
+                   por <a class="author-name" href="javascript:void(0)">Fulano de Tal</a> 
+               </p>
+               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec libero vel neque tempus lacinia. Etiam non elit nec risus vulputate luctus. Proin arcu dolor, faucibus vel ligula in, congue dictum ante. Aliquam erat volutpat. Donec molestie placerat nulla id eleifend. Vivamus posuere libero vel tristique egestas. Quisque quis ligula non eros ullamcorper consectetur sit amet et sem. Quisque nunc orci, venenatis nec tincidunt vitae, vulputate quis quam. Integer id sem orci. Donec ac leo at arcu adipiscing hendrerit in ac nisi. Maecenas congue, lorem quis consectetur blandit, sem tortor ultrices odio, at sagittis nulla velit a tellus. Phasellus imperdiet massa et laoreet consequat. Curabitur sit amet erat pharetra, facilisis lectus at, pellentesque nisl.</p>
+               <p>Vestibulum non dignissim velit. Nullam volutpat ante ut sapien venenatis convallis. Sed id ligula augue. Phasellus eleifend consectetur odio, a dignissim mi rhoncus id. Pellentesque rhoncus molestie ante sed vestibulum. Phasellus id dolor nunc. In imperdiet congue lectus vel sollicitudin.</p>
+               <figure>
+                  <img data-src="holder.js/auto/sky/450x300" alt="Título do Artigo">
+                  <figurecaption> <p>Lengenda da imagem, como, por exemplo, a fonte da mesma.</p> </figurecaption>
+               </figure>
+               <p>Nam vitae quam in justo lobortis adipiscing. Integer volutpat justo ipsum, et dapibus tellus aliquet id. Donec auctor augue eget mauris vestibulum porta mattis eget metus. Phasellus sodales mi quis ipsum euismod, at malesuada odio vestibulum. Vivamus egestas iaculis nisl, non ultrices sapien adipiscing sed. Sed neque nulla, aliquam id dui quis, rhoncus vulputate lorem. Vivamus euismod ornare tempor. Pellentesque nec turpis a quam volutpat facilisis lobortis in orci. Mauris dolor erat, ornare quis sagittis ut, mollis eu odio. In dignissim lobortis leo, et rutrum dui blandit a. Suspendisse eros lectus, porttitor non faucibus quis, scelerisque pharetra lacus. Maecenas consequat semper mollis. Donec ullamcorper, sem eu lobortis rhoncus, lacus erat euismod neque, a porttitor erat orci eu lorem.</p>
+               <p>Phasellus in sapien at velit pulvinar rhoncus. Aenean orci sem, porta ut consequat in, hendrerit eu augue. Duis facilisis a nisi ac laoreet. Curabitur non malesuada diam, sed tristique metus. Curabitur id sodales ligula. In bibendum ipsum enim, quis tempor orci lobortis vel. Curabitur ultrices ac enim eget blandit. Mauris imperdiet consectetur feugiat.</p>
+               <p>Morbi varius dui at molestie rutrum. Duis fermentum eros ac libero adipiscing, et pharetra nibh ultricies. In mauris sem, tempor vitae eleifend vitae, tempus eu purus. Duis auctor orci dapibus lacus viverra, laoreet venenatis nunc pharetra. Praesent eget ante quis tellus lacinia sodales. Suspendisse auctor justo nunc, a porta lorem vestibulum vehicula. Donec eu ornare mauris. Sed libero urna, egestas ac elit ac, malesuada ornare tortor. In facilisis vulputate urna ac auctor. Nullam blandit, odio et egestas consequat, tortor augue adipiscing eros, non placerat nibh dolor in lectus. Nunc risus nisl, pharetra et ligula quis, tincidunt laoreet massa. Donec ac magna lacinia tortor elementum dictum. Nunc congue malesuada nisi id semper. Suspendisse pellentesque metus augue, tristique ultricies ante rhoncus eget. Vestibulum vitae dolor a velit porttitor mollis ac eget tellus. Etiam a pulvinar lorem.</p>
+               <hr />
+               <p class="tools-content">
+                  <p style="float:right; line-height: 30px; vertical-align: middle;">
+                      <a href="javascript:void(0)" class="icon-social icon-social-facebook"></a>
+                      <a href="javascript:void(0)" class="icon-social icon-social-twitter"></a>
+                      <a href="javascript:void(0)" class="icon-social icon-social-google"></a>
+                  </p>
+                  <button><span class="glyphicon glyphicon-print"></span> imprimir</button>
+                  <button><span class="glyphicon glyphicon-envelope"></span> enviar</button>
+               </p>
+             </article> 
+
+             <div>
+                <h3 class="title">Comentários</h3>
+                <p>Utilizar pugin facebook social</p>
+             </div> 
+
+          </section>
+
+          <aside class="col-md-4">
+              {% include "last-contents.html" %}
+              {% include "hot-contents.html" %}
+          </aside>
+
+          <div style="clear: both"></div>
+
+          <section class="col-md-12">
+              {% include "related-contents.html" %}
+          </div>
+
+       </div>
+    </div>
+{% endblock %}

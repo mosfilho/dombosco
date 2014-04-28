@@ -35,11 +35,12 @@
 
       {% block "header" %}{% endblock %}
 
-      <title>{% block title  %}Colégio Dom Bosco{% endblock %}</title>
+      <title>{% block title  %}{{ site.name }}{% endblock %}</title>
 
    </head>
    <body role="document">
    {% menu_list %}
+   {% block breadcrumb %}{% endblock %}
    {% block content %}{% endblock %}
        
    </body>

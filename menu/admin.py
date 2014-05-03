@@ -5,10 +5,12 @@ from models import Menu
 from django.contrib.flatpages.admin import FlatpageForm, FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 from django.utils.translation import ugettext_lazy as _
+from redactor.widgets import RedactorEditor
 
 class MenuForm(FlatpageForm):
     class Meta:
         model = Menu
+        widgets = {'content' : RedactorEditor()}
 
 class MenuAdmin(FlatPageAdmin):
     form = MenuForm

@@ -32,7 +32,7 @@ SITE_ID = 2
 # Application definition
 
 INSTALLED_APPS = (
-    'south',
+    #'south',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,8 +44,10 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'filer',
     'fullcalendar',
+    'redactor',
     'menu',
     'portal',
+    'siteconfig',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -73,6 +75,17 @@ DATABASES = {
     }
 }
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE':'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'dombosco',
+#        'USER': 'postgres',
+#        'PASSWORD': '123',
+#        'HOST': '127.0.0.1',
+#        'PORT': '5432',
+#    }
+#}
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -91,3 +104,68 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+TEMPLATE_DIRS = (
+	os.path.join(BASE_DIR,'templates'),
+)
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    'django.core.context_processors.request',
+    'dombosco.context_processors.site',
+)
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
+
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    #'easy_thumbnails.processors.scale_and_crop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
+STATIC_ROOT = os.path.join(BASE_DIR,'static/')
+
+REDACTOR_OPTIONS = {
+    'lang': 'en',
+}
+REDACTOR_UPLOAD = 'media/redactor/'
+#REDACTOR_UPLOAD_HANDLER = 'redactor.handlers.DateDirectoryUploader'

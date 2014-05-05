@@ -3,6 +3,8 @@
 from django.db import models
 from django.contrib.sites.models import Site
 from filer.fields.image import FilerImageField
+from easy_thumbnails.files import get_thumbnailer
+from django.conf import settings
 
 class SiteConfig(Site):
     facebook_id = models.CharField(max_length = 200, blank = True, null = True )
@@ -17,3 +19,6 @@ class SiteConfig(Site):
     class Meta:
         verbose_name = u'Site'
         verbose_name_plural = u'Sites'
+
+    def get_logo_url(self):
+        return '%s%s' %(settings.MEDIA_URL, get_thumbnailer(self.logo_menu))

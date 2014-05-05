@@ -1,0 +1,359 @@
+{% extends "base.html" %}
+{% block content %}
+   
+      <div class="bs-site bs-site-main">
+    
+          <div id="main-carousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#main-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#main-carousel" data-slide-to="1"></li>
+          </ol>
+        
+             <!-- Wrapper for slides -->
+             <div class="carousel-inner">
+                <div class="item active">
+                   <img src="{{ MEDIA_URL}}example/01.jpg" alt="Primeiro slide" style="width:100%">
+                   <div class="carousel-caption">
+                       <h3>Título da notícia</h3>
+                       <div class="hidden-xs hidden-sm">
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempus tellus ac viverra ornare. Morbi ut faucibus nisi, ut fermentum est. Phasellus elementum augue sed pellentesque tristique. Pellentesque in faucibus magna. Proin adipiscing molestie sapien. Nulla volutpat ultrices tellus. Pellentesque vitae felis ligula. Nullam sollicitudin ut nibh at elementum. Suspendisse eu purus a lectus sollicitudin bibendum. Aliquam ipsum risus, feugiat id pellentesque non, hendrerit vel dui.</p>
+                      </div>
+                       <p style="text-align: center"><a class="btn btn-lg btn-primary" href="#" role="button">Leia mais</a></p>
+                   </div>
+                </div>
+                <div class="item">
+                   <img src="{{ MEDIA_URL}}example/02.jpg" alt="Primeiro slide" style="width:100%">
+                   <div class="carousel-caption">
+                       <h3>Título da notícia</h3>
+                       <div class="hidden-xs hidden-sm">
+                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempus tellus ac viverra ornare. Morbi ut faucibus nisi, ut fermentum est. Phasellus elementum augue sed pellentesque tristique. Pellentesque in faucibus magna. Proin adipiscing molestie sapien. Nulla volutpat ultrices tellus. Pellentesque vitae felis ligula. Nullam sollicitudin ut nibh at elementum. Suspendisse eu purus a lectus sollicitudin bibendum. Aliquam ipsum risus, feugiat id pellentesque non, hendrerit vel dui.</p>
+                      </div>
+                      <p style="text-align: center"><a class="btn btn-lg btn-primary" href="#" role="button">Leia mais</a></p>
+                   </div>
+                </div>
+             </div>
+           
+             <!-- Controls -->
+             <a class="left carousel-control" href="#main-carousel" data-slide="prev">
+               <span class="glyphicon glyphicon-chevron-left"></span>
+             </a>
+             <a class="right carousel-control" href="#main-carousel" data-slide="next">
+               <span class="glyphicon glyphicon-chevron-right"></span>
+             </a>
+           </div>
+
+       </div>
+
+       <div style="clear:both"></div>
+
+       
+   <div class="container">
+
+       <div class="row" style="padding: 0px 20px 20px 20px">
+
+           <section class="col-xs-12 col-md-8">
+               <div class="row">
+                   <article class="col-md-6">
+                      <p><a href="javascript:void(0)"><small>#colegioDomBosco</small></a></p>
+                      <a href="javascript:void(0)" class="article-link">
+                        <figure class="animade-caption" class="hidden-xs">
+                          <img data-src="holder.js/auto/350x200" alt="Título do Artigo" class="hidden-xs">
+                          <figcaption>
+                            <p style="margin-top:25px">
+                              <span class="glyphicon glyphicon-calendar">13/05/2014</span>
+                            </p>
+                            <p>
+                              <span onclick="javascript:void(0)" class="icon-social icon-social-facebook"></span>
+                              <span onclick="javascript:void(0)" class="icon-social icon-social-twitter"></span>
+                              <span onclick="javascript:void(0)" class="icon-social icon-social-google"></span>
+                            </p>
+                            <p>115 curtidas</p>
+                            <p><span class="glyphicon glyphicon-comment"></span> 10 comentário(s)</p>
+                            <p><span class="glyphicon glyphicon-user"></span><small> por <span class="invert" onclick="javascript:void(0)">Fulano de Tal</span></small></p>
+                          </figcaption>
+                        </figure>
+                        <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                      </a>
+                   </article>
+  
+                   <section class="col-md-6" style="margin-top: 27px;"> 
+                     <div class="row">
+
+                       <article class="col-md-12">
+                          <a href="javascript:void(0)" class="article-link">
+                            <figure class="animade-caption" style="max-width:95px; float: left; margin-right: 5px;">
+                               <img data-src="holder.js/auto/95x80" alt="Título do Artigo" align="left">
+                               <figcaption>
+                               <p>
+                                 <span onclick="javascript:void(0)" class="icon-social icon-social-facebook"></span>
+                                 <span onclick="javascript:void(0)" class="icon-social icon-social-twitter"></span>
+                                 <span onclick="javascript:void(0)" class="icon-social icon-social-google"></span>
+                               </p>
+                               </figcaption>
+                            </figure>
+                            <p><b>10/05/2014</b></p>
+                            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+                          </a>
+                       </article>
+
+                       <article class="col-md-12" style="margin-top: 20px">
+                          <a href="javascript:void(0)" class="article-link">
+                            <figure class="animade-caption" style="max-width:95px; float: left; margin-right: 5px;">
+                               <img data-src="holder.js/auto/95x80" alt="Título do Artigo" align="left">
+                               <figcaption>
+                               <p>
+                                 <span onclick="javascript:void(0)" class="icon-social icon-social-facebook"></span>
+                                 <span onclick="javascript:void(0)" class="icon-social icon-social-twitter"></span>
+                                 <span onclick="javascript:void(0)" class="icon-social icon-social-google"></span>
+                               </p>
+                               </figcaption>
+                            </figure>
+                            <p><b>10/05/2014</b></p>
+                            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+                          </a>
+                       </article>
+
+                       <article class="col-md-12" style="margin-top: 20px">
+                          <a href="javascript:void(0)" class="article-link">
+                            <figure class="animade-caption" style="max-width:95px; float: left; margin-right: 5px;">
+                               <img data-src="holder.js/auto/95x80" alt="Título do Artigo" align="left">
+                               <figcaption>
+                               <p>
+                                 <span onclick="javascript:void(0)" class="icon-social icon-social-facebook"></span>
+                                 <span onclick="javascript:void(0)" class="icon-social icon-social-twitter"></span>
+                                 <span onclick="javascript:void(0)" class="icon-social icon-social-google"></span>
+                               </p>
+                               </figcaption>
+                            </figure>
+                            <p><b>10/05/2014</b></p>
+                            <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+                          </a>
+                       </article>
+    
+                     </div>
+                   </section>
+
+               </div>
+
+
+               <div class="row" style="margin-top: 30px">
+                
+                   <div id="second-carousel" class="carousel slide" data-ride="carousel">
+                   <!-- Indicators -->
+                   <ol class="carousel-indicators">
+                      <li data-target="#second-carousel" data-slide-to="0" class="active"></li>
+                      <li data-target="#second-carousel" data-slide-to="1"></li>
+                   </ol>
+
+                   <!-- Wrapper for slides -->
+                   <div class="carousel-inner">
+                      <div class="item active">
+                         <img src="{{ MEDIA_URL}}example/01.jpg" alt="Primeiro slide" style="width:100%">
+                         <div class="carousel-caption">
+                            <h3 class="caption-title">TÍTULO DA NOTÍCIA COM MAIS DE 50 CARACTERES PARA ...</h3>
+                         </div>
+                      </div>
+                      <div class="item">
+                         <img src="{{ MEDIA_URL}}example/02.jpg" alt="Primeiro slide" style="width:100%">
+                         <div class="carousel-caption">
+                            <h3 class="caption-title">TÍTULO DA NOTÍCIA COM MAIS DE 50 CARACTERES PARA ...</h3>
+                         </div>
+                      </div>
+                   </div>
+                    
+                   <!-- Controls -->
+                   <a class="left carousel-control" href="#second-carousel" data-slide="prev">
+                     <span class="glyphicon glyphicon-chevron-left"></span>
+                   </a>
+                   <a class="right carousel-control" href="#second-carousel" data-slide="next">
+                     <span class="glyphicon glyphicon-chevron-right"></span>
+                   </a>
+
+               </div>
+
+               <div class="row" style="margin-top: 20px">
+                   <article class="col-md-6">
+                      <p><a href="javascript:void(0)"><small>#colegioDomBosco</small></a></p>
+                      <a href="javascript:void(0)"><h3>Escola altera visual do site</h3></a>
+                   </article>
+                   <article class="col-md-6">
+                      <p><a href="javascript:void(0)"><small>#colegioDomBosco</small></a></p>
+                      <a href="javascript:void(0)"><h3>Novo site com mais funcionalidade para vocês</h3></a>
+                   </article>
+               </div>
+
+               <hr />
+
+               <div class="row" style="margin-top: 20px">
+
+                   <article class="col-md-6">
+                      <a href="javascript:void(0)" class="article-link">
+                        <figure class="animade-caption" style="max-width:95px; float: left; margin-right: 5px;">
+                           <img data-src="holder.js/auto/95x80" alt="Título do Artigo" align="left">
+                           <figcaption>
+                           <p>
+                             <span onclick="javascript:void(0)" class="icon-social icon-social-facebook"></span>
+                             <span onclick="javascript:void(0)" class="icon-social icon-social-twitter"></span>
+                             <span onclick="javascript:void(0)" class="icon-social icon-social-google"></span>
+                           </p>
+                           </figcaption>
+                        </figure>
+                        <p><b>10/05/2014</b></p>
+                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+                      </a>
+                   </article>
+
+                   <article class="col-md-6">
+                      <a href="javascript:void(0)" class="article-link">
+                        <figure class="animade-caption" style="max-width:95px; float: left; margin-right: 5px;">
+                           <img data-src="holder.js/auto/95x80" alt="Título do Artigo" align="left">
+                           <figcaption>
+                           <p>
+                             <span onclick="javascript:void(0)" class="icon-social icon-social-facebook"></span>
+                             <span onclick="javascript:void(0)" class="icon-social icon-social-twitter"></span>
+                             <span onclick="javascript:void(0)" class="icon-social icon-social-google"></span>
+                           </p>
+                           </figcaption>
+                        </figure>
+                        <p><b>10/05/2014</b></p>
+                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+                      </a>
+                   </article>
+
+               </div>
+
+               <div class="row" style="margin-top: 20px">
+
+                   <article class="col-md-6">
+                      <a href="javascript:void(0)" class="article-link">
+                        <figure class="animade-caption" style="max-width:95px; float: left; margin-right: 5px;">
+                           <img data-src="holder.js/auto/95x80" alt="Título do Artigo" align="left">
+                           <figcaption>
+                           <p>
+                             <span onclick="javascript:void(0)" class="icon-social icon-social-facebook"></span>
+                             <span onclick="javascript:void(0)" class="icon-social icon-social-twitter"></span>
+                             <span onclick="javascript:void(0)" class="icon-social icon-social-google"></span>
+                           </p>
+                           </figcaption>
+                        </figure>
+                        <p><b>10/05/2014</b></p>
+                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+                      </a>
+                   </article>
+
+                   <article class="col-md-6">
+                      <a href="javascript:void(0)" class="article-link">
+                        <figure class="animade-caption" style="max-width:95px; float: left; margin-right: 5px;">
+                           <img data-src="holder.js/auto/95x80" alt="Título do Artigo" align="left">
+                           <figcaption>
+                           <p>
+                             <span onclick="javascript:void(0)" class="icon-social icon-social-facebook"></span>
+                             <span onclick="javascript:void(0)" class="icon-social icon-social-twitter"></span>
+                             <span onclick="javascript:void(0)" class="icon-social icon-social-google"></span>
+                           </p>
+                           </figcaption>
+                        </figure>
+                        <p><b>10/05/2014</b></p>
+                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+                      </a>
+                   </article>
+
+               </div>
+
+               <hr />
+
+               <div class="row" style="margin-top: 20px">
+
+                   <section class="col-md-6">
+                      <div class="row">
+                         <article class="col-md-12">
+                            <a href="javascript:void(0)" class="article-link">
+                              <figure class="animade-caption" style="max-width:95px; float: left; margin-right: 5px;">
+                                 <img data-src="holder.js/auto/95x80" alt="Título do Artigo" align="left">
+                                 <figcaption>
+                                 <p>
+                                   <span onclick="javascript:void(0)" class="icon-social icon-social-facebook"></span>
+                                   <span onclick="javascript:void(0)" class="icon-social icon-social-twitter"></span>
+                                   <span onclick="javascript:void(0)" class="icon-social icon-social-google"></span>
+                                 </p>
+                                 </figcaption>
+                              </figure>
+                              <p><b>10/05/2014</b></p>
+                              <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+                            </a>
+                         </article>
+
+                         <article class="col-md-12">
+                             <a href="javascript:void(0)"><h3>Novo site com mais funcionalidade para vocês</h3></a>
+                         </article>
+      
+                         <article class="col-md-12" style="margin-top: 20px">
+                            <a href="javascript:void(0)" class="article-link">
+                              <figure class="animade-caption" style="max-width:95px; float: left; margin-right: 5px;">
+                                 <img data-src="holder.js/auto/95x80" alt="Título do Artigo" align="left">
+                                 <figcaption>
+                                 <p>
+                                   <span onclick="javascript:void(0)" class="icon-social icon-social-facebook"></span>
+                                   <span onclick="javascript:void(0)" class="icon-social icon-social-twitter"></span>
+                                   <span onclick="javascript:void(0)" class="icon-social icon-social-google"></span>
+                                 </p>
+                                 </figcaption>
+                              </figure>
+                              <p><b>10/05/2014</b></p>
+                              <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h4>
+                            </a>
+                         </article>
+                      </div>
+                   </section>
+
+                   <article class="col-md-6">
+                      <p><a href="javascript:void(0)"><small>#colegioDomBosco</small></a></p>
+                      <a href="javascript:void(0)" class="article-link">
+                        <figure class="animade-caption" class="hidden-xs">
+                          <img data-src="holder.js/auto/350x200" alt="Título do Artigo" class="hidden-xs">
+                          <figcaption>
+                            <p style="margin-top:25px">
+                              <span class="glyphicon glyphicon-calendar">13/05/2014</span>
+                            </p>
+                            <p>
+                              <span onclick="javascript:void(0)" class="icon-social icon-social-facebook"></span>
+                              <span onclick="javascript:void(0)" class="icon-social icon-social-twitter"></span>
+                              <span onclick="javascript:void(0)" class="icon-social icon-social-google"></span>
+                            </p>
+                            <p>115 curtidas</p>
+                            <p><span class="glyphicon glyphicon-comment"></span> 10 comentário(s)</p>
+                            <p><span class="glyphicon glyphicon-user"></span><small> por <span class="invert" onclick="javascript:void(0)">Fulano de Tal</span></small></p>
+                          </figcaption>
+                        </figure>
+                        <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3>
+                      </a>
+                   </article>
+
+               </div>
+
+               <hr />
+
+           </section>
+
+           <aside class="col-xs-12 col-md-4">
+              <div class="row"> 
+                 <div class="col-md-12">
+                    {% include "fullcalendar.html" %}
+                 </div>
+                 <div class="col-md-12" style="margin-top: 35px">
+                    <iframe width="345" height="290" src="//www.youtube.com/embed/izDGRl51pAw" frameborder="0" allowfullscreen></iframe>
+                 </div>
+                 <div class="col-md-12" style="margin-top: 20px">
+                    <h3 class="title">Facebook</h3>
+                 </div>
+                 <div class="col-md-12" style="margin-top: 20px">
+                    <h3 class="title">Twitter</h3>
+                 </div>
+              </div>
+           </aside>
+       </div>
+
+   </div>
+      
+{% endblock %}

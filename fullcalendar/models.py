@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from portal.models import Agregador
 
 
 class CalendarEvent(models.Model):
@@ -28,6 +29,9 @@ class CalendarEvent(models.Model):
     start = models.DateTimeField(_('Start'))
     end = models.DateTimeField(_('End'))
     all_day = models.BooleanField(_('All day'), default=False)
+    text = models.TextField(blank = True, null = True)
+    feriado = models.BooleanField()
+    agregador = models.ForeignKey(Agregador, null = True, blank = True, editable = False, on_delete = models.SET_NULL)
 
     class Meta:
         verbose_name = _('Event')

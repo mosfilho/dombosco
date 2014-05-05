@@ -18,26 +18,30 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: models.py:27
+#: models.py:28
 msgid "Title"
 msgstr "Título"
 
-#: models.py:28
+#: models.py:29
 msgid "Start"
 msgstr "Início do Evento"
 
-#: models.py:29
+#: models.py:30
 msgid "End"
 msgstr "Final do Evento"
 
-#: models.py:30
+#: models.py:31
 msgid "All day"
 msgstr "Todo o dia"
 
-#: models.py:33
+#: models.py:32
+msgid "Text"
+msgstr "Texto"
+
+#: models.py:37
 msgid "Event"
 msgstr "Evento"
 
-#: models.py:34
+#: models.py:38
 msgid "Events"
 msgstr "Eventos"

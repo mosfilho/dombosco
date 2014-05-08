@@ -1,4 +1,5 @@
 {% load menus %}
+{% load static %}
 <! DOCTYPE html>
 <html lang="pt-br">
    <head>
@@ -7,12 +8,16 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <script src="{{ MEDIA_URL }}js/jquery-1.11.0.min.js"></script>
+      {% block head-link %}
+      <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+      <link href="{% static 'bxslider/jquery.bxslider.css' %}" rel="stylesheet">
+      <link href="{% static 'css/style.css' %}" rel="stylesheet">
+      {% menu_css %}
+      {% endblock %}
 
-      <!-- BOOTSTRAP -->
-      <link href="{{ MEDIA_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
-      <script src="{{ MEDIA_URL }}bootstrap/js/bootstrap.min.js"></script>
-      <script src="{{ MEDIA_URL }}js/holder.js"></script>
+      <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+      <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'js/holder.js' %}"></script>
 
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,12 +26,6 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]--> 
 
-      <!-- PLUGIN SLIDESHOW -->
-      <link href="{{ MEDIA_URL }}bxslider/jquery.bxslider.css" rel="stylesheet">
-      <script src="{{ MEDIA_URL }}bxslider/jquery.bxslider.min.js"></script>
-
-      <!-- CUSTOM STYLE OVERRIDE -->
-      <link href="{{ MEDIA_URL }}css/style.css" rel="stylesheet">
 
 
       {% block "header" %}{% endblock %}

@@ -1,77 +1,81 @@
 a.icon-navbar{
-   height: 48px;
-   width: 48px;
-   background-repeat: no-repeat;
-   background-position: center center;
-   background-color: red;
-   border: 1px solid blue;
+   height: 50px;
+   width: 50px;
 }
-/* navbar */
-.navbar-default {
-    background-color: #F8F8F8;
-    border-color: #E7E7E7;
+/* navbar oi*/
+.navbar-custom {
+    background-color: #fff;
+    border-bottom-color: #ccc;
+    box-shadow: 0px 1px 5px #dadada;
+    border-radius: 0px !important;
 }
 /* title */
-.navbar-default .navbar-brand {
-    color: #777;
+.navbar-custom .navbar-brand {
+    color: #133984;
 }
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
+.navbar-custom .navbar-brand:hover,
+.navbar-custom .navbar-brand:focus {
     color: #5E5E5E;
 }
 /* link */
-.navbar-default .navbar-nav > li > a {
+.navbar-custom .navbar-nav > li > a {
     color: #777;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    letter-spacing: -1px;
+    transition: color .1s linear 0.1s, background-color .2s linear 0.1s;
 }
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-    color: #333;
+.navbar-custom .navbar-nav > li > a:hover,
+.navbar-custom .navbar-nav > li > a:focus {
+    color: #205fdd;
+    background-color: #fff;
 }
-.navbar-default .navbar-nav > .active > a, 
-.navbar-default .navbar-nav > .active > a:hover, 
-.navbar-default .navbar-nav > .active > a:focus {
+.navbar-custom .navbar-nav > .active > a, 
+.navbar-custom .navbar-nav > .active > a:hover, 
+.navbar-custom .navbar-nav > .active > a:focus {
     color: #555;
-    background-color: #E7E7E7;
 }
-.navbar-default .navbar-nav > .open > a, 
-.navbar-default .navbar-nav > .open > a:hover, 
-.navbar-default .navbar-nav > .open > a:focus {
-    color: #555;
-    background-color: #D5D5D5;
+.navbar-custom .navbar-nav > .open > a, 
+.navbar-custom .navbar-nav > .open > a:hover, 
+.navbar-custom .navbar-nav > .open > a:focus {
+    color: #133984;
+/*    background-color: #D5D5D5;  */
+    background-color: #fff;
 }
 /* caret */
-.navbar-default .navbar-nav > .dropdown > a .caret {
+.navbar-custom .navbar-nav > .dropdown > a .caret {
     border-top-color: #777;
     border-bottom-color: #777;
+    transition: color .1s linear 0.1s, background-color .2s linear 0.1s;
 }
-.navbar-default .navbar-nav > .dropdown > a:hover .caret,
-.navbar-default .navbar-nav > .dropdown > a:focus .caret {
-    border-top-color: #333;
-    border-bottom-color: #333;
+.navbar-custom .navbar-nav > .dropdown > a:hover .caret,
+.navbar-custom .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #205fdd;
+    border-bottom-color: #205fdd;
 }
-.navbar-default .navbar-nav > .open > a .caret, 
-.navbar-default .navbar-nav > .open > a:hover .caret, 
-.navbar-default .navbar-nav > .open > a:focus .caret {
-    border-top-color: #555;
-    border-bottom-color: #555;
+.navbar-custom .navbar-nav > .open > a .caret, 
+.navbar-custom .navbar-nav > .open > a:hover .caret, 
+.navbar-custom .navbar-nav > .open > a:focus .caret {
+    border-top-color: #133984;
+    border-bottom-color: #133984;
 }
 /* mobile version */
-.navbar-default .navbar-toggle {
+.navbar-custom .navbar-toggle {
     border-color: #DDD;
 }
-.navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus {
+.navbar-custom .navbar-toggle:hover,
+.navbar-custom .navbar-toggle:focus {
     background-color: #DDD;
 }
-.navbar-default .navbar-toggle .icon-bar {
+.navbar-custom .navbar-toggle .icon-bar {
     background-color: #CCC;
 }
-@media (max-width: 767px) {
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    .navbar-custom .navbar-nav .open .dropdown-menu > li > a {
         color: #777;
+    transition: color .1s linear 0.1s, background-color .2s linear 0.1s;
     }
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-        color: #333;
+    .navbar-custom .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-custom .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #205fdd;
+        background-color: #fff;
     }
-}

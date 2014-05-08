@@ -5,8 +5,14 @@ from django.db.models import signals
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from filer.fields.image import FilerImageField
-from fullcalendar.models import CalendarEvent
 from django.contrib.contenttypes.models import ContentType
+
+class Agregador(models.Model):
+    id = models.AutoField(primary_key = True)
+
+    class Meta:
+        verbose_name = u'Agregador de Informações'
+        verbose_name_plural = u'Agregadores de Informações'
 
 
 class EstruturaConteudo (models.Model):
@@ -36,7 +42,7 @@ class Galeria (EstruturaConteudo):
     class Meta:
         verbose_name = u'Galeria de Imagem'
         verbose_name_plural = u'Galerias de Imagem'
-    pass
+    agregador = models.ForeignKey(Agregador, null = True, blank = True, editable = False, on_delete = models.SET_NULL)
 
 class ImagemGaleria (models.Model):
     galeria = models.ForeignKey(Galeria)
@@ -49,27 +55,38 @@ class ImagemGaleria (models.Model):
 class Publicacao (EstruturaConteudo):
     tipo_publicacao = models.ForeignKey(TipoPublicacao, null = True, blank = True, on_delete = models.SET_NULL) 
     texto = models.TextField()
-    imagem_apresentacao = FilerImageField()
+    imagem_apresentacao = FilerImageField(null = True, blank = True)
     autor = models.ForeignKey(User, related_name = 'autor', editable = False, null = True, blank = True, on_delete = models.SET_NULL)
     editor = models.ForeignKey(User, related_name = 'editor', editable = False, null = True, blank = True, on_delete = models.SET_NULL)
     data_criacao = models.DateTimeField(auto_now = True, verbose_name = u'Data da Criação')
     data_edicao = models.DateTimeField(editable = False, verbose_name = u'Data da Edição', blank = True, null = True)
+    agregador = models.ForeignKey(Agregador, null = True, blank = True, editable = False, on_delete = models.SET_NULL)
 
     class Meta:
         verbose_name = u'Publicação'
         verbose_name_plural = u'Publicações'
 
     def __unicode__(self):
-        return self.titulo
+        return self.nome
 
-class Informacao(models.Model):
-    publicacao = models.ForeignKey(Publicacao, blank = True, null = True, on_delete = models.SET_NULL)
-    evento = models.ForeignKey(CalendarEvent, blank = True, null = True, on_delete = models.SET_NULL)
-    galeria = models.ForeignKey(Galeria, blank = True, null = True, on_delete = models.SET_NULL)
+class TabelaLocal(models.Model):
+    local = models.CharField(max_length = 30, help_text = u'e.g: Slideshow, Topo do Site, etc')   
 
     class Meta:
-        verbose_name = u'Informação'
-        verbose_name_plural = u'Informações'
+        verbose_name = u'Tabela do Local'
+        verbose_name_plural = u'Tabelas do Local'
+
+    def __unicode__(self):
+        return self.local
+
+class LocalPublicacao(models.Model):
+    local = models.ForeignKey(TabelaLocal, null = True, blank = True, on_delete = models.SET_NULL)
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField(db_index = True)
+
+    class Meta:
+        verbose_name = u'Local da Publicação'
+        verbose_name_plural = u'Locais da Publicação'
 
 # www.aprendendodjango.com.br
 class Tag(models.Model):
@@ -86,17 +103,16 @@ class TagItem(models.Model):
     class Meta:
         unique_together = ('tag', 'content_type', 'object_id')
 
-
 ################################################## SIGNALS ###########################################################
 
-def conteudo_pre_save(signal, instance, sender, **kwargs):
+def publicacao_pre_save(signal, instance, sender, **kwargs):
    """Este signal gera um slug automaticamente. Ele verifica se ja existe um conteudo com o mesmo 
       slug e acrescenta um numero ao final para evitar duplicidade"""
    if not instance.slug:
-       slug = slugify(instance.titulo)
+       slug = slugify(instance.nome)
        novo_slug = slug
        contador = 0
-       while Conteudo.objects.filter(slug=novo_slug).exclude(id=instance.id).count() > 0:
+       while Publicacao.objects.filter(slug=novo_slug).exclude(id=instance.id).count() > 0:
            contador += 1
            novo_slug = '%s-%d'%(slug, contador)
        instance.slug = novo_slug
@@ -116,11 +132,11 @@ def galeria_pre_save(signal, instance, sender, **kwargs):
        slug = slugify(instance.nome)
        novo_slug = slug
        contador = 0
-       while Galeria_Imagem.objects.filter(slug=novo_slug).exclude(id=instance.id).count() > 0:
+       while Galeria.objects.filter(slug=novo_slug).exclude(id=instance.id).count() > 0:
            contador += 1
            novo_slug = '%s-%d'%(slug, contador)
        instance.slug = novo_slug
 
-signals.pre_save.connect(conteudo_pre_save, sender=Publicacao)
+signals.pre_save.connect(publicacao_pre_save, sender=Publicacao)
 signals.pre_save.connect(tipo_publicacao_pre_save, sender=TipoPublicacao)
 signals.pre_save.connect(galeria_pre_save, sender=Galeria)

@@ -18,9 +18,6 @@ class Menu(FlatPage):
     def __unicode__(self):
 	    return self.title
 
-    def save(self, *args, **kwargs):
-        super(Menu, self).save(*args, **kwargs)
-
     def is_child(self):
         if self.pagina_pai:
             return True

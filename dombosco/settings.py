@@ -41,8 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'easy_thumbnails',
     'filer',
+    'easy_thumbnails',
     'fullcalendar',
     'redactor',
     'menu',
@@ -159,6 +159,8 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
 )
+
+FILER_ENABLE_PERMISSIONS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media/')

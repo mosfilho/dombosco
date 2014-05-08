@@ -10,7 +10,6 @@ from redactor.widgets import RedactorEditor
 class MenuForm(FlatpageForm):
     class Meta:
         model = Menu
-        widgets = {'content' : RedactorEditor()}
 
 class MenuAdmin(FlatPageAdmin):
     form = MenuForm

@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'^redactor/', include('redactor.urls')),
+    url(r'^', include('filer.server.urls')),
 )
 
 if settings.DEBUG:

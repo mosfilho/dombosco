@@ -125,8 +125,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    'django.core.context_processors.request',
-    'dombosco.context_processors.site',
+    "django.core.context_processors.request",
+    "dombosco.context_processors.site",
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

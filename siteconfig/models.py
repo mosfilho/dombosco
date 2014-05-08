@@ -3,9 +3,14 @@
 from django.db import models
 from django.contrib.sites.models import Site
 from filer.fields.image import FilerImageField
+<<<<<<< HEAD
 from django.utils.safestring import mark_safe
 from django.conf import settings
 from easy_thumbnails.files import get_thumbnailer
+=======
+from easy_thumbnails.files import get_thumbnailer
+from django.conf import settings
+>>>>>>> f158ccbe2cdc71801e30816132356c06033177d0
 
 class SiteConfig(Site):
     facebook_id = models.CharField(max_length = 200, blank = True, null = True )
@@ -21,8 +26,13 @@ class SiteConfig(Site):
         verbose_name = u'Site'
         verbose_name_plural = u'Sites'
 
+<<<<<<< HEAD
     def get_safe_img_logo(self):
         return mark_safe("<img src='%s%s'") % (settings.MEDIA_URL, get_thumbnailer(self.logo_menu))
 
     def get_url_logo(self):
         return "%s%s" % (settings.MEDIA_URL, get_thumbnailer(self.logo_menu))
+=======
+    def get_logo_url(self):
+        return '%s%s' %(settings.MEDIA_URL, get_thumbnailer(self.logo_menu))
+>>>>>>> f158ccbe2cdc71801e30816132356c06033177d0

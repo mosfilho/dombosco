@@ -13,7 +13,11 @@ urlpatterns = patterns('',
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'^redactor/', include('redactor.urls')),
     url(r'^', include('filer.server.urls')),
+<<<<<<< HEAD
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+=======
+)
+>>>>>>> f158ccbe2cdc71801e30816132356c06033177d0
 
 if settings.DEBUG:
     # static files (images, css, javascript, etc.)

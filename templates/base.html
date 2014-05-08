@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 {% load menus %}
 {% load static %}
+=======
+{% load i18n %}
+>>>>>>> f158ccbe2cdc71801e30816132356c06033177d0
 <! DOCTYPE html>
 <html lang="pt-br">
    <head>
@@ -8,12 +12,18 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<<<<<<< HEAD
       {% block head-link %}
       <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
       <link href="{% static 'bxslider/jquery.bxslider.css' %}" rel="stylesheet">
       <link href="{% static 'css/style.css' %}" rel="stylesheet">
       {% menu_css %}
       {% endblock %}
+=======
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+      <script src="{{ MEDIA_URL }}js/jquery-1.11.0.min.js"></script>
+>>>>>>> f158ccbe2cdc71801e30816132356c06033177d0
 
       <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
       <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
@@ -26,17 +36,78 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]--> 
 
+<<<<<<< HEAD
+=======
+      <!-- PLUGIN SLIDESHOW -->
+      <link href="{{ MEDIA_URL }}bxslider/jquery.bxslider.css" rel="stylesheet">
+      <script src="{{ MEDIA_URL }}bxslider/jquery.bxslider.min.js"></script>
 
+      <!-- CUSTOM STYLE OVERRIDE -->
+      <link href="{{ MEDIA_URL }}css/structure.css" rel="stylesheet">
 
-      {% block "header" %}{% endblock %}
+      <!-- GOOGLE FONTS -->
+      <link href='http://fonts.googleapis.com/css?family=Paytone+One' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Scada:700' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Marcellus+SC' rel='stylesheet' type='text/css'>
+>>>>>>> f158ccbe2cdc71801e30816132356c06033177d0
 
-      <title>{% block title  %}{{ site.name }}{% endblock %}</title>
+      {% block css %}{% endblock %}
+
+      <title></title>
+
 
    </head>
    <body role="document">
-   {% menu_list %}
-   {% block breadcrumb %}{% endblock %}
-   {% block content %}{% endblock %}
+
+      <a href="javascript:void(0)" class="back-to-top"></a>
+      <script>
+         $('.back-to-top').click(function(){
+            $('html,body').animate({scrollTop: 0}, 500);
+            return false;
+         });
+      </script>
+
+      {% load menus %}
+      {% menu_list %}
+      {% block breadcrumb %}{% endblock %}
+
+      <!-- Docs page layout -->
+      <div class="bs-site bs-site-header" id="content">
+         <div class="container">
+           <div class="hidden-xs hidden-sm col-md-4 col-lg-4">
+              <div class="logo-text">
+                 <span class="escola">ESCOLA</span>
+                 <span class="dom-bosco">Dom Bosco</span>
+              </div>
+           </div>
+           <address class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+              <h4><strong>SEDE PROFESSOR ADROALDO NEIVA</strong></h4>
+              <p>Rua Durvalino Couto, 1220</p>
+              <p>Bairro Joquei Clube</p>
+              <p>Teresina-PI - CEP:64049-120</p>
+              <p>Fone: <a class="invert" href="tel:+55863232466">(86) 3232-4766</a> Fax: <a class="invert" href="fax: +558632341446"> (86) 3234-1446</a></p>
+           </address>
+           <address class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+              <h4><strong>SEDE PROFESSORA ALDA NEIVA</strong></h4>
+              <p>Rua Professor Elias Torres, 137</p>
+              <p>Bairro São Cristóvão</p>
+              <p>Teresina-PI - CEP:64052-160</p>
+              <p>Fone: <a class="invert" href="tel:+558632333139">(86) 3233-3139</a>  Fax: <a class="invert" href="fax:+558632333139">(86)3233-3139</a></p>
+           </address>
+           <!--<p>An overview of Bootstrap, how to download and use, basic templates and examples, and more.</p>-->
+         </div>
+      </div>
+
+      {% block content %}{% endblock %}
+
+      <footer>
+          <div class="container">
+             <p style="text-align: center">
+                Copyright © 2014 - Escola Dom Bosco (todos os direitos reservados) | 
+                Desenvolvido por <a class="invert" href="mailto:mosfilho@gmail.com">mosfilho</a>
+             </p>
+          </div>
+      </footer>
        
    </body>
 </html>

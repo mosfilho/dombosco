@@ -1,6 +1,10 @@
-.icon-navbar{
-   height: 64px;
-   width: 64px;
+a.icon-navbar{
+   height: 48px;
+   width: 48px;
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-color: red;
+   border: 1px solid blue;
 }
 /* navbar */
 .navbar-default {

@@ -2,7 +2,12 @@ from django import template
 from menu.models import Menu
 from django.contrib.sites.models import Site
 <<<<<<< HEAD
+<<<<<<< HEAD
 from django.template.loader import render_to_string
+=======
+from siteconfig.models import SiteConfig
+
+>>>>>>> f158ccbe2cdc71801e30816132356c06033177d0
 =======
 from siteconfig.models import SiteConfig
 
@@ -16,6 +21,7 @@ def get_submenus(parent):
     return Menu.objects.filter(pagina_pai = parent, esta_publicado = True)
 
 #@register.assignment_tag
+<<<<<<< HEAD
 <<<<<<< HEAD
 def menu_list(context):  
     """
@@ -37,6 +43,8 @@ def menu_css(*args):
         'menu/menu_css.html'
     )
 =======
+=======
+>>>>>>> f158ccbe2cdc71801e30816132356c06033177d0
 def menu_list():  
     site = Site.objects.get_current()
     parent_menus = Menu.objects.filter(pagina_pai__isnull = True, esta_publicado = True, sites__in = [site])

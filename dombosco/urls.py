@@ -14,8 +14,11 @@ urlpatterns = patterns('',
     url(r'^redactor/', include('redactor.urls')),
     url(r'^', include('filer.server.urls')),
 <<<<<<< HEAD
+<<<<<<< HEAD
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 =======
+=======
+>>>>>>> f158ccbe2cdc71801e30816132356c06033177d0
 )
 >>>>>>> f158ccbe2cdc71801e30816132356c06033177d0
 

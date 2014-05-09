@@ -2,7 +2,12 @@ from django.contrib import admin
 from models import *
 from forms import *
 from fullcalendar.admin import CalendarEventAdminInline
-from . import aplicar_tags, tags_para_objeto
+from . import aplicar_tags, aplicar_layout
+
+class TabelaLocalAdmin(admin.ModelAdmin):
+    model = TabelaLocal
+    ordering = ('id',)
+    list_display = ('id','local',)
 
 class ImagemGaleriaAdminInline(admin.StackedInline):
     model = ImagemGaleria
@@ -18,6 +23,7 @@ class GaleriaAdmin(admin.ModelAdmin):
         super(GaleriaAdmin, self).save_model(request, obj, form, change)
 
         aplicar_tags(obj, form.cleaned_data['tags'])
+        aplicar_layout(obj, form.cleaned_data['layout'])
 
 class GaleriaAdminInline(admin.StackedInline):
     model = Galeria
@@ -29,6 +35,7 @@ class GaleriaAdminInline(admin.StackedInline):
         super(GaleriaAdminInline, self).save_model(request, obj, form, change)
 
         aplicar_tags(obj, form.cleaned_data['tags'])
+        aplicar_layout(obj, form.cleaned_data['layout'])
 
 
 class GaleriaAdminInline(admin.StackedInline):
@@ -44,6 +51,7 @@ class PublicacaoAdmin(admin.ModelAdmin):
         super(PublicacaoAdmin, self).save_model(request, obj, form, change)
 
         aplicar_tags(obj, form.cleaned_data['tags'])
+        aplicar_layout(obj, form.cleaned_data['layout'])
 
 class PublicacaoAdminInline(admin.StackedInline):
     model = Publicacao
@@ -64,5 +72,6 @@ admin.site.register(Galeria, GaleriaAdmin)
 admin.site.register(Publicacao, PublicacaoAdmin)
 admin.site.register(Agregador, AgregadorAdmin)
 admin.site.register(TipoPublicacao)
-admin.site.register(TabelaLocal)
+admin.site.register(TabelaLocal, TabelaLocalAdmin)
 admin.site.register(Tag)
+admin.site.register(Layout)

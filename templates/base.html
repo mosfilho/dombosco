@@ -46,7 +46,14 @@
       {% menu_list %}
       {% block breadcrumb %}{% endblock %}
 
-      {% block content %}{% endblock %}
+      <div class="container">
+      	<section class="col-md-9">
+  	      {% block content %}{% endblock %}
+      	</section>
+
+      	<aside class="col-md-3">
+      	</aside>
+      </div>
 
        
    </body>

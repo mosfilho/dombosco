@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from filer.fields.image import FilerImageField
 from django.contrib.contenttypes.models import ContentType
+from easy_thumbnails.files import get_thumbnailer
+from django.conf import settings
+
 
 class Agregador(models.Model):
     id = models.AutoField(primary_key = True)
@@ -44,6 +47,10 @@ class Galeria (EstruturaConteudo):
         verbose_name_plural = u'Galerias de Imagem'
     agregador = models.ForeignKey(Agregador, null = True, blank = True, editable = False, on_delete = models.SET_NULL)
 
+    def get_image(self):
+        first_image = ImagemGaleria.objects.filter(galeria = self.id)[0]
+        return first_image.imagem
+
 class ImagemGaleria (models.Model):
     galeria = models.ForeignKey(Galeria)
     imagem = FilerImageField()
@@ -69,6 +76,9 @@ class Publicacao (EstruturaConteudo):
     def __unicode__(self):
         return self.nome
 
+    def get_image(self):
+    	return self.imagem_apresentacao
+
 class TabelaLocal(models.Model):
     local = models.CharField(max_length = 30, help_text = u'e.g: Slideshow, Topo do Site, etc')   
 
@@ -79,14 +89,15 @@ class TabelaLocal(models.Model):
     def __unicode__(self):
         return self.local
 
-class LocalPublicacao(models.Model):
+class Layout(models.Model):
     local = models.ForeignKey(TabelaLocal, null = True, blank = True, on_delete = models.SET_NULL)
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField(db_index = True)
+    data_expiracao = models.DateTimeField(null = True, blank = True)
 
     class Meta:
-        verbose_name = u'Local da Publicação'
-        verbose_name_plural = u'Locais da Publicação'
+        verbose_name = u'Layout'
+        verbose_name_plural = u'Layouts'
 
 # www.aprendendodjango.com.br
 class Tag(models.Model):

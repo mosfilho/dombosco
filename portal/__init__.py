@@ -1,7 +1,10 @@
-from models import Tag, TagItem
+from models import Tag, TagItem, Layout
 from django.contrib.contenttypes.models import ContentType
 
 def aplicar_tags(obj, tags):
+    """ 
+    override all tags related in object and context by type
+    """
     tipo_dinamico = ContentType.objects.get_for_model(obj)
     
     TagItem.objects.filter(
@@ -19,6 +22,9 @@ def aplicar_tags(obj, tags):
             object_id = obj.id)
 
 def tags_para_objeto(obj):
+    """ 
+    return all tags related by object in param
+    """
     tipo_dinamico  = ContentType.objects.get_for_model(obj)
      
     tags = TagItem.objects.filter(
@@ -27,3 +33,25 @@ def tags_para_objeto(obj):
         )
 
     return ', '.join([item.tag.nome for item in tags])
+
+def aplicar_layout(obj, layout):
+    tipo_dinamico = ContentType.objects.get_for_model(obj)
+    Layout.objects.filter(
+        content_type = tipo_dinamico,
+        object_id = obj.id,
+        ).delete
+ 
+    Layout.objects.get_or_create(
+        local = layout,
+        content_type = tipo_dinamico,
+        object_id = obj.id)
+
+def layout_para_objeto(obj):
+    tipo_dinamico  = ContentType.objects.get_for_model(obj)
+     
+    layout = Layout.objects.filter(
+        content_type=tipo_dinamico,
+        object_id=obj.id,
+        )
+
+    return [item.local.local for item in layout]

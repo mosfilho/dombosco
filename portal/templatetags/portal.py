@@ -1,6 +1,9 @@
 from django import template
 from menu.models import Menu
 from django.contrib.sites.models import Site
+from ..models import Layout
+from django.contrib.contenttypes.models import ContentType
+
 
 register = template.Library()
 
@@ -17,3 +20,11 @@ def menu_list():
     return {'menus' : parent_menus}
 register.inclusion_tag('menu_list.html') (menu_list)
 '''
+
+def main_banner(context):
+    banners = []
+    for layout in Layout.objects.filter(local = 1):
+        table = ContentType.objects.get_for_id(layout.content_type.id)
+        banners.append(table.get_object_for_this_type(pk=layout.object_id))
+    return {'banners' : banners,}
+register.inclusion_tag('main_banner.html', takes_context = True) (main_banner)

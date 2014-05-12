@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'fullcalendar',
     'redactor',
     'menu',
+    'paintstore',
     'portal',
     'siteconfig',
 )

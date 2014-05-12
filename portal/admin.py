@@ -3,6 +3,7 @@ from models import *
 from forms import *
 from fullcalendar.admin import CalendarEventAdminInline
 from . import aplicar_tags, aplicar_layout
+from datetime import datetime
 
 class TabelaLocalAdmin(admin.ModelAdmin):
     model = TabelaLocal
@@ -46,8 +47,18 @@ class GaleriaAdminInline(admin.StackedInline):
 class PublicacaoAdmin(admin.ModelAdmin):
     model = Publicacao
     form = PublicacaoForm
+    list_display = ('nome','data_criacao','autor','tipo_publicacao','esta_ativo',)
+
 
     def save_model(self, request, obj, form, change):
+        obj.editor = request.user
+        obj.data_edicao = datetime.now()
+        if not Publicacao.objects.filter(id = obj.id).exists():
+            obj.autor = request.user
+            obj.data_criacao = datetime.now()
+
+        obj.save()
+
         super(PublicacaoAdmin, self).save_model(request, obj, form, change)
 
         aplicar_tags(obj, form.cleaned_data['tags'])

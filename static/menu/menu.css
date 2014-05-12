@@ -70,12 +70,12 @@ a.icon-navbar{
 .navbar-custom .navbar-toggle .icon-bar {
     background-color: #CCC;
 }
-    .navbar-custom .navbar-nav .open .dropdown-menu > li > a {
-        color: #777;
+.navbar-custom .navbar-nav .open .dropdown-menu > li > a {
+    color: #777;
     transition: color .1s linear 0.1s, background-color .2s linear 0.1s;
-    }
-    .navbar-custom .navbar-nav .open .dropdown-menu > li > a:hover,
-    .navbar-custom .navbar-nav .open .dropdown-menu > li > a:focus {
-        color: #205fdd;
-        background-color: #fff;
-    }
+}
+.navbar-custom .navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar-custom .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #205fdd;
+    background-color: #fff;
+}

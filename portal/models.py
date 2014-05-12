@@ -8,6 +8,7 @@ from filer.fields.image import FilerImageField
 from django.contrib.contenttypes.models import ContentType
 from easy_thumbnails.files import get_thumbnailer
 from django.conf import settings
+from paintstore.fields import ColorPickerField
 
 
 class Agregador(models.Model):
@@ -19,8 +20,8 @@ class Agregador(models.Model):
 
 
 class EstruturaConteudo (models.Model):
-    nome = models.CharField(max_length = 40)
-    slug = models.SlugField(max_length = 55, blank = True, null = True,
+    nome = models.CharField(max_length = 70)
+    slug = models.SlugField(max_length = 100, blank = True, null = True,
         help_text = u'Identificador na URL. É gerado automaticamente ao salvar este conteúdo')
     esta_ativo = models.BooleanField(default = True)
     numeroVisitas = models.IntegerField(blank = True, null = True, editable = False)
@@ -33,13 +34,15 @@ class EstruturaConteudo (models.Model):
         return self.nome
  
     def get_abolsute_url(self):
-        return self.url
+        return self.slug
     
 class TipoPublicacao (EstruturaConteudo):
+    ordem = models.IntegerField()
+    cor  = ColorPickerField()
+
     class Meta:
         verbose_name = u'Tipo de Conteúdo'
         verbose_name_plural = u'Tipos de Conteúdo'
-    pass
 
 class Galeria (EstruturaConteudo):
     class Meta:
@@ -63,11 +66,11 @@ class Publicacao (EstruturaConteudo):
     tipo_publicacao = models.ForeignKey(TipoPublicacao, null = True, blank = True, on_delete = models.SET_NULL) 
     texto = models.TextField()
     imagem_apresentacao = FilerImageField(null = True, blank = True)
+    agregador = models.ForeignKey(Agregador, null = True, blank = True, editable = False, on_delete = models.SET_NULL)
     autor = models.ForeignKey(User, related_name = 'autor', editable = False, null = True, blank = True, on_delete = models.SET_NULL)
     editor = models.ForeignKey(User, related_name = 'editor', editable = False, null = True, blank = True, on_delete = models.SET_NULL)
     data_criacao = models.DateTimeField(auto_now = True, verbose_name = u'Data da Criação')
     data_edicao = models.DateTimeField(editable = False, verbose_name = u'Data da Edição', blank = True, null = True)
-    agregador = models.ForeignKey(Agregador, null = True, blank = True, editable = False, on_delete = models.SET_NULL)
 
     class Meta:
         verbose_name = u'Publicação'
@@ -80,7 +83,9 @@ class Publicacao (EstruturaConteudo):
     	return self.imagem_apresentacao
 
 class TabelaLocal(models.Model):
-    local = models.CharField(max_length = 30, help_text = u'e.g: Slideshow, Topo do Site, etc')   
+    local = models.CharField(max_length = 30, help_text = u'e.g: Banner, Em destaque, etc')   
+    largura = models.IntegerField(help_text=u'Largura em pixels da imagem de apresentação (caso houver)')
+    altura = models.IntegerField(help_text=u'Altura em pixels da imagem de apresentação (caso houver)')
 
     class Meta:
         verbose_name = u'Tabela do Local'

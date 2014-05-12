@@ -1,0 +1,13 @@
+<h3>Caledário</h3>			   
+{% load fullcalendar_tags %}
+{% block "css" %}
+	{% fullcalendar_css %} 
+	{% fullcalendar_print_css %} 
+{% endblock %}
+
+{% fullcalendar_jquery %} 
+{% fullcalendar_jquery_ui %} 
+{% fullcalendar_javascript %} 
+{% calendar_init calendar_config_options %}
+
+{% calendar %}

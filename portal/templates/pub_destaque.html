@@ -1,0 +1,14 @@
+{% load thumbnail %}
+{% for publicacao in publicacoes %}
+   <article class="publicacao" {% if forloop.counter = 1 %}style="margin-top: 0;"{% endif %}>
+      <a href="{{ publicacao.get_absolute_url }}" style="color: {{ publicacao.tipo_publicacao.cor }};">
+      	 {% if publicacao.get_image %}
+            <img src="{% thumbnail publicacao.get_image size crop %}">
+         {% endif %}
+         <p>
+             <span class="data-publicacao">{{ publicacao.data_criacao }}</span>
+             <h5>{{ publicacao }}</h5>
+         </p>
+      </a>
+   </article>
+{% endfor %}

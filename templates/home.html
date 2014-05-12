@@ -1,5 +1,30 @@
 {% extends "base.html" %}
 {% load portal %}
+{% block head-link %}
+   {{ block.super }}
+   {% portal_css %}
+{% endblock %}
 {% block content %}
-{% main_banner %}
+<div class="row">
+   <div class="col-md-5" style="margin-bottom: 20px">
+      {% main_banner %}
+   </div>
+   <div class="col-md-4">
+      {% pub_destaque %}
+   </div>
+   <div class="col-md-3">
+      {% pub_destaque %}
+   </div>
+</div>
+
+<div style="clear: both">
+
+<div class="row">
+
+	<div class="col-md-12">
+		{% pub_comum %}
+	</div>
+
+</div>
+
 {% endblock %}

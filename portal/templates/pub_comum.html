@@ -1,0 +1,24 @@
+{% load portal %}
+{% for tipo_publicacao in tipos_publicacao %}
+    <div class="col-md-4 publicacao-comum" style="color: {{ tipo_publicacao.cor }}">
+    	<h4 class="nome-categoria" style="">{{ tipo_publicacao }}</h4>
+        {% for publicacao in tipo_publicacao|pub_por_tipo %}
+        <a href="{{ publicacao.get_absolute_url }}">
+            {% if forloop.counter = 1 %}
+               <h3 class="publicacao-principal">{{ publicacao }}</h3>
+            {% else %}
+               <p>{{ publicacao }}</p>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+{% endfor %}
+<!--
+<a href="{{ publicacao.get_absolute_url }}">
+    {% if forloop.counter = 1 %}
+       <h3 class="publicacao-principal">{{ publicacao }}</h3>
+    {% else %}
+       <p>{{ publicacao }}</p>
+    {% endif %}
+</a>
+-->

@@ -1,0 +1,36 @@
+{% load thumbnail %}
+<script>
+$('#main-carousel').carousel({
+  interval: 2000
+})
+</script>
+<div id="main-carousel" class="carousel slide" data-ride="carousel" style="height: {{ size.1 }}px; width: {{ size.0 }}px;">
+    <!-- Indicators -->
+   <ol class="carousel-indicators">
+     {% for banner in banners %}
+         <li data-target="#main-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter == 1 %}class="active"{% endif %}></li>
+     {% endfor %}
+   </ol>
+   <!-- Wrapper for slides -->
+   <div class="carousel-inner">
+      {% for banner in banners %}
+         <div class="item {% if forloop.counter == 1 %}active{% endif %}">
+         <a href="{{ banner.get_absolute_url }}">
+            <img src="{% thumbnail banner.get_image size crop %}" alt="{{ banner.nome }}" style="height: {{ size.1 }}px; width: {{ size.0 }}px;">
+            <div class="carousel-caption">
+                <h3>{{ banner.nome }}</h3>
+            </div>
+
+         </a>
+         </div>
+      {% endfor %}
+    </div>
+    
+    <!-- Controls -->
+    <a class="left carousel-control" href="#main-carousel" data-slide="prev">
+       <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#main-carousel" data-slide="next">
+       <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>

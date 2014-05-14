@@ -14,5 +14,5 @@ class SiteConfigAdmin(admin.ModelAdmin):
     	(u'Mídias', {'fields' : ('logo_menu','imagem_site')} ),
     )
 
-admin.site.unregister(Site)
+#admin.site.unregister(Site)
 admin.site.register(SiteConfig, SiteConfigAdmin)

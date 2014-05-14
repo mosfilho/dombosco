@@ -5,8 +5,8 @@ from fullcalendar.admin import CalendarEventAdminInline
 from . import aplicar_tags, aplicar_layout
 from datetime import datetime
 
-class TabelaLocalAdmin(admin.ModelAdmin):
-    model = TabelaLocal
+class TabelaLayoutAdmin(admin.ModelAdmin):
+    model = TabelaLayout
     ordering = ('id',)
     list_display = ('id','local',)
 
@@ -21,6 +21,9 @@ class GaleriaAdmin(admin.ModelAdmin):
     list_display = ('id','nome',)
 
     def save_model(self, request, obj, form, change):
+        obj.autor = request.user
+        obj.data_criacao = datetime.now()
+
         super(GaleriaAdmin, self).save_model(request, obj, form, change)
 
         aplicar_tags(obj, form.cleaned_data['tags'])
@@ -28,16 +31,8 @@ class GaleriaAdmin(admin.ModelAdmin):
 
 class GaleriaAdminInline(admin.StackedInline):
     model = Galeria
-    form = GaleriaForm
     inlines = [ImagemGaleriaAdminInline]
     extra = 1
-
-    def save_model(self, request, obj, form, change):
-        super(GaleriaAdminInline, self).save_model(request, obj, form, change)
-
-        aplicar_tags(obj, form.cleaned_data['tags'])
-        aplicar_layout(obj, form.cleaned_data['layout'])
-
 
 class GaleriaAdminInline(admin.StackedInline):
     model = Galeria
@@ -47,15 +42,11 @@ class GaleriaAdminInline(admin.StackedInline):
 class PublicacaoAdmin(admin.ModelAdmin):
     model = Publicacao
     form = PublicacaoForm
-    list_display = ('nome','data_criacao','autor','tipo_publicacao','esta_ativo',)
-
+    list_display = ('nome','data_criacao','autor','tipo_publicacao','esta_ativo','id',)
 
     def save_model(self, request, obj, form, change):
-        obj.editor = request.user
-        obj.data_edicao = datetime.now()
-        if not Publicacao.objects.filter(id = obj.id).exists():
-            obj.autor = request.user
-            obj.data_criacao = datetime.now()
+        obj.autor = request.user
+        obj.data_criacao = datetime.now()
 
         obj.save()
 
@@ -66,23 +57,21 @@ class PublicacaoAdmin(admin.ModelAdmin):
 
 class PublicacaoAdminInline(admin.StackedInline):
     model = Publicacao
-    form = PublicacaoForm
     extra = 1
-
-    def save_model(self, request, obj, form, change):
-        super(PublicacaoAdminInline, self).save_model(request, obj, form, change)
-
-        aplicar_tags(obj, form.cleaned_data['tags'])
 
 class AgregadorAdmin(admin.ModelAdmin):
     model = Agregador
     inlines = [PublicacaoAdminInline, GaleriaAdminInline, CalendarEventAdminInline]
+
+class LayoutAdmin(admin.ModelAdmin):
+    model = Layout
+    list_display = ('local','content_type','object_id','data_expiracao',)
 
 # Register your models here.
 admin.site.register(Galeria, GaleriaAdmin)
 admin.site.register(Publicacao, PublicacaoAdmin)
 admin.site.register(Agregador, AgregadorAdmin)
 admin.site.register(TipoPublicacao)
-admin.site.register(TabelaLocal, TabelaLocalAdmin)
+admin.site.register(TabelaLayout, TabelaLayoutAdmin)
 admin.site.register(Tag)
-admin.site.register(Layout)
+admin.site.register(Layout, LayoutAdmin)

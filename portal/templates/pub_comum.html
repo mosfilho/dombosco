@@ -1,10 +1,15 @@
 {% load portal %}
+{% load thumbnail %}
+{{ teste }}
 {% for tipo_publicacao in tipos_publicacao %}
-    <div class="col-md-4 publicacao-comum" style="color: {{ tipo_publicacao.cor }}">
-    	<h4 class="nome-categoria" style="">{{ tipo_publicacao }}</h4>
+    <div class="col-md-4 publicacao-comum">
+    	<p class="nome-categoria" style="">{{ tipo_publicacao }}</p>
         {% for publicacao in tipo_publicacao|pub_por_tipo %}
-        <a href="{{ publicacao.get_absolute_url }}">
+        <a href="{{ publicacao.get_absolute_url }}" style="color: {{ tipo_publicacao.cor }}">
             {% if forloop.counter = 1 %}
+               {% if publicacao.get_image %}
+                  <img src="{% thumbnail publicacao.get_image 350x150 crop %}">
+               {% endif %}
                <h3 class="publicacao-principal">{{ publicacao }}</h3>
             {% else %}
                <p>{{ publicacao }}</p>

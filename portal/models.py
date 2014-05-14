@@ -18,6 +18,22 @@ class Agregador(models.Model):
         verbose_name = u'Agregador de Informações'
         verbose_name_plural = u'Agregadores de Informações'
 
+    def __unicode__(self):
+    	try:
+    	    pub = Publicacao.objects.get(agregador = self.id)
+    	except:
+    	    pub = None
+    	try:
+       	    galeria = Galeria.objects.get(agregador = self.id)
+    	except:
+    	    galeria = None
+    	try:
+    	    evento = CalendarEvent.objects.get(agregador = self.id)
+    	except:
+    	    evento = None
+
+    	return "cod. %s - Public.: %s, Galeria: %s, Evento: %s" % (self.id, pub, galeria, evento)
+
 
 class EstruturaConteudo (models.Model):
     nome = models.CharField(max_length = 70)
@@ -25,6 +41,8 @@ class EstruturaConteudo (models.Model):
         help_text = u'Identificador na URL. É gerado automaticamente ao salvar este conteúdo')
     esta_ativo = models.BooleanField(default = True)
     numeroVisitas = models.IntegerField(blank = True, null = True, editable = False)
+    autor = models.ForeignKey(User, editable = False, null = True, blank = True, on_delete = models.SET_NULL)
+    data_criacao = models.DateTimeField(auto_now = True, verbose_name = u'Data da Criação')
 
     class Meta:
         abstract = True
@@ -33,7 +51,7 @@ class EstruturaConteudo (models.Model):
     def __unicode__(self):
         return self.nome
  
-    def get_abolsute_url(self):
+    def get_absolute_url(self):
         return self.slug
     
 class TipoPublicacao (EstruturaConteudo):
@@ -43,6 +61,9 @@ class TipoPublicacao (EstruturaConteudo):
     class Meta:
         verbose_name = u'Tipo de Conteúdo'
         verbose_name_plural = u'Tipos de Conteúdo'
+ 
+    def get_absolute_url(self):
+        return "portal/publicacao/%s/" % (self.slug)
 
 class Galeria (EstruturaConteudo):
     class Meta:
@@ -67,10 +88,6 @@ class Publicacao (EstruturaConteudo):
     texto = models.TextField()
     imagem_apresentacao = FilerImageField(null = True, blank = True)
     agregador = models.ForeignKey(Agregador, null = True, blank = True, editable = False, on_delete = models.SET_NULL)
-    autor = models.ForeignKey(User, related_name = 'autor', editable = False, null = True, blank = True, on_delete = models.SET_NULL)
-    editor = models.ForeignKey(User, related_name = 'editor', editable = False, null = True, blank = True, on_delete = models.SET_NULL)
-    data_criacao = models.DateTimeField(auto_now = True, verbose_name = u'Data da Criação')
-    data_edicao = models.DateTimeField(editable = False, verbose_name = u'Data da Edição', blank = True, null = True)
 
     class Meta:
         verbose_name = u'Publicação'
@@ -78,24 +95,31 @@ class Publicacao (EstruturaConteudo):
 
     def __unicode__(self):
         return self.nome
+ 
+    def get_absolute_url(self):
+        return "portal/publicacao/%s/%s" % (self.tipo_publicacao.slug, self.slug)
 
     def get_image(self):
     	return self.imagem_apresentacao
 
-class TabelaLocal(models.Model):
+    def get_url_image(self):
+    	return "%s/%s" %(settings.MEDIA_URL, get_thumbnailer(self.imagem_apresentacao))
+
+class TabelaLayout(models.Model):
     local = models.CharField(max_length = 30, help_text = u'e.g: Banner, Em destaque, etc')   
     largura = models.IntegerField(help_text=u'Largura em pixels da imagem de apresentação (caso houver)')
     altura = models.IntegerField(help_text=u'Altura em pixels da imagem de apresentação (caso houver)')
+    tem_imagem = models.BooleanField()
 
     class Meta:
-        verbose_name = u'Tabela do Local'
-        verbose_name_plural = u'Tabelas do Local'
+        verbose_name = u'Tabela de Layout'
+        verbose_name_plural = u'Tabela de Layouts'
 
     def __unicode__(self):
         return self.local
 
 class Layout(models.Model):
-    local = models.ForeignKey(TabelaLocal, null = True, blank = True, on_delete = models.SET_NULL)
+    local = models.ForeignKey(TabelaLayout, null = True, blank = True, on_delete = models.SET_NULL)
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField(db_index = True)
     data_expiracao = models.DateTimeField(null = True, blank = True)
@@ -107,9 +131,14 @@ class Layout(models.Model):
 # www.aprendendodjango.com.br
 class Tag(models.Model):
     nome = models.CharField(max_length = 30, unique = True)
+    slug = models.SlugField(max_length = 100, blank = True, null = True,
+        help_text = u'Identificador na URL. É gerado automaticamente ao salvar este conteúdo')
 
     def __unicode__(self):
         return self.nome
+
+    def get_absolute_url(self):
+        return "tags/%s/" % (self.nome)
 
 class TagItem(models.Model):
     tag = models.ForeignKey(Tag)
@@ -120,6 +149,18 @@ class TagItem(models.Model):
         unique_together = ('tag', 'content_type', 'object_id')
 
 ################################################## SIGNALS ###########################################################
+
+def tags_pre_save(signal, instance, sender, **kwargs):
+   """Este signal gera um slug automaticamente. Ele verifica se ja existe um conteudo com o mesmo 
+      slug e acrescenta um numero ao final para evitar duplicidade"""
+   if not instance.slug:
+       slug = slugify(instance.nome)
+       novo_slug = slug
+       contador = 0
+       while Tag.objects.filter(slug=novo_slug).exclude(id=instance.id).count() > 0:
+           contador += 1
+           novo_slug = '%s-%d'%(slug, contador)
+       instance.slug = novo_slug
 
 def publicacao_pre_save(signal, instance, sender, **kwargs):
    """Este signal gera um slug automaticamente. Ele verifica se ja existe um conteudo com o mesmo 
@@ -156,3 +197,4 @@ def galeria_pre_save(signal, instance, sender, **kwargs):
 signals.pre_save.connect(publicacao_pre_save, sender=Publicacao)
 signals.pre_save.connect(tipo_publicacao_pre_save, sender=TipoPublicacao)
 signals.pre_save.connect(galeria_pre_save, sender=Galeria)
+signals.pre_save.connect(tags_pre_save, sender=Tag)

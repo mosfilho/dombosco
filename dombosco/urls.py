@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^pages/', include('django.contrib.flatpages.urls')),
     url(r'^redactor/', include('redactor.urls')),
     url(r'^', include('filer.server.urls')),
+    url(r'^portal/', include('portal.urls')),
 )
 
 

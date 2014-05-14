@@ -34,24 +34,30 @@ def tags_para_objeto(obj):
 
     return ', '.join([item.tag.nome for item in tags])
 
+def get_tags(obj):
+    """ 
+    return all tags related by object in param
+    """
+    tipo_dinamico  = ContentType.objects.get_for_model(obj)
+    tag_items = TagItem.objects.filter(
+        content_type=tipo_dinamico,
+        object_id=obj.id)
+    return [item.tag for item in tag_items]
+    
+
 def aplicar_layout(obj, layout):
     tipo_dinamico = ContentType.objects.get_for_model(obj)
-    Layout.objects.filter(
-        content_type = tipo_dinamico,
-        object_id = obj.id,
-        ).delete
- 
-    Layout.objects.get_or_create(
-        local = layout,
-        content_type = tipo_dinamico,
-        object_id = obj.id)
-
+    Layout.objects.filter(content_type = tipo_dinamico, object_id = obj.id).delete()
+    
+    if layout:
+        Layout.objects.get_or_create(
+            local = layout,
+            content_type = tipo_dinamico,
+            object_id = obj.id)
+    
 def layout_para_objeto(obj):
     tipo_dinamico  = ContentType.objects.get_for_model(obj)
-     
-    layout = Layout.objects.filter(
-        content_type=tipo_dinamico,
-        object_id=obj.id,
-        )
-
-    return [item.local.local for item in layout]
+    if Layout.objects.filter(content_type=tipo_dinamico, object_id=obj.id).exists():
+        layout = Layout.objects.get(content_type=tipo_dinamico, object_id=obj.id)
+        return layout.local.id
+    return 0

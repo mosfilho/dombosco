@@ -25,8 +25,6 @@
    font-size: 120%;
    padding-bottom: 10px;
 }
-.carousel:hover{
-}
 
 article.publicacao{
    height: 80px;
@@ -38,11 +36,19 @@ article.publicacao{
    overflow: hidden;
 }
 
-article.publicacao span.data-publicacao{
-   font-size: 100%;
-   line-height: 15px;
+article.publicacao .data{
+    font-size: 85%;
+    line-height: 15px;
+    letter-spacing: -.4px;
+    font-weight: 200;
+    color: #666;
 }
 
+article.publicacao .titulo{
+    line-height: 15px;
+	font-weight: 800;
+	letter-spacing: -.5px;
+}
 
 article.publicacao img{
    float: left;
@@ -55,8 +61,6 @@ article.publicacao img{
 
 article.publicacao a{
    color: #6d6d6d;
-   font-weight: bold;
-   transition: color .2s linear;
 }
 
 article.publicacao a:hover > img{
@@ -80,5 +84,73 @@ article.publicacao a:hover > img{
 }
 
 .publicacao-comum .nome-categoria{
+    font-weight: 100;
+    letter-spacing: -1px;
+}
+
+.publicacao-comum img{
+   -webkit-border-radius: 5px;
+      -box-border-radius: 5px;
+           border-radius: 5px;
+}
+.publicacao-comum a:hover > img{
+   -webkit-box-shadow: 0px 0px 0px 2px currentColor;
+      -moz-box-shadow: 0px 0px 0px 2px currentColor;
+           box-shadow: 0px 0px 0px 2px currentColor;
+}
+.detalhes-publicacao .data, .detalhes-publicacao .autor{
+    font-size: 85%;
+    line-height: 20px;
+    color: #9292ad;
+    letter-spacing: -.5px;
+    padding: 0;
+    margin: 0;
+}
+.detalhes-publicacao hr{
+    padding: 0;
+    margin: 10px 0px 5px 0px;
+}
+.detalhes-publicacao .titulo{
+    line-height: 30px;
+    color: #333;
+    letter-spacing: -1.2px;
     font-weight: 800;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+}
+.detalhes-publicacao .tags {
+	line-height: 20px;
+	vertical-align: middle;
+	border-top: 1px solid #e6e6e6;
+	border-bottom: 1px solid #e6e6e6;
+	padding: 5px 0px 5px 0px;
+	clear: both;
+}
+
+.detalhes-publicacao .texto {
+	padding: 0;
+	margin-top: 10px;
+}
+
+.detalhes-publicacao .texto img{
+	float: left;
+	margin: 0px 15px 10px 0px;
+   -webkit-border-radius: 5px;
+      -box-border-radius: 5px;
+           border-radius: 5px;
+    padding:  4px;
+    border: 1px solid #ddd;
+    display: inline block;
+    height: auto;
+    max-width: 100%;
+    line-height: 1.42;
+    background-color: #fff;
+    -webkit-transition: all .2s ease-in-out;
+       -moz-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+}
+
+.breadcrumb{
+    font-size:85%;
 }

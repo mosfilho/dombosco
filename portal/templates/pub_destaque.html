@@ -5,10 +5,8 @@
       	 {% if publicacao.get_image %}
             <img src="{% thumbnail publicacao.get_image size crop %}">
          {% endif %}
-         <p>
-             <span class="data-publicacao">{{ publicacao.data_criacao }}</span>
-             <h5>{{ publicacao }}</h5>
-         </p>
-      </a>
+             <h5 class="titulo">{{ publicacao }}</h5>
+         </a>
+         <p> <span class="data">{{ publicacao.data_criacao }}</span> </p>
    </article>
 {% endfor %}

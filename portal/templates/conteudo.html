@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load portal %}
+{% load thumbnail %}
+{% block head-link %}
+   {{ block.super }}
+   {% portal_css %}
+{% endblock %}
+{% block content %}
+<section class="col-md-9">
+    <ol class="breadcrumb">
+        <li><a href="/">Página Inicial</a></li>
+        <li><a href="{{ tipo.get_absolute_url }}">{{ tipo }}</a></li>
+        <li class="active">{{ pub }}</li>
+    </ol>
+    <article class="detalhes-publicacao">
+	    <p class="data">{{ pub.data_criacao }}</p>
+	    <h1 class="titulo">{{ pub.nome }}</h1>
+	    <hr />
+	    <p class="autor">por {{ pub.autor }}</p>
+	    <div class="texto">
+     	    <img src="{{ pub.get_url_image }}">
+	    	{{ pub.texto|safe }}
+	    </div>
+	    <p class="tags">
+	        <a class="btn btn-info btn-sm" href='{{ tag.get_absolute_url }}'>
+	            <span class="glyphicon glyphicon-tags"></span> &nbsp;
+	         	{{ tipo }}
+	        </a>
+	        {% for tag in tags %}
+	            <a class="btn btn-info btn-sm" href='{{ tag.get_absolute_url }}'>
+	                <span class="glyphicon glyphicon-tags"></span> &nbsp;
+	            	{{ tag }}
+	            </a>
+	        {% endfor %}
+	    </p>
+    </article>
+
+</section>
+
+<aside class="col-md-3">
+</aside>
+{% endblock %}

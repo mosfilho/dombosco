@@ -42,7 +42,7 @@ class GaleriaAdminInline(admin.StackedInline):
 class PublicacaoAdmin(admin.ModelAdmin):
     model = Publicacao
     form = PublicacaoForm
-    list_display = ('nome','data_criacao','autor','tipo_publicacao','esta_ativo','id',)
+    list_display = ('nome','data_criacao','autor','tipo_publicacao','esta_ativo','id','numeroVisitas',)
 
     def save_model(self, request, obj, form, change):
         obj.autor = request.user
@@ -53,7 +53,7 @@ class PublicacaoAdmin(admin.ModelAdmin):
         super(PublicacaoAdmin, self).save_model(request, obj, form, change)
 
         aplicar_tags(obj, form.cleaned_data['tags'])
-        aplicar_layout(obj, form.cleaned_data['layout'])
+        aplicar_layout(obj, form.cleaned_data['layout'], form.cleaned_data['data_expiracao'])
 
 class PublicacaoAdminInline(admin.StackedInline):
     model = Publicacao

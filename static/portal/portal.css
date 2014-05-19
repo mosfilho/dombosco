@@ -36,7 +36,7 @@ article.publicacao{
    overflow: hidden;
 }
 
-article.publicacao .data{
+.data{
     font-size: 85%;
     line-height: 15px;
     letter-spacing: -.4px;
@@ -153,4 +153,48 @@ article.publicacao a:hover > img{
 
 .breadcrumb{
     font-size:85%;
+}
+
+.titulo-pagina{
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+
+.list-object { 
+    margin-bottom: 20px;
+    padding-left: 0px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted #e1e1e1;
+    color: #484848;
+    position: relative;
+}
+.list-object a{ 
+    color: currentColor;
+    transition: opacity .2s linear;
+}
+.list-object a.label{ 
+    color: white;
+}
+.list-object a:hover{
+    text-decoration: none;
+    opacity: .8;
+}
+.list-object a:hover > img{
+    opacity: .98;
+}
+
+.list-object h2{
+    font-weight: 800;
+    letter-spacing: -1px;
+    display: inline;
+    vertical-align: top;
+}
+.list-object img{
+    display: inline;
+   -webkit-border-radius: 5px;
+      -box-border-radius: 5px;
+           border-radius: 5px;
+    margin-right: 10px;
+    float: left;
 }

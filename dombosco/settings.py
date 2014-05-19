@@ -176,3 +176,10 @@ REDACTOR_OPTIONS = {
 }
 REDACTOR_UPLOAD = 'media/redactor/'
 #REDACTOR_UPLOAD_HANDLER = 'redactor.handlers.DateDirectoryUploader'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'

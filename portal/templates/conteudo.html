@@ -7,32 +7,89 @@
 {% endblock %}
 {% block content %}
 <section class="col-md-9">
+
     <ol class="breadcrumb">
+
         <li><a href="/">Página Inicial</a></li>
-        <li><a href="{{ tipo.get_absolute_url }}">{{ tipo }}</a></li>
-        <li class="active">{{ pub }}</li>
+
+        {% if obj.tipo_publicacao %}
+           <li><a href="{{ obj.tipo_publicacao.get_absolute_url }}">{{ obj.tipo_publicacao }}</a></li>
+        {% endif %}
+
+        <li class="active">{{ obj }}</li>
+
     </ol>
+
     <article class="detalhes-publicacao">
-	    <p class="data">{{ pub.data_criacao }}</p>
-	    <h1 class="titulo">{{ pub.nome }}</h1>
+
+	    <p class="data">{{ obj.data_criacao }}</p>
+
+	    <h1 class="titulo">{{ obj.nome }}</h1>
+
 	    <hr />
-	    <p class="autor">por {{ pub.autor }}</p>
-	    <div class="texto">
-     	    <img src="{{ pub.get_url_image }}">
-	    	{{ pub.texto|safe }}
-	    </div>
+
+	    <p class="autor">por {{ obj.autor }}</p>
+
+
+            {% if tabela = 'publicacao' %}
+	        <div class="texto">
+     	            {% if obj.get_image %}
+     	               <img src="{{ obj.get_url_image }}">
+     	            {% endif %}
+	            {{ obj.texto|safe }}
+	        </div>
+             {% elif tabela = 'galeria' %}
+
+                <div class="row">
+                {% for image in obj.get_all_images %}
+                    <div class="col-lg-4 col-md-4 col-xs-6">
+                       <a href="#myModal" data-toggle="modal" data-img-url="{{ image.get_url_image }}" class="img-galeria thumbnail">
+                          <img src="{{ image.get_url_image }}">
+                       </a>
+                    </div>
+                {% endfor %}
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">{{ obj.nome }}</h4>
+                        </div>
+                        <div class="modal-body">
+                          <img src="#">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <script>
+                    $('a.img-galeria').click(function () {
+                         $('#myModal img').attr('src', $(this).attr('data-img-url'));
+                     });
+                </script>
+                </div>
+
+             {% endif %}
+
+
+
 	    <p class="tags">
-	        <a class="btn btn-info btn-sm" href='{{ tag.get_absolute_url }}'>
-	            <span class="glyphicon glyphicon-tags"></span> &nbsp;
-	         	{{ tipo }}
-	        </a>
-	        {% for tag in tags %}
+
+                {% if obj.tipo_publicacao %}
+	            <a class="btn btn-info btn-sm" href='{{ obj.tipo_publicacao.get_absolute_url }}'>
+	                <span class="glyphicon glyphicon-tags"></span> &nbsp;
+	         	    {{ obj.tipo_publicacao }}
+	            </a>
+                {% endif %}
+
+	        {% for tag in obj|get_tags %}
 	            <a class="btn btn-info btn-sm" href='{{ tag.get_absolute_url }}'>
 	                <span class="glyphicon glyphicon-tags"></span> &nbsp;
 	            	{{ tag }}
 	            </a>
 	        {% endfor %}
+
 	    </p>
+
     </article>
 
 </section>

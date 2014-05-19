@@ -40,7 +40,7 @@ class EstruturaConteudo (models.Model):
     slug = models.SlugField(max_length = 100, blank = True, null = True,
         help_text = u'Identificador na URL. É gerado automaticamente ao salvar este conteúdo')
     esta_ativo = models.BooleanField(default = True)
-    numeroVisitas = models.IntegerField(blank = True, null = True, editable = False)
+    numeroVisitas = models.IntegerField(blank = True, null = True, editable = False, default = 0)
     autor = models.ForeignKey(User, editable = False, null = True, blank = True, on_delete = models.SET_NULL)
     data_criacao = models.DateTimeField(auto_now = True, verbose_name = u'Data da Criação')
 
@@ -52,7 +52,12 @@ class EstruturaConteudo (models.Model):
         return self.nome
  
     def get_absolute_url(self):
-        return self.slug
+        table = ContentType.objects.get_for_model(self)
+        return "/%s/%s/%s/" %(slugify(table.app_label),slugify(table.model), self.slug)
+
+    def incrementa_visita(self):
+        self.numeroVisitas += 1
+        self.save()
     
 class TipoPublicacao (EstruturaConteudo):
     ordem = models.IntegerField()
@@ -61,10 +66,10 @@ class TipoPublicacao (EstruturaConteudo):
     class Meta:
         verbose_name = u'Tipo de Conteúdo'
         verbose_name_plural = u'Tipos de Conteúdo'
- 
-    def get_absolute_url(self):
-        return "portal/publicacao/%s/" % (self.slug)
 
+    def get_absolute_url(self):
+        return "/portal/%s/" % self.slug
+ 
 class Galeria (EstruturaConteudo):
     class Meta:
         verbose_name = u'Galeria de Imagem'
@@ -75,6 +80,9 @@ class Galeria (EstruturaConteudo):
         first_image = ImagemGaleria.objects.filter(galeria = self.id)[0]
         return first_image.imagem
 
+    def get_all_images(self):
+        return ImagemGaleria.objects.filter(galeria = self.id)
+
 class ImagemGaleria (models.Model):
     galeria = models.ForeignKey(Galeria)
     imagem = FilerImageField()
@@ -82,6 +90,10 @@ class ImagemGaleria (models.Model):
     class Meta:
         verbose_name = u'Imagem da galeria'
         verbose_name_plural = u'Imagens da galeria'
+
+    def get_url_image(self):
+        return "%s%s" %(settings.MEDIA_URL, get_thumbnailer(self.imagem))
+
 
 class Publicacao (EstruturaConteudo):
     tipo_publicacao = models.ForeignKey(TipoPublicacao, null = True, blank = True, on_delete = models.SET_NULL) 
@@ -96,14 +108,11 @@ class Publicacao (EstruturaConteudo):
     def __unicode__(self):
         return self.nome
  
-    def get_absolute_url(self):
-        return "portal/publicacao/%s/%s" % (self.tipo_publicacao.slug, self.slug)
-
     def get_image(self):
     	return self.imagem_apresentacao
 
     def get_url_image(self):
-    	return "%s/%s" %(settings.MEDIA_URL, get_thumbnailer(self.imagem_apresentacao))
+    	return "%s%s" %(settings.MEDIA_URL, get_thumbnailer(self.imagem_apresentacao))
 
 class TabelaLayout(models.Model):
     local = models.CharField(max_length = 30, help_text = u'e.g: Banner, Em destaque, etc')   
@@ -138,7 +147,7 @@ class Tag(models.Model):
         return self.nome
 
     def get_absolute_url(self):
-        return "tags/%s/" % (self.nome)
+        return "/tag/%s/" % (self.slug)
 
 class TagItem(models.Model):
     tag = models.ForeignKey(Tag)

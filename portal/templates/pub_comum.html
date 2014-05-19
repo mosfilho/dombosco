@@ -1,9 +1,8 @@
 {% load portal %}
 {% load thumbnail %}
-{{ teste }}
 {% for tipo_publicacao in tipos_publicacao %}
     <div class="col-md-4 publicacao-comum">
-    	<p class="nome-categoria" style="">{{ tipo_publicacao }}</p>
+    	<a href="{{ tipo_publicacao.get_absolute_url }}" class="nome-categoria" style="">{{ tipo_publicacao }}</a>
         {% for publicacao in tipo_publicacao|pub_por_tipo %}
         <a href="{{ publicacao.get_absolute_url }}" style="color: {{ tipo_publicacao.cor }}">
             {% if forloop.counter = 1 %}

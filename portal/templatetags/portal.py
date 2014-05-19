@@ -1,9 +1,11 @@
 from django import template
 from menu.models import Menu
 from django.contrib.sites.models import Site
-from ..models import Layout, TipoPublicacao, Publicacao
+from ..models import Layout, TipoPublicacao, Publicacao, TabelaLayout, Tag, TagItem
 from django.contrib.contenttypes.models import ContentType
 from django.template.loader import render_to_string 
+from django.db.models import Q
+from datetime import datetime
 
 NUM_REGISTROS = 4
 
@@ -17,7 +19,7 @@ def banner_principal(context):
     try:
         for layout in Layout.objects.filter(local = 1):
             table = ContentType.objects.get_for_id(layout.content_type.id)
-            banners.append(table.get_object_for_this_type(pk=layout.object_id))
+            banners.append(table.get_object_for_this_type(pk=layout.object_id, esta_ativo = True))
             size = [layout.local.largura, layout.local.altura]
         return {'banners' : banners,
                 'size' : size}
@@ -29,17 +31,34 @@ def pub_destaque(context):
     """
     Include html with hot publications. By default, the locale is 2
     """
-    publicacoes = []
+    object_list = []
     try:
-        for layout in Layout.objects.filter(local = 2):
+        for layout in Layout.objects.filter(Q(data_expiracao__gte=datetime.now()) |
+        	                                Q(data_expiracao__isnull=True),
+        	                                local = 2):
             table = ContentType.objects.get_for_id(layout.content_type.id)
-            publicacoes.append(table.get_object_for_this_type(pk=layout.object_id))
+            try:
+                object_list.append(table.get_object_for_this_type(esta_ativo=True, pk=layout.object_id))
+            except:
+            	pass
             size = [layout.local.largura, layout.local.altura]
-        return {'publicacoes' : publicacoes, 
-                'size' : size}
+        return {'object_list' : object_list, 
+                'size' : size,
+                'view' : 'destaque'}
     except:
         return None
 register.inclusion_tag('pub_destaque.html', takes_context = True) (pub_destaque)
+
+def pub_acessadas(context):
+    """
+    retorna as mais acessadas
+    """
+    local = TabelaLayout.objects.get(id = 2)
+    size = [local.largura, local.altura]
+    return {'object_list' : Publicacao.objects.filter(esta_ativo = True).order_by('-numeroVisitas'),
+            'size' : size,
+            'view' : 'acessadas'}
+register.inclusion_tag('pub_destaque.html', takes_context = True) (pub_acessadas)
 
 def pub_layout():
     """
@@ -59,7 +78,7 @@ def pub_comum(context):
     """
     retorna todos tipo_publicacao
     """
-    return {'tipos_publicacao' : TipoPublicacao.objects.all(),
+    return {'tipos_publicacao' : TipoPublicacao.objects.filter(esta_ativo = True),
             'teste' : pub_layout()}
 register.inclusion_tag('pub_comum.html', takes_context = True) (pub_comum)
 
@@ -75,4 +94,25 @@ def portal_css(*args):
     return render_to_string(
         'portal/portal_css.html'
     )
+
+@register.simple_tag
+def galeria_css(*args):
+    return render_to_string(
+        'portal/galeria_css.html'
+    )
+
+@register.filter
+def get_app_label(obj):
+    return ContentType.objects.get_for_model(obj)
+
+@register.filter
+def get_tags(obj):
+    """ 
+    return all tags related by object in param
+    """
+    tipo_dinamico  = ContentType.objects.get_for_model(obj)
+    tag_items = TagItem.objects.filter(
+        content_type=tipo_dinamico,
+        object_id=obj.id)
+    return [item.tag for item in tag_items]
 

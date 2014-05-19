@@ -1,9 +1,8 @@
-
+<! DOCTYPE html>
+<html lang="pt-br">
 {% load menus %}
 {% load static %}
 {% load i18n %}
-<! DOCTYPE html>
-<html lang="pt-br">
    <head>
       <!-- METATAGS -->
       <meta charset="utf-8">
@@ -14,7 +13,6 @@
 
       <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
       <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-      <script src="{% static 'js/holder.js' %}"></script>
 
       {% block head-link %}
          <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -30,8 +28,8 @@
 
       {% block css %}{% endblock %}
 
-      <script src="{% static 'custom/js/modernizr.custom.js' %}"></script>
    </head>
+
    <body role="document">
 
       <a href="javascript:void(0)" class="back-to-top"></a>
@@ -54,4 +52,5 @@
 
        
    </body>
+
 </html>

@@ -22,8 +22,11 @@ class PublicacaoForm(forms.ModelForm):
             self.fields['layout'].initial = layout_para_objeto(self.instance)
 
     def clean_layout(self):
-        if self.cleaned_data['layout'] and not self.cleaned_data['imagem_apresentacao']:
-            forms.ValidationError(u'Necessita imagem para este tipo de layout')
+        if self.cleaned_data['layout']:
+            local = TabelaLayout.objects.get(local = self.cleaned_data['layout'])
+            if local.tem_imagem and not self.cleaned_data['imagem_apresentacao']:
+                raise forms.ValidationError('Necessita imagem para este tipo de layout')
+            return self.cleaned_data['layout']
 
 
 class GaleriaForm(forms.ModelForm):

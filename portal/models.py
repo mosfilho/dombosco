@@ -42,7 +42,7 @@ class EstruturaConteudo (models.Model):
     esta_ativo = models.BooleanField(default = True)
     numeroVisitas = models.IntegerField(blank = True, null = True, editable = False, default = 0)
     autor = models.ForeignKey(User, editable = False, null = True, blank = True, on_delete = models.SET_NULL)
-    data_criacao = models.DateTimeField(auto_now = True, verbose_name = u'Data da Criação')
+    data_criacao = models.DateTimeField(verbose_name = u'Data da Criação', editable = False)
 
     class Meta:
         abstract = True
@@ -62,10 +62,11 @@ class EstruturaConteudo (models.Model):
 class TipoPublicacao (EstruturaConteudo):
     ordem = models.IntegerField()
     cor  = ColorPickerField()
+    classe_icone = models.CharField(max_length = 50, blank = True, null = True)
 
     class Meta:
-        verbose_name = u'Tipo de Conteúdo'
-        verbose_name_plural = u'Tipos de Conteúdo'
+        verbose_name = u'Tipo de Publicação'
+        verbose_name_plural = u'Tipos de Publicação'
 
     def get_absolute_url(self):
         return "/portal/%s/" % self.slug
@@ -82,6 +83,9 @@ class Galeria (EstruturaConteudo):
 
     def get_all_images(self):
         return ImagemGaleria.objects.filter(galeria = self.id)
+
+    def get_url_image(self):
+    	return "%s%s" %(settings.MEDIA_URL, get_thumbnailer(self.get_image()))
 
 class ImagemGaleria (models.Model):
     galeria = models.ForeignKey(Galeria)

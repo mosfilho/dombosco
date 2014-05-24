@@ -1,0 +1,13 @@
+{% load thumbnail %}
+{% for object in object_list %}
+   <article class="galeria-destaque" {% if forloop.counter = 1 %}style="margin-top: 0;"{% endif %}>
+      <a href="{{ object.get_absolute_url }}" style="color: {{ object.tipo_publicacao.cor }};">
+      	 {% if object.get_image %}
+            {% if forloop.counter = 1 %}
+                <img src="{{ object.get_url_image }}" style="width: 100%" class="thumbnail radius"> 
+            {% endif %}
+         {% endif %}
+         <h5 class="titulo">{{ object }} <span class="data"> há {{ object.data_criacao|timesince }}</span></h5>
+      </a>
+   </article>
+{% endfor %}

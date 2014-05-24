@@ -8,7 +8,7 @@
    <article class="publicacao" {% if forloop.counter = 1 %}style="margin-top: 0;"{% endif %}>
       <a href="{{ object.get_absolute_url }}" style="color: {{ object.tipo_publicacao.cor }};">
       	 {% if object.get_image %}
-            <img src="{% thumbnail object.get_image size crop %}">
+            <img src="{% thumbnail object.get_image size crop %}" class="thumbnail">
          {% endif %}
              <h5 class="titulo">{{ object }}</h5>
          </a>

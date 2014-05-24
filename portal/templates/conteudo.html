@@ -44,7 +44,7 @@
                 {% for image in obj.get_all_images %}
                     <div class="col-lg-4 col-md-4 col-xs-6">
                        <a href="#myModal" data-toggle="modal" data-img-url="{{ image.get_url_image }}" class="img-galeria thumbnail">
-                          <img src="{{ image.get_url_image }}">
+                          <img src="{{ image.get_url_image }}"> 
                        </a>
                     </div>
                 {% endfor %}
@@ -89,6 +89,26 @@
 	        {% endfor %}
 
 	    </p>
+
+    </article>
+
+    <article class="relacionados">
+
+        {% if obj|get_related_objects %}
+        <h3>veja também...</h3>
+        <div class="row">
+            {% for relacionado in obj|get_related_objects %}
+                <div class="col-md-3 relacionado-item">
+                    <a href="{{ relacionado.get_absolute_url }}" {% if relacionado.tipo_publicacao %}style="color:{{ relacionado.tipo_publicacao.cor }} !important"{% endif %}>
+                        {% if relacionado.get_image %}
+                            <img src="{% thumbnail relacionado.get_image 120x70 crop %}" style="width:100%" class="thumbnail hidden-xs">
+                        {% endif  %}
+                        <p>{{ relacionado.nome }} <span class="data">há {{ relacionado.data_criacao|timesince }}</span></p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
 
     </article>
 

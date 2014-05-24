@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     url(r'^', include('filer.server.urls')),
     url(r'^portal/', include('portal.urls')),
     url(r'^tag/(?P<tag>[\w_-]+)/$', 'portal.views.tag'),
+    url(r'^eventos/', 'fullcalendar.views.eventos', name='eventos'),
 )
 
 

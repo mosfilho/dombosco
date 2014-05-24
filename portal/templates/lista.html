@@ -9,23 +9,23 @@
 <section class="col-md-7">
        <h3 class="titulo-pagina">{{ mensagem|safe }}</h3>
        {% for object in objects %}
-           <div class="col-xs-12 list-object" {% if object.tipo_publicacao %}style="color: {{ object.tipo_publicacao.cor }}"{% endif %}>
-               {% if object.get_image %}
-                   <a href="{{ object.get_absolute_url }}">
-                        <img src="{% thumbnail object.get_image 250x150 crop %}" >
-                        <h2>{{ object }}</h2>
-                   </a>
-                   <p class="data">publicado à {{ object.data_criacao|timesince }}</p>
-                   <p class="topicos">
-                      <span class="data">Tópicos:</span>
-                      {% if object.tipo_publicacao %}
-                          <a class="label label-default" href="{{ object.tipo_publicacao.get_absolute_url }}">{{ object.tipo_publicacao }}</a>
-                      {% endif %}
-                      {% for tag in object|get_tags %}
-                          <a class="label label-default" href="{{ tag.get_absolute_url }}">{{ tag }}</a>
-                      {% endfor %}
-                   </p>
-               {% endif %}
+           <div class="col-xs-12 list-object" >
+               <a href="{{ object.get_absolute_url }}" {% if object.tipo_publicacao %}style="color: {{ object.tipo_publicacao.cor }}"{% endif %}>
+                    {% if object.get_image %}
+                         <img src="{% thumbnail object.get_image 250x150 crop %}" class="thumbnail">
+                    {% endif %}
+                    <h2>{{ object }}</h2>
+               </a>
+               <p class="data">publicado à {{ object.data_criacao|timesince }}</p>
+               <p class="topicos">
+                  <span class="data">Tópicos:</span>
+                  {% if object.tipo_publicacao %}
+                      <a class="label label-default" href="{{ object.tipo_publicacao.get_absolute_url }}">{{ object.tipo_publicacao }}</a>
+                  {% endif %}
+                  {% for tag in object|get_tags %}
+                      <a class="label label-default" href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+                  {% endfor %}
+               </p>
            </div>
        {% endfor %}
 

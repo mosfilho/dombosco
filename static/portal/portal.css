@@ -1,24 +1,36 @@
-.carousel, .carousel-inner, .carousel-inner .item, .carousel > .carousel-control {
+a{
+   color: #333;
+   transition: color .2s linear;
+}
+a:hover{
+   color: #777;
+}
+.radius{
    -webkit-border-radius: 5px;
       -box-border-radius: 5px;
            border-radius: 5px;
-    <strong>behavior:url(border-radius.htc);</strong>
 }
-.carousel, .carousel-inner, .carousel-inner .item {
-   /*box-shadow: 0px 0px 4px #ccc;*/
+.carousel, .carousel-inner, .carousel-inner .item, .carousel > .carousel-control {
 }
+
 .carousel-caption {
    width: 100%;
    position: absolute;
+   vertical-align: middle;
    bottom: 0;
    left: 0;
    padding: 0;
    margin: 0;
-   background-color: rgba( 0, 0, 0, 0.7);
+   background-color: rgba( 0, 0, 0, 0.7);   
+   text-transform: uppercase;
+   letter-spacing: -1px;
+   font-weight: bold;
+   height: 80px;
+   text-shadow: 4px 4px 4px 4px black;
 }
 .carousel-indicators {
    position: absolute;
-   bottom: 40;
+   bottom: -5px;
    display: block-inline;
 }
 .carousel-caption h3 {
@@ -35,16 +47,22 @@ article.publicacao{
    display: block;
    overflow: hidden;
 }
+article.galeria-destaque{
+   border-bottom: 1px dotted #eaeaea;
+}
 
 .data{
     font-size: 85%;
+    color: #666;
     line-height: 15px;
     letter-spacing: -.4px;
     font-weight: 200;
-    color: #666;
+    height: 15px;
+    margin: 0;
+    padding:0;
 }
 
-article.publicacao .titulo{
+article.publicacao .titulo, article.galeria-destaque .titulo{
     line-height: 15px;
 	font-weight: 800;
 	letter-spacing: -.5px;
@@ -63,7 +81,7 @@ article.publicacao a{
    color: #6d6d6d;
 }
 
-article.publicacao a:hover > img{
+article.publicacao a:hover > img, article.galeria-destaque a:hover > img{
 	-webkit-box-shadow: 0px 0px 0px 2px currentColor;
 	   -moz-box-shadow: 0px 0px 0px 2px currentColor;
 	        box-shadow: 0px 0px 0px 2px currentColor;
@@ -73,6 +91,7 @@ article.publicacao a:hover > img{
 	font-family: 'Open Sans', sans-serif;
 	color: currentColor;
 	letter-spacing: 0px;
+        margin-bottom: 10px;
 }
 
 .publicacao-comum a{
@@ -80,12 +99,26 @@ article.publicacao a:hover > img{
 }
 .publicacao-comum .publicacao-principal{
     font-weight: 600;
-	letter-spacing: -2px;
+    letter-spacing: -2px;
 }
 
 .publicacao-comum .nome-categoria{
     font-weight: 100;
     letter-spacing: -1px;
+    font-size: 90%;
+    color: #969696;
+}
+
+.publicacao-comum .publicacao-secundaria {
+    height: 40px;
+    border-bottom: 1px dotted #e6e6e6;
+}
+
+.publicacao-comum img.publicacao-secundaria {
+    float: left;
+    margin-right: 10px;
+    height: 55px;
+    width: 70px;
 }
 
 .publicacao-comum img{
@@ -177,11 +210,12 @@ article.publicacao a:hover > img{
     color: white;
 }
 .list-object a:hover{
-    text-decoration: none;
     opacity: .8;
 }
 .list-object a:hover > img{
-    opacity: .98;
+    -webkit-box-shadow: 0px 0px 0px 2px currentColor;
+	   -moz-box-shadow: 0px 0px 0px 2px currentColor;
+	        box-shadow: 0px 0px 0px 2px currentColor;
 }
 
 .list-object h2{
@@ -198,3 +232,62 @@ article.publicacao a:hover > img{
     margin-right: 10px;
     float: left;
 }
+
+.tipo-publicacao {
+    border-top: 1px dotted #f5f5f5;
+    line-height: 40px;
+    height: 40px;
+}
+
+.tipo-publicacao a{
+    font-weight: bold;
+}
+.tipo-publicacao a:hover{
+    opacity: .9;
+    text-decoration: none;
+}
+
+.relacionados {
+    line-height: 20px;
+    color: inherit;
+}
+.relacionado-item {
+    border-right: 1px dotted #e9e9e9;
+}
+.relacionados img{
+    display: block-inline;
+}
+.relacionados p{
+    font-weight: bold;
+    letter-spacing: -1px;
+    padding: 0;
+}
+.relacionados a:hover > img{ 
+	-webkit-box-shadow: 0px 0px 0px 2px currentColor;
+	   -moz-box-shadow: 0px 0px 0px 2px currentColor;
+	        box-shadow: 0px 0px 0px 2px currentColor;
+}
+.modal-header {
+   font-size: 100%;
+   background: white;
+}
+.modal-content{
+   border: 1px solid #727272;
+   padding: 10px;
+   background: #929292;
+}
+.modal-body{
+   padding: 0;
+}
+.modal-body > img{
+   width: 100%;
+}
+
+footer {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  box-shadow: 2px 0px 5px #dadada;
+  padding: 20px;
+  color: #808080;
+}
+

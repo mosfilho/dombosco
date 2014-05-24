@@ -7,7 +7,8 @@ from django.utils.safestring import mark_safe
 from django.conf import settings
 from easy_thumbnails.files import get_thumbnailer
 
-class SiteConfig(Site):
+class SiteConfig(models.Model):
+    site = models.ForeignKey(Site, unique = True)
     facebook_id = models.CharField(max_length = 200, blank = True, null = True )
     twitter_site = models.CharField(max_length = 200, blank = True, null = True )
     logo_menu = FilerImageField(null = True, blank = True, on_delete = models.SET_NULL,

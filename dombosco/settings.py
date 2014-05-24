@@ -183,3 +183,13 @@ CACHES = {
     }
 }
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+
+FULLCALENDAR_MEDIA_URL = STATIC_URL+'fullcalendar/'
+FULLCALENDAR = {
+    'css_url': FULLCALENDAR_MEDIA_URL+'css/fullcalendar.css',
+    'print_css_url': FULLCALENDAR_MEDIA_URL+'css/fullcalendar.print.css',
+    'javascript_url': FULLCALENDAR_MEDIA_URL+'js/fullcalendar.min.js',
+    'jquery_url': STATIC_URL+'js/jquery-1.11.0.min.js',
+    'jquery_ui_url': FULLCALENDAR_MEDIA_URL+'js/jquery-ui.custom.min.js',
+}

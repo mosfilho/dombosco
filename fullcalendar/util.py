@@ -65,3 +65,38 @@ def calendar_options(event_url, options):
     else:
         return '{%s}' % (event_url_option)
     return s[:pos] + event_url_option + ', ' + s[pos:]
+
+event_url = '/eventos/'
+OPTIONS_EVENT = """{  timeFormat: "H:mm",
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay',
+                },
+                                header: {left: '', center: 'title', right: 'prev, next'},
+                                buttonIcons: {prev: 'ui-icon-triangle-w', next: 'ui-icon-triangle-e'},
+                                monthNames: ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho',
+                                                         'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                allDaySlot: false,
+                firstDay: 0,
+                weekMode: 'liquid',
+                slotMinutes: 15,
+                defaultEventMinutes: 30,
+                minTime: 8,
+                maxTime: 20,
+                editable: false,
+                dayClick: function(date, allDay, jsEvent, view) {
+                    if (allDay) {       
+                        $('#calendar').fullCalendar('gotoDate', date)      
+                        $('#calendar').fullCalendar('changeView', 'agendaDay')
+                    }
+                },
+                eventClick: function(event, jsEvent, view) {
+                    if (view.name == 'month') {     
+                        $('#calendar').fullCalendar('gotoDate', event.start)      
+                        $('#calendar').fullCalendar('changeView', 'agendaDay')
+                    }
+                },
+            }"""
+

@@ -1,28 +1,31 @@
 {% load portal %}
 {% load thumbnail %}
 {% for tipo_publicacao in tipos_publicacao %}
-    <div class="col-md-4 publicacao-comum">
-    	<a href="{{ tipo_publicacao.get_absolute_url }}" class="nome-categoria" style="">{{ tipo_publicacao }}</a>
+    <div class="col-md-12 publicacao-comum">
+    	<p class="tipo-publicacao">
+           <a href="{{ tipo_publicacao.get_absolute_url }}" class="nome-categoria" >
+              {% if tipo_publicacao.classe_icone %}<span class="{{ tipo_publicacao.classe_icone }}"></span>{% endif %} {{ tipo_publicacao }} [veja +]
+           </a>
+        </p>
+        <div class="row">
         {% for publicacao in tipo_publicacao|pub_por_tipo %}
-        <a href="{{ publicacao.get_absolute_url }}" style="color: {{ tipo_publicacao.cor }}">
-            {% if forloop.counter = 1 %}
-               {% if publicacao.get_image %}
-                  <img src="{% thumbnail publicacao.get_image 350x150 crop %}">
-               {% endif %}
-               <h3 class="publicacao-principal">{{ publicacao }}</h3>
-            {% else %}
-               <p>{{ publicacao }}</p>
-            {% endif %}
-        </a>
+            <div class="col-md-6">
+                <a href="{{ publicacao.get_absolute_url }}" style="color: {{ tipo_publicacao.cor }}">
+                    {% if forloop.counter = 1 %}
+                          {% if publicacao.get_image %}
+                             <img src="{% thumbnail publicacao.get_image 350x150 crop %}" style="width: 100%" class="thumbnail">
+                          {% endif %}
+                          <h3 class="publicacao-principal">{{ publicacao }}</h3>
+                    {% else %}
+                       {% if publicacao.get_image %}
+                           <img src="{% thumbnail publicacao.get_image 70x70 crop %}" class="thumbnail publicacao-secundaria">
+                       {% endif %}
+                       <p class="data">{{ publicacao.data_criacao }}</p>
+                       <h5 class="publicacao-secundaria">{{ publicacao }}</h5>
+                    {% endif %}
+                </a>
+             </div>
         {% endfor %}
+        </div>
     </div>
 {% endfor %}
-<!--
-<a href="{{ publicacao.get_absolute_url }}">
-    {% if forloop.counter = 1 %}
-       <h3 class="publicacao-principal">{{ publicacao }}</h3>
-    {% else %}
-       <p>{{ publicacao }}</p>
-    {% endif %}
-</a>
--->

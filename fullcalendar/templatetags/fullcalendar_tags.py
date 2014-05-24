@@ -1,6 +1,7 @@
 from django import template
 from django.utils.safestring import mark_safe
 from ..fullcalendar import css_url, print_css_url, javascript_url, jquery_url, jquery_ui_url
+from ..util import event_url, OPTIONS_EVENT, calendar_options
 
 register = template.Library()
 
@@ -57,3 +58,7 @@ def fullcalendar_jquery_ui():
 def fullcalendar_javascript():
     url = fullcalendar_javascript_url()
     return "<script src='%s'></script>" % url
+
+@register.assignment_tag
+def calendar_opt():
+    return calendar_options(event_url, OPTIONS_EVENT)

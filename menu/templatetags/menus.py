@@ -3,6 +3,7 @@ from menu.models import Menu
 from django.contrib.sites.models import Site
 from django.template.loader import render_to_string
 from siteconfig.models import SiteConfig
+from fullcalendar.util import calendar_options, OPTIONS_EVENT, event_url
 
 
 register = template.Library()
@@ -21,7 +22,7 @@ def menu_list(context):
     parent_menus = Menu.objects.filter(pagina_pai__isnull = True, esta_publicado = True, sites__in = [current_site])
     return {'menus'   : parent_menus,
             'request' : context['request'],
-            'site'    : context['site']}
+            'site'    : context['site'] }
 register.inclusion_tag('menu_list.html', takes_context = True) (menu_list)
 
 @register.simple_tag

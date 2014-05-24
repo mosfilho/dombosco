@@ -1,7 +1,7 @@
 from django import template
 from menu.models import Menu
 from django.contrib.sites.models import Site
-from ..models import Layout, TipoPublicacao, Publicacao, TabelaLayout, Tag, TagItem
+from ..models import Layout, TipoPublicacao, Publicacao, TabelaLayout, Tag, TagItem, Galeria
 from django.contrib.contenttypes.models import ContentType
 from django.template.loader import render_to_string 
 from django.db.models import Q
@@ -78,7 +78,7 @@ def pub_comum(context):
     """
     retorna todos tipo_publicacao
     """
-    return {'tipos_publicacao' : TipoPublicacao.objects.filter(esta_ativo = True),
+    return {'tipos_publicacao' : TipoPublicacao.objects.filter(esta_ativo = True).order_by('ordem'),
             'teste' : pub_layout()}
 register.inclusion_tag('pub_comum.html', takes_context = True) (pub_comum)
 
@@ -115,4 +115,29 @@ def get_tags(obj):
         content_type=tipo_dinamico,
         object_id=obj.id)
     return [item.tag for item in tag_items]
+
+
+def galeria_destaque(context):
+    object_list = Galeria.objects.filter(esta_ativo = True).order_by('-numeroVisitas')[:2]
+    local = TabelaLayout.objects.get(id = 2)
+    size = [local.largura, local.altura]
+    return {'object_list' : object_list, 
+            'size'        : size}
+register.inclusion_tag('galeria_destaque.html', takes_context = True) (galeria_destaque)
+
+@register.filter
+def get_related_objects(obj):
+    object_list = []
+    tags = TagItem.objects.filter(object_id = obj.id)
+    table_obj = ContentType.objects.get_for_model(obj)
+    for tag in tags:
+        table = ContentType.objects.get_for_id(tag.content_type.id)
+        if table == table_obj:
+            object_new = table.get_object_for_this_type(pk=tag.object_id, esta_ativo = True)
+            if not obj == object_new:
+                object_list.append(table.get_object_for_this_type(pk=tag.object_id, esta_ativo = True))
+        else:
+            object_list.append(table.get_object_for_this_type(pk=tag.object_id, esta_ativo = True))
+    
+    return [obj for obj in object_list]
 

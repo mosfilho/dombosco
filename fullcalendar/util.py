@@ -46,7 +46,7 @@ def events_to_json(events_queryset):
     """
     Dumps a CalendarEvent queryset to the JSON expected by FullCalendar
     """
-    events_values = list(events_queryset.values('title', 'start', 'end', 'all_day'))
+    events_values = list(events_queryset.values('title', 'start', 'end', 'all_day', 'url'))
     events_values = convert_field_names(events_values)
     return json.dumps(events_values, default=date_handler)
 
@@ -73,18 +73,43 @@ OPTIONS_EVENT = """{  timeFormat: "H:mm",
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay',
                 },
-                                header: {left: '', center: 'title', right: 'prev, next'},
-                                buttonIcons: {prev: 'ui-icon-triangle-w', next: 'ui-icon-triangle-e'},
-                                monthNames: ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho',
-                                                         'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+		dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+		dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+		buttonText: {
+			prev: '&nbsp;&#9668;&nbsp;',
+			next: '&nbsp;&#9658;&nbsp;',
+			prevYear: '&nbsp;&lt;&lt;&nbsp;',
+			nextYear: '&nbsp;&gt;&gt;&nbsp;',
+			today: 'hoje',
+			month: 'mês',
+			week: 'semana',
+			day: 'dia'
+		},		
+		titleFormat: {
+			month: 'MMMM yyyy',
+			week: "d [ yyyy]{ '&#8212;'[ MMM] d MMM yyyy}",
+			day: 'dddd, d MMM, yyyy'
+		},
+		columnFormat: {
+			month: 'ddd',
+			week: 'ddd d/M',
+			day: 'dddd d/M'
+		},
+		allDayText: 'dia todo',
+		axisFormat: 'H:mm',
+		timeFormat: {
+			'': 'H(:mm)',
+			agenda: 'H:mm{ - H:mm}'
+		},
                 allDaySlot: false,
                 firstDay: 0,
                 weekMode: 'liquid',
                 slotMinutes: 15,
                 defaultEventMinutes: 30,
-                minTime: 8,
-                maxTime: 20,
+                minTime: 0,
+                maxTime: 24,
                 editable: false,
                 dayClick: function(date, allDay, jsEvent, view) {
                     if (allDay) {       
@@ -100,3 +125,27 @@ OPTIONS_EVENT = """{  timeFormat: "H:mm",
                 },
             }"""
 
+'''
+$(function(){
+$("#calendario").datepicker({
+    dateFormat: 'dd/mm/yy',
+    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'
+        ],
+    dayNamesMin: [
+    'D','S','T','Q','Q','S','S','D'
+    ],
+    dayNamesShort: [
+    'Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'
+    ],
+    monthNames: [  'Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro',
+    'Outubro','Novembro','Dezembro'
+    ],
+    monthNamesShort: [
+    'Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set',
+    'Out','Nov','Dez'
+    ],
+    nextText: 'Próximo',
+    prevText: 'Anterior'
+    });
+});
+'''

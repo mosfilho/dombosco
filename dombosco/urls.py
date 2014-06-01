@@ -15,7 +15,11 @@ urlpatterns = patterns('',
     url(r'^', include('filer.server.urls')),
     url(r'^portal/', include('portal.urls')),
     url(r'^tag/(?P<tag>[\w_-]+)/$', 'portal.views.tag'),
+    url(r'^evento/', include('fullcalendar.urls')),
+    url(r'^calendario/$', 'fullcalendar.views.calendario', name='calendario'),
     url(r'^eventos/', 'fullcalendar.views.eventos', name='eventos'),
+    url(r'^entrar/$', 'django.contrib.auth.views.login', name='entrar'),
+    url(r'^sair/$', 'django.contrib.auth.views.logout', name='sair'),
 )
 
 

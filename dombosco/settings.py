@@ -42,11 +42,11 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'filer',
     'easy_thumbnails',
+    'portal',
     'fullcalendar',
     'redactor',
     'menu',
     'paintstore',
-    'portal',
     'siteconfig',
 )
 
@@ -193,3 +193,7 @@ FULLCALENDAR = {
     'jquery_url': STATIC_URL+'js/jquery-1.11.0.min.js',
     'jquery_ui_url': FULLCALENDAR_MEDIA_URL+'js/jquery-ui.custom.min.js',
 }
+
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+LOGIN_REDIRECT_URL = '/admin'

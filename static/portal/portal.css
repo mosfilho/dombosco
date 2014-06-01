@@ -1,14 +1,13 @@
-a{
-   color: #333;
-   transition: color .2s linear;
+.border-carousel{
+  padding: 4px;
+  border: 1px solid #d3d3d3;
+  width: 100%; 
+  border-radius: 5px;
 }
-a:hover{
-   color: #777;
-}
-.radius{
-   -webkit-border-radius: 5px;
-      -box-border-radius: 5px;
-           border-radius: 5px;
+.border-carousel:hover{
+  -webkit-box-shadow: 0px 0px 0px 2px #545454;
+   -moz-box-shadow: 0px 0px 0px 2px #545454;
+        box-shadow: 0px 0px 0px 2px #545454;
 }
 .carousel, .carousel-inner, .carousel-inner .item, .carousel > .carousel-control {
 }
@@ -42,10 +41,11 @@ article.publicacao{
    height: 80px;
    border-bottom: 1px dotted #eaeaea;
    color: black;
-   margin: 20px 0px 0px 0px;
+   margin: 0px;
    vertical-align: center;
    display: block;
    overflow: hidden;
+   width: 100%;
 }
 article.galeria-destaque{
    border-bottom: 1px dotted #eaeaea;
@@ -60,12 +60,6 @@ article.galeria-destaque{
     height: 15px;
     margin: 0;
     padding:0;
-}
-
-article.publicacao .titulo, article.galeria-destaque .titulo{
-    line-height: 15px;
-	font-weight: 800;
-	letter-spacing: -.5px;
 }
 
 article.publicacao img{
@@ -88,37 +82,37 @@ article.publicacao a:hover > img, article.galeria-destaque a:hover > img{
 }
 
 .publicacao-comum {
-	font-family: 'Open Sans', sans-serif;
-	color: currentColor;
-	letter-spacing: 0px;
-        margin-bottom: 10px;
+   font-family: 'Open Sans', sans-serif;
+   color: currentColor;
+   letter-spacing: 0px;
+   margin-bottom: 10px;
 }
 
 .publicacao-comum a{
-	color: currentColor;
+    color: currentColor;
 }
 .publicacao-comum .publicacao-principal{
     font-weight: 600;
     letter-spacing: -2px;
 }
 
-.publicacao-comum .nome-categoria{
-    font-weight: 100;
+.publicacao-comum .nome-categoria, .nome-categoria {
+    font-weight: bold;
     letter-spacing: -1px;
     font-size: 90%;
     color: #969696;
 }
 
 .publicacao-comum .publicacao-secundaria {
-    height: 40px;
-    border-bottom: 1px dotted #e6e6e6;
+    height: 50px;
+    font-weight: bold;
 }
 
 .publicacao-comum img.publicacao-secundaria {
     float: left;
     margin-right: 10px;
-    height: 55px;
-    width: 70px;
+    height: 70px;
+    width: 95px;
 }
 
 .publicacao-comum img{
@@ -142,15 +136,6 @@ article.publicacao a:hover > img, article.galeria-destaque a:hover > img{
 .detalhes-publicacao hr{
     padding: 0;
     margin: 10px 0px 5px 0px;
-}
-.detalhes-publicacao .titulo{
-    line-height: 30px;
-    color: #333;
-    letter-spacing: -1.2px;
-    font-weight: 800;
-    padding: 0;
-    margin: 0;
-    margin-top: 10px;
 }
 .detalhes-publicacao .tags {
 	line-height: 20px;
@@ -179,9 +164,6 @@ article.publicacao a:hover > img, article.galeria-destaque a:hover > img{
     max-width: 100%;
     line-height: 1.42;
     background-color: #fff;
-    -webkit-transition: all .2s ease-in-out;
-       -moz-transition: all .2s ease-in-out;
-            transition: all .2s ease-in-out;
 }
 
 .breadcrumb{
@@ -204,7 +186,6 @@ article.publicacao a:hover > img, article.galeria-destaque a:hover > img{
 }
 .list-object a{ 
     color: currentColor;
-    transition: opacity .2s linear;
 }
 .list-object a.label{ 
     color: white;
@@ -244,7 +225,6 @@ article.publicacao a:hover > img, article.galeria-destaque a:hover > img{
 }
 .tipo-publicacao a:hover{
     opacity: .9;
-    text-decoration: none;
 }
 
 .relacionados {
@@ -282,12 +262,3 @@ article.publicacao a:hover > img, article.galeria-destaque a:hover > img{
 .modal-body > img{
    width: 100%;
 }
-
-footer {
-  margin-top: 20px;
-  border-top: 1px solid #ccc;
-  box-shadow: 2px 0px 5px #dadada;
-  padding: 20px;
-  color: #808080;
-}
-

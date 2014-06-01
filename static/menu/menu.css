@@ -1,26 +1,23 @@
-a.icon-navbar{
-   margin-right: 60px;
-   height: 147px;
-   width: 206px;
-   background-repeat: none;
-}
 /* navbar oi*/
 .navbar-custom {
-    background-color: #fff;
-    border-bottom-color: #ccc;
-    box-shadow: 0px 1px 5px #dadada;
+    background: linear-gradient(to top, #133984, #0b224f);
+    background: -moz-linear-gradient(to top, #133984, #0b224f);
+    background: -moz-linear-gradient(to top, #133984, #0b224f);
+    background: -o-linear-gradient(to top, #133984, #0b224f);
+    background: -webkit-linear-gradient(to top, #133984, #0b224f);
+    background: #133984;
+
+    box-shadow: 0px 1px 5px #050f22;
     border-radius: 0px !important;
-    height: 200px;
-    position: relative;
-}
-.navbar-content{
-    bottom: 0;
-    position: absolute;
-    width: inherit;
+    z-index: 25;
+    font-family: 'Open Sans', sans-serif;
 }
 /* title */
-.navbar-custom .navbar-brand {
-    color: #133984;
+.navbar-fixed-top .navbar-brand {
+   color: #133984;
+   background: url('../img/icon-logo.png') no-repeat center center;
+   height: 48px;
+   width: 48px;
 }
 .navbar-custom .navbar-brand:hover,
 .navbar-custom .navbar-brand:focus {
@@ -28,16 +25,22 @@ a.icon-navbar{
 }
 /* link */
 .navbar-custom .navbar-nav > li > a {
-    color: #777;
-    font-family: 'Open Sans', sans-serif;
+    color: #fff;
     font-weight: 600;
-    letter-spacing: -1px;
-    transition: color .1s linear 0.1s, background-color .2s linear 0.1s;
+    font-size: 90%;
+    letter-spacing: 0px;
+    transition: color .1s linear 0.1s, background-color .1s linear 0.1s;
+    margin: 7px;
+    padding: 10px;
+    border-radius: 20px;
 }
 .navbar-custom .navbar-nav > li > a:hover,
 .navbar-custom .navbar-nav > li > a:focus {
-    color: #205fdd;
-    background-color: #fff;
+    color: #d7dff1;
+    background-color: #103170;
+   -webkit-box-shadow: inset 0 0 10px #0d285c;
+      -moz-box-shadow: inset 0 0 10px #0d285c;
+           box-shadow: inset 0 0 10px #0d285c;
 }
 .navbar-custom .navbar-nav > .active > a, 
 .navbar-custom .navbar-nav > .active > a:hover, 
@@ -47,26 +50,25 @@ a.icon-navbar{
 .navbar-custom .navbar-nav > .open > a, 
 .navbar-custom .navbar-nav > .open > a:hover, 
 .navbar-custom .navbar-nav > .open > a:focus {
-    color: #133984;
+    color: #fff;
 /*    background-color: #D5D5D5;  */
-    background-color: #fff;
 }
 /* caret */
 .navbar-custom .navbar-nav > .dropdown > a .caret {
-    border-top-color: #777;
+    border-top-color: #fff;
     border-bottom-color: #777;
     transition: color .1s linear 0.1s, background-color .2s linear 0.1s;
 }
 .navbar-custom .navbar-nav > .dropdown > a:hover .caret,
 .navbar-custom .navbar-nav > .dropdown > a:focus .caret {
-    border-top-color: #205fdd;
-    border-bottom-color: #205fdd;
+    border-top-color: #d7dff1;
+    border-bottom-color: #d7dff1;
 }
 .navbar-custom .navbar-nav > .open > a .caret, 
 .navbar-custom .navbar-nav > .open > a:hover .caret, 
 .navbar-custom .navbar-nav > .open > a:focus .caret {
-    border-top-color: #133984;
-    border-bottom-color: #133984;
+    border-top-color: #fff;
+    border-bottom-color: #fff;
 }
 /* mobile version */
 .navbar-custom .navbar-toggle {
@@ -88,3 +90,31 @@ a.icon-navbar{
     color: #205fdd;
     background-color: #fff;
 }
+
+#header-navbar {
+    background: -webkit-linear-gradient(to bottom, #ffffff, #ededed); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(to bottom, #ffffff, #ededed); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(to bottom, #ffffff, #ededed); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom, #ffffff, #ededed); /* Standard syntax */
+    height: 130px;
+    color: white;
+    display: block;
+    padding-top: 20px;
+}
+
+.media-links{
+    width: 200px;
+    height: 100%;
+    float: right;
+}
+.media-links li{
+    color: white;
+    line-height: 32px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+}
+.media-links li.facebook{ background: url('../img/Facebook-Icon.png') no-repeat center center; }
+.media-links li.google{ background: url('../img/Google-Plus-Icon.png') no-repeat center center; }
+.media-links li.twitter{ background: url('../img/Twitter-Icon.png') no-repeat center center; }

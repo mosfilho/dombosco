@@ -9,30 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from easy_thumbnails.files import get_thumbnailer
 from django.conf import settings
 from paintstore.fields import ColorPickerField
-
-
-class Agregador(models.Model):
-    id = models.AutoField(primary_key = True)
-
-    class Meta:
-        verbose_name = u'Agregador de Informações'
-        verbose_name_plural = u'Agregadores de Informações'
-
-    def __unicode__(self):
-    	try:
-    	    pub = Publicacao.objects.get(agregador = self.id)
-    	except:
-    	    pub = None
-    	try:
-       	    galeria = Galeria.objects.get(agregador = self.id)
-    	except:
-    	    galeria = None
-    	try:
-    	    evento = CalendarEvent.objects.get(agregador = self.id)
-    	except:
-    	    evento = None
-
-    	return "cod. %s - Public.: %s, Galeria: %s, Evento: %s" % (self.id, pub, galeria, evento)
+from fullcalendar.models import CalendarEvent
 
 
 class EstruturaConteudo (models.Model):
@@ -75,7 +52,6 @@ class Galeria (EstruturaConteudo):
     class Meta:
         verbose_name = u'Galeria de Imagem'
         verbose_name_plural = u'Galerias de Imagem'
-    agregador = models.ForeignKey(Agregador, null = True, blank = True, editable = False, on_delete = models.SET_NULL)
 
     def get_image(self):
         first_image = ImagemGaleria.objects.filter(galeria = self.id)[0]
@@ -83,6 +59,9 @@ class Galeria (EstruturaConteudo):
 
     def get_all_images(self):
         return ImagemGaleria.objects.filter(galeria = self.id)
+
+    def get_images(self, size = 4):
+        return ImagemGaleria.objects.filter(galeria = self.id)[:size]
 
     def get_url_image(self):
     	return "%s%s" %(settings.MEDIA_URL, get_thumbnailer(self.get_image()))
@@ -103,7 +82,6 @@ class Publicacao (EstruturaConteudo):
     tipo_publicacao = models.ForeignKey(TipoPublicacao, null = True, blank = True, on_delete = models.SET_NULL) 
     texto = models.TextField()
     imagem_apresentacao = FilerImageField(null = True, blank = True)
-    agregador = models.ForeignKey(Agregador, null = True, blank = True, editable = False, on_delete = models.SET_NULL)
 
     class Meta:
         verbose_name = u'Publicação'
@@ -117,6 +95,26 @@ class Publicacao (EstruturaConteudo):
 
     def get_url_image(self):
     	return "%s%s" %(settings.MEDIA_URL, get_thumbnailer(self.imagem_apresentacao))
+
+    def get_agregate(self):
+        publicacoes = []
+        eventos = []
+        galerias = []
+        if Agregador.objects.filter(publicacao = self.id).exists():
+            agrs = Agregador.objects.filter(publicacao = self.id)
+            for agr in agrs:
+                try:
+                    eventos.append(CalendarEvent.objects.get(id = agr.evento.id))
+                except:
+                    pass
+
+                try:
+                    galerias.append(Galeria.objects.get(id = agr.galeria.id))
+                except:
+                    pass
+
+        return publicacoes, eventos, galerias
+        #return {'Pub':publicacoes, 'Ev': eventos, 'Gal': galerias}
 
 class TabelaLayout(models.Model):
     local = models.CharField(max_length = 30, help_text = u'e.g: Banner, Em destaque, etc')   
@@ -160,6 +158,11 @@ class TagItem(models.Model):
 
     class Meta:
         unique_together = ('tag', 'content_type', 'object_id')
+
+class Agregador(models.Model):
+    evento = models.ForeignKey(CalendarEvent, null = True, blank = True, on_delete = models.SET_NULL)
+    publicacao = models.ForeignKey(Publicacao, null = True, blank = True, on_delete = models.SET_NULL)
+    galeria = models.ForeignKey(Galeria, null = True, blank = True, on_delete = models.SET_NULL)
 
 ################################################## SIGNALS ###########################################################
 

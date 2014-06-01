@@ -1,14 +1,26 @@
 {% load menus %}
 {% load thumbnail %}
-<div class="navbar navbar-custom">
+<div class="hidden-xs hidden-sm" id="header-navbar" >
+   <div class="container">
+       <img src='{% thumbnail site.imagem_site 406x147 autocrop %}'>
+   </div>
+</div>
 
+<div class="navbar navbar-custom" id="navbar-site" >
+ 
   <div class="container">
 
     <div class="navbar-header">
-      <a class="navbar-brand icon-navbar" href="/" style="background-image: url('{% thumbnail site.logo_menu 206x147 autocrop %}');"></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-site-collapse" style="border-width: 0">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"></a>
     </div>
   
-    <div class="navbar-collapse collapse navbar-responsive-collapse navbar-content">
+    <div class="navbar-collapse collapse navbar-responsive-collapse navbar-content" id="navbar-site-collapse">
   
       <ul class="nav navbar-nav">
         {% for menu in menus %}
@@ -28,21 +40,28 @@
         {% endfor %}
       </ul>
   
-  
-      <form class="navbar-form navbar-left">
-        <input type="text" class="form-control col-lg-8" placeholder="Pesquisar...">
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Pesquisar...">
+        </div>
       </form>
   
       <ul class="nav navbar-nav navbar-right">
+ 
+        <li>
+        </li>
+  
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">USER <b class="caret"></b></a>
+          {% if request.user.is_active %}
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ request.user }} <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="{% url 'admin:index' %}">Administração</a></li>
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="{% url 'admin:logout' %}">Sair</a></li>
           </ul>
+          {% else %}
+             <li><a href="{% url 'entrar' %}">Entrar</a></li>
+          {% endif %}
         </li>
       </ul>
 

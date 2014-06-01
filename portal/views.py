@@ -2,7 +2,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.contenttypes.models import ContentType
-from models import TipoPublicacao, Publicacao, Tag, TagItem
+from models import TipoPublicacao, Publicacao, Tag, TagItem, Galeria
 from django.core.paginator import Paginator
 
 # Create your views here.
@@ -48,8 +48,14 @@ def tag(request, tag):
         context_instance = RequestContext(request))
 
 def tipo(request, tipo):
-    tipo = TipoPublicacao.objects.get(slug = tipo)
-    object_list  = tipo.publicacao_set.filter(esta_ativo = True)
+    try:
+        tipo = TipoPublicacao.objects.get(slug = tipo)
+        object_list  = tipo.publicacao_set.filter(esta_ativo = True)
+        mensagem = 'Tipo: <small>%s</small>'%(tipo.nome)
+    except:
+        object_list  = Galeria.objects.filter(esta_ativo = True).order_by('-id')
+        mensagem = 'Galerias'
+        
     paginator = Paginator(object_list, 25)
     try:
         page = request.GET.get('p','1')
@@ -64,7 +70,6 @@ def tipo(request, tipo):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         objects = paginator.page(paginator.num_pages)
-    mensagem = 'Tipo: <small>%s</small>'%(tipo.nome)
 
     return render_to_response('lista.html', locals(),
         context_instance = RequestContext(request))

@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+
+   <div class="panel-heading" style="background: white; font-weight: bold; font-size: 120%; color:#292f33;">
+       <span class="glyphicon glyphicon-calendar"></span> Eventos
+       <a class="label label-default" href="{% url 'calendario' %}" style="float: right">veja calendário</a>
+   </div>
+   <div class="panel-body">
+       {% if object_list %}
+       <ul class="nav nav-pills" style="font-size: 90%; margin-bottom: 20px;">
+           <li class="active"> <a href="#ativos" data-toggle="tab">Hoje</a> </li>
+           <li > <a href="#mes" data-toggle="tab">Mês</a> </li>
+       </ul>
+    
+       <div class="tab-content">
+           <div class="tab-pane fade in active" id="ativos">
+               {% for object in object_list %}
+                    <div class="event-list">
+                         <p style="font-weight: bold">{{ object.start|date:'d/m/y H:i' }} às {{ object.end|date:'d/m/y H:i' }}</p>
+                         <p><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></p>
+                    </div>
+               {% endfor %}
+           </div>
+           <div class="tab-pane" id="mes">
+               {% for object in object_list %}
+                    <div class="event-list">
+                         <p style="font-weight: bold">{{ object.start|date:'d/m/y H:i' }} às {{ object.end|date:'d/m/y H:i' }}</p>
+                         <p><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></p>
+                    </div>
+               {% endfor %}
+           </div>
+       </div>
+       {% else %}
+            Nenhum evento ativo. 
+       {% endif %}
+
+   </div>
+
+</div>

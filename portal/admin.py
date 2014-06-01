@@ -58,10 +58,6 @@ class PublicacaoAdminInline(admin.StackedInline):
     model = Publicacao
     extra = 1
 
-class AgregadorAdmin(admin.ModelAdmin):
-    model = Agregador
-    inlines = [PublicacaoAdminInline, GaleriaAdminInline, CalendarEventAdminInline]
-
 class LayoutAdmin(admin.ModelAdmin):
     model = Layout
     list_display = ('local','content_type','object_id','data_expiracao',)
@@ -69,7 +65,7 @@ class LayoutAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Galeria, GaleriaAdmin)
 admin.site.register(Publicacao, PublicacaoAdmin)
-admin.site.register(Agregador, AgregadorAdmin)
+admin.site.register(Agregador)
 admin.site.register(TipoPublicacao)
 admin.site.register(TabelaLayout, TabelaLayoutAdmin)
 admin.site.register(Tag)

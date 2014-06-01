@@ -2,9 +2,18 @@ from django import template
 from django.utils.safestring import mark_safe
 from ..fullcalendar import css_url, print_css_url, javascript_url, jquery_url, jquery_ui_url
 from ..util import event_url, OPTIONS_EVENT, calendar_options
+from ..models import CalendarEvent
+from datetime import datetime
 
 register = template.Library()
 
+
+@register.inclusion_tag("fullcalendar/calendar_list.html")
+def calendar_list():
+    hoje = datetime.now()
+    object_list = CalendarEvent.objects.filter(start__lte = hoje, end__gte = hoje)[:5]
+    month_list = CalendarEvent.objects.filter(start__month = hoje.month)[:5]
+    return {'object_list':object_list}
 
 @register.inclusion_tag("fullcalendar/calendar.html")
 def calendar():

@@ -1,0 +1,86 @@
+body {
+   font-family: 'Open Sans', sans-serif;
+   color: #3a3a3a;
+}
+a{
+   color: #333;
+    -webkit-transition: all .2s ease-in-out;
+       -moz-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+}
+a:hover > img{
+   opacity: .95 !important;
+}
+a:hover{
+   color: #777;
+   text-decoration: none;
+   opacity: .85 !important;
+}
+.radius{
+   -webkit-border-radius: 5px;
+      -box-border-radius: 5px;
+           border-radius: 5px;
+}
+footer {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  box-shadow: 2px 0px 5px #dadada;
+  padding: 20px;
+  color: white;
+  background: linear-gradient(to bottom, #133984, #0b224f);
+  background: -moz-linear-gradient(to bottom, #133984, #0b224f);
+  background: -moz-linear-gradient(to bottom, #133984, #0b224f);
+  background: -o-linear-gradient(to bottom, #133984, #0b224f);
+  background: -webkit-linear-gradient(to bottom, #133984, #0b224f);
+}
+
+.social-share{
+  line-height: 20px;
+  height: 20px;
+  font-size: 90%;
+}
+
+.social-share label{
+  padding-bottom: 10px
+  font-weight: bold;
+  float: left;
+  margin-right: 10px;
+}
+
+/*
+*
+*  CALENDAR
+*
+*/
+#calendar thead tr th {
+   padding: 10px;
+}
+#calendar .fc-state-highlight {
+   background: #E3F4FC;
+}
+#calendar .fc-day:hover { 
+   cursor: hand;
+   background-color: #d9f2ff;
+}
+#calendar .fc-today:hover { 
+   background-color: #0087d0;
+   color: #fff;
+}
+#calendar .fc-today { 
+   font-size: 150%;
+   font-weight: bold;
+}
+#calendar a:hover {
+   color: #3e6374;
+   background: #88d9ff;
+}
+
+
+h1.titulo {
+   line-height: 35px;
+   font-weight: 800;
+   letter-spacing: -.5px;
+   color: #0087d0;
+}
+ 
+

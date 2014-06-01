@@ -8,3 +8,9 @@ class CalendarEventForm(forms.ModelForm):
         model = CalendarEvent
         widgets = {'text' : RedactorEditor()}
 
+    def save(self, commit=True):
+        instance = super(CalendarEventForm, self).save(commit=False)
+        instance.url = instance.get_absolute_url()
+        if commit:
+            instance.save()
+        return instance

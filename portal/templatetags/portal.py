@@ -118,9 +118,10 @@ def get_tags(obj):
 
 
 def galeria_destaque(context):
-    object_list = Galeria.objects.filter(esta_ativo = True).order_by('-numeroVisitas')[:2]
-    local = TabelaLayout.objects.get(id = 2)
-    size = [local.largura, local.altura]
+    object_list = Galeria.objects.filter(esta_ativo = True).order_by('-id')[:4]
+    local = TabelaLayout.objects.get(id = 1)
+    #size = [local.largura, local.altura]
+    size = [300, 200]
     return {'object_list' : object_list, 
             'size'        : size}
 register.inclusion_tag('galeria_destaque.html', takes_context = True) (galeria_destaque)

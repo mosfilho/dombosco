@@ -3,6 +3,7 @@
 from django import forms
 from models import Publicacao, Galeria, TabelaLayout
 from redactor.widgets import RedactorEditor
+from fullcalendar.models import CalendarEvent
 from . import tags_para_objeto, layout_para_objeto
 from django.contrib.admin import widgets
 

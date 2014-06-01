@@ -4,23 +4,14 @@
 {% block head-link %}
    {{ block.super }}
    {% portal_css %}
-   
-   {% fullcalendar_css %} 
-   {% fullcalendar_print_css %} 
-
 {% endblock %}
 {% block content %}
 
-   <div class="col-md-5" style="margin-bottom: 20px">
+   <div class="col-md-8" style="margin-bottom: 20px">
       {% banner_principal %}
    </div>
-   <div class="col-md-7" style="padding-left: 0;">
-      <div class="col-md-6">
-         {% pub_destaque %}
-      </div>
-      <div class="col-md-6">
-         {% galeria_destaque %}
-      </div>
+   <div class="col-md-4">
+      {% pub_destaque %}
    </div>
 
    <div style="clear: both"></div>
@@ -28,17 +19,14 @@
    <div class="row">
       <div class="col-md-8">
          {% pub_comum %}
+         <div style"clear: both"></div>
+         <div class="col-md-12">
+            {% galeria_destaque %}
+         </div>
       </div>
+
       <div class="col-md-4">
-         
-         {% calendar_opt as calendar_config_options %}
-
-         {% fullcalendar_jquery_ui %} 
-         {% fullcalendar_javascript %} 
-         {% calendar_init calendar_config_options %}
-         
-         {% calendar %}  
-
+         {% include "social.html" %}
       </div>
    </div>
 

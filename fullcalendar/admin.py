@@ -10,4 +10,6 @@ class CalendarEventAdmin(admin.ModelAdmin):
     model = CalendarEvent
     form = CalendarEventForm
 
+
+
 admin.site.register(CalendarEvent, CalendarEventAdmin)

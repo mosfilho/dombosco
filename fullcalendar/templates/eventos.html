@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="col-md-8">
+    {% for obj in object_list %}
+        <h1 class="titulo">{{ obj.title }}</h1>
+        <h4>De {{ obj.start|date:'d/m/y à\s H:i' }} ao dia {{ obj.end|date:'d/m/y à\s H:i' }}</h4>
+        <div class="">
+            {{ obj.text|safe }}
+            <a class="label label-default" href="{% url 'calendario' %}">veja calendário</a>
+        </div>
+        {% include "agregacao.html" %}
+    {% endfor %}
+    </div>
+{% endblock %}

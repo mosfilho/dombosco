@@ -6,7 +6,7 @@
    {% portal_css %}
 {% endblock %}
 {% block content %}
-<section class="col-md-9">
+<section class="col-md-8">
 
     <ol class="breadcrumb">
 
@@ -14,6 +14,8 @@
 
         {% if obj.tipo_publicacao %}
            <li><a href="{{ obj.tipo_publicacao.get_absolute_url }}">{{ obj.tipo_publicacao }}</a></li>
+        {% else %}
+           <li><a href="/portal/galeria/">Galeria</a></li>
         {% endif %}
 
         <li class="active">{{ obj }}</li>
@@ -24,7 +26,7 @@
 
 	    <p class="data">{{ obj.data_criacao }}</p>
 
-	    <h1 class="titulo">{{ obj.nome }}</h1>
+	    <h1 class="titulo" {% if obj.tipo_publicacao %} style="color: {{ obj.tipo_publicacao.cor }}"{% endif %} >{{ obj.nome }}</h1>
 
 	    <hr />
 
@@ -70,10 +72,15 @@
 
              {% endif %}
 
+             {% include "agregacao.html" %}
 
-
+	    <p class="social-share">
+                <label>Compartilhe:</label>                
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ request.build_absolute_uri }}" data-text="{{ obj.nome }}" data-via="escoladombosco">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </p>
 	    <p class="tags">
-
+ 
                 {% if obj.tipo_publicacao %}
 	            <a class="btn btn-info btn-sm" href='{{ obj.tipo_publicacao.get_absolute_url }}'>
 	                <span class="glyphicon glyphicon-tags"></span> &nbsp;
@@ -114,6 +121,7 @@
 
 </section>
 
-<aside class="col-md-3">
+<aside class="col-md-4">
+     {% include "social.html" %}
 </aside>
 {% endblock %}

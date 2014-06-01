@@ -6,7 +6,7 @@
    {% portal_css %}
 {% endblock %}
 {% block content %}
-<section class="col-md-7">
+<section class="col-md-8">
        <h3 class="titulo-pagina">{{ mensagem|safe }}</h3>
        {% for object in objects %}
            <div class="col-xs-12 list-object" >
@@ -46,4 +46,9 @@
    </div>
 
 </section>
+
+<aside class="col-md-4">
+    {% include "social.html" %}
+</aside>
+
 {% endblock %}

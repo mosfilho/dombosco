@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load fullcalendar_tags %}
+{% block head-link %}
+   {{ block.super }}
+   {% fullcalendar_css %} 
+   {% fullcalendar_print_css %} 
+{% endblock %}
+{% block content %}
+
+   <h2><span class="glyphicon glyphicon-calendar"></span> Calendário Escolar</h2>
+   <hr>
+   <div class="col-md-12" style="margin-bottom: 20px">
+        {% calendar_opt as calendar_config_options %}
+        {% fullcalendar_jquery_ui %} 
+        {% fullcalendar_javascript %} 
+        {% calendar_init calendar_config_options %}
+        {% calendar %}  
+   </div>
+
+{% endblock %}

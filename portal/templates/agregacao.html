@@ -1,0 +1,24 @@
+{% for agrs in obj.get_agregate %}
+     {% if forloop.counter = 1 %}
+         {% if agrs %}
+             <h4 style="font-weight: bold"><span class="glyphicon glyphicon-book"></span> Confira a publicação</h4>
+             {% for obj in  agrs %}
+                  {% include "sub_conteudo.html" %}
+             {% endfor %}
+         {% endif %}
+     {% elif forloop.counter = 2 %}
+         {% if agrs %}
+             <h4 style="font-weight: bold"><span class="glyphicon glyphicon-calendar"></span> Detalhes deste evento</h4>
+             {% for obj in  agrs %}
+                  {% include "sub_eventos.html" %}
+             {% endfor %}
+         {% endif %}
+     {% elif forloop.counter = 3 %}
+         {% if agrs %}
+             <h4 style="font-weight: bold"><span class="glyphicon glyphicon-picture"></span> Veja a galeria de imagens</h4>
+             {% for obj in  agrs %}
+                  {% include "sub_galeria.html" %}
+             {% endfor %}
+         {% endif %}
+     {% endif %}
+{% endfor %}

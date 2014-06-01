@@ -1,13 +1,57 @@
 {% load thumbnail %}
-{% for object in object_list %}
-   <article class="galeria-destaque" {% if forloop.counter = 1 %}style="margin-top: 0;"{% endif %}>
-      <a href="{{ object.get_absolute_url }}" style="color: {{ object.tipo_publicacao.cor }};">
-      	 {% if object.get_image %}
-            {% if forloop.counter = 1 %}
-                <img src="{{ object.get_url_image }}" style="width: 100%" class="thumbnail radius"> 
-            {% endif %}
-         {% endif %}
-         <h5 class="titulo">{{ object }} <span class="data"> há {{ object.data_criacao|timesince }}</span></h5>
+<div class="row">
+   <p class="col-md-12 tipo-publicacao"><a href="/portal/galeria/" class="nome-categoria" ><span class="glyphicon glyphicon-picture"></span> Galeria de Imagens [veja +]</a></p>
+   
+   {% for object in object_list %}
+   
+      <div class="col-md-6">
+      {% if forloop.counter = 1 %}
+         <script>
+         $('#galeria-carousel').carousel({
+           interval: 2000
+         })
+         </script>
+   
+            <div class="border-carousel">
+               <div id="galeria-carousel" class="carousel slide" data-ride="carousel" style="height: {{ size.1 }}px;">
+                   <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                     {% for image in object.get_images %}
+                        <li data-target="#galeria-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter == 1 %}class="active"{% endif %}></li>
+                     {% endfor %}
+                  </ol>
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner">
+                     {% for image in object.get_images %}
+                        <div class="item {% if forloop.counter == 1 %}active{% endif %}">
+                        <a href="{{ object.get_absolute_url }}">
+                           <img src="{% thumbnail image.imagem size crop %}" alt="{{ object.nome }}" style="max-height: {{ size.1 }}px; width: 100%;">
+                        </a>
+                        </div>
+                     {% endfor %}
+                   </div>
+                
+                   <!-- Controls -->
+                   <a class="left carousel-control" href="#galeria-carousel" data-slide="prev">
+                      <span class="glyphicon glyphicon-chevron-left"></span>
+                   </a>
+                   <a class="right carousel-control" href="#galeria-carousel" data-slide="next">
+                      <span class="glyphicon glyphicon-chevron-right"></span>
+                   </a>
+               </div>
+            </div>
+      <a href="{{ object.get_absolute_url }}">
+            <h4>{{ object.nome }}</h4>
       </a>
-   </article>
-{% endfor %}
+      {% else %}
+            <a href="{{ object.get_absolute_url }}">
+                 {% if object.get_image %}
+                     <img src="{% thumbnail object.get_image 70x70 crop %}" class="thumbnail" align="left" style="margin-right: 10px">
+                 {% endif %}
+                 <p class="data">{{ object.data_criacao }}</p>
+                 <h5 class="publicacao-secundaria">{{ object }}</h5>
+            </a>
+      {% endif %}
+      </div>
+   {% endfor %}
+</div>

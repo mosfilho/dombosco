@@ -1,0 +1,10 @@
+    <article class="detalhes-publicacao">
+	        <div class="texto">
+     	            {% if obj.get_image %}
+     	               <img src="{{ obj.get_url_image }}" class="thumbnail" align="left" style="max-width: 100%; margin-right: 10px;">
+     	            {% endif %}
+	            {{ obj.texto|safe }}
+	        </div>
+
+    </article>
+

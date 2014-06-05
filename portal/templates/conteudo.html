@@ -134,7 +134,7 @@
 
 	    <p class="social-share">
                 <label>Compartilhe:</label>                
-                 <a class="social-icon social-icon-facebook" target="_blank" href="http://www.facebook.com/sharer/sharer.php?s=100;p[url]={{ request.build_absolute_uri }};{% if obj.get_image %}p[images][0]=http://{{ site.site.domain }}{{ obj.get_url_image }}{% endif %};p[title]={{ obj.nome }};"></a>
+                 <a class="social-icon social-icon-facebook" target="_blank" href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]={{ request.build_absolute_uri }}{% if obj.get_image %}&p[images][0]=http://{{ site.site.domain }}{{ obj.get_url_image }}{% endif %}&p[title]={{ obj.nome }}"></a>
                  <a target="_blank" href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }};text={{ obj.nome }};via=escoladombosco" class="social-icon social-icon-twitter"></a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                  <a class="social-icon social-icon-google" href="https://plus.google.com/share?url={{ request.build_absolute_uri }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>

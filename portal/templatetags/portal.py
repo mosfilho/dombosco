@@ -110,11 +110,14 @@ def get_tags(obj):
     """ 
     return all tags related by object in param
     """
-    tipo_dinamico  = ContentType.objects.get_for_model(obj)
-    tag_items = TagItem.objects.filter(
-        content_type=tipo_dinamico,
-        object_id=obj.id)
-    return [item.tag for item in tag_items]
+    try:
+        tipo_dinamico  = ContentType.objects.get_for_model(obj)
+        tag_items = TagItem.objects.filter(
+            content_type=tipo_dinamico,
+            object_id=obj.id)
+        return [item.tag for item in tag_items]
+    except:
+        return False
 
 
 def galeria_destaque(context):

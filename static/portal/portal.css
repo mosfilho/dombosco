@@ -1,7 +1,6 @@
 .border-carousel{
   padding: 4px;
   border: 1px solid #d3d3d3;
-  width: 100%; 
   border-radius: 5px;
 }
 .border-carousel:hover{
@@ -9,7 +8,9 @@
    -moz-box-shadow: 0px 0px 0px 2px #545454;
         box-shadow: 0px 0px 0px 2px #545454;
 }
-.carousel, .carousel-inner, .carousel-inner .item, .carousel > .carousel-control {
+.border-carousel, .carousel, img {
+   max-width: 100%;
+   max-height: 100%;
 }
 
 .carousel-caption {
@@ -20,21 +21,21 @@
    left: 0;
    padding: 0;
    margin: 0;
-   background-color: rgba( 0, 0, 0, 0.7);   
+   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0),rgba( 0, 0, 0, 1));   
+   height: 170px;
+}
+.carousel-caption h3 {
+   font-weight: 900;
+   font-size: 200%;
+   text-shadow: 4px 4px 4px 4px black;
    text-transform: uppercase;
    letter-spacing: -1px;
-   font-weight: bold;
-   height: 80px;
-   text-shadow: 4px 4px 4px 4px black;
+   padding-top: 50px;
 }
 .carousel-indicators {
    position: absolute;
    bottom: -5px;
    display: block-inline;
-}
-.carousel-caption h3 {
-   font-size: 120%;
-   padding-bottom: 10px;
 }
 
 article.publicacao{
@@ -82,7 +83,6 @@ article.publicacao a:hover > img, article.galeria-destaque a:hover > img{
 }
 
 .publicacao-comum {
-   font-family: 'Open Sans', sans-serif;
    color: currentColor;
    letter-spacing: 0px;
    margin-bottom: 10px;
@@ -96,10 +96,10 @@ article.publicacao a:hover > img, article.galeria-destaque a:hover > img{
     letter-spacing: -2px;
 }
 
-.publicacao-comum .nome-categoria, .nome-categoria {
-    font-weight: bold;
-    letter-spacing: -1px;
-    font-size: 90%;
+.publicacao-comum .nome-categoria, .tipo-publicacao .nome-categoria {
+    font-weight: 300;
+    letter-spacing: 0px;
+    font-size: 100%;
     color: #969696;
 }
 

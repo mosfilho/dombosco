@@ -13,7 +13,7 @@
          </script>
    
             <div class="border-carousel">
-               <div id="galeria-carousel" class="carousel slide" data-ride="carousel" style="height: {{ size.1 }}px;">
+               <div id="galeria-carousel" class="carousel slide" data-ride="carousel" style="min-height: {{ size.1 }}px;">
                    <!-- Indicators -->
                   <ol class="carousel-indicators">
                      {% for image in object.get_images %}
@@ -25,7 +25,11 @@
                      {% for image in object.get_images %}
                         <div class="item {% if forloop.counter == 1 %}active{% endif %}">
                         <a href="{{ object.get_absolute_url }}">
-                           <img src="{% thumbnail image.imagem size crop %}" alt="{{ object.nome }}" style="max-height: {{ size.1 }}px; width: 100%;">
+                           <img src="{% thumbnail image.imagem size crop %}" alt="{{ object.nome }}" style="min-height: {{ size.1 }}px; width: 100%;">
+                           <div class="carousel-caption" style="height: 100px; padding-top:0;">
+                               <h3 style="font-size: 120%; margin-bottom: 20px;padding-top:0;">{{ object.nome }}</h3>
+                           </div>
+
                         </a>
                         </div>
                      {% endfor %}
@@ -40,11 +44,8 @@
                    </a>
                </div>
             </div>
-      <a href="{{ object.get_absolute_url }}">
-            <h4>{{ object.nome }}</h4>
-      </a>
       {% else %}
-            <a href="{{ object.get_absolute_url }}">
+            <a href="{{ object.get_absolute_url }}" style="height: 70px; margin-bottom: 20px" class="col-xs-12">
                  {% if object.get_image %}
                      <img src="{% thumbnail object.get_image 70x70 crop %}" class="thumbnail" align="left" style="margin-right: 10px">
                  {% endif %}

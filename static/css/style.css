@@ -1,5 +1,5 @@
 body {
-   font-family: 'Open Sans', sans-serif;
+   font-family: 'Roboto', sans-serif;
    color: #3a3a3a;
 }
 a{
@@ -83,4 +83,25 @@ h1.titulo {
    color: #0087d0;
 }
  
+/*
+*
+*  FACEBOOK
+*
+*/
+.fbFeedbackContent .composer {
+   width: 100%;
+}
 
+
+.social-icon {
+   height: 24px;
+   width:24px;
+   background-repeat: none;
+   background-position: center center;
+   display: block;
+   float: left;
+   margin-right: 10px;
+}
+.social-icon-facebook { background-image: url('../img/facebook.png') }
+.social-icon-twitter { background-image: url('../img/twitter.png') }
+.social-icon-google { background-image: url('../img/google.png') }

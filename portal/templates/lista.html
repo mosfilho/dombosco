@@ -22,9 +22,11 @@
                   {% if object.tipo_publicacao %}
                       <a class="label label-default" href="{{ object.tipo_publicacao.get_absolute_url }}">{{ object.tipo_publicacao }}</a>
                   {% endif %}
-                  {% for tag in object|get_tags %}
-                      <a class="label label-default" href="{{ tag.get_absolute_url }}">{{ tag }}</a>
-                  {% endfor %}
+                  {% if object|get_tags %}
+                      {% for tag in object|get_tags %}
+                          <a class="label label-default" href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+                      {% endfor %}
+                  {% endif %}
                </p>
            </div>
        {% endfor %}

@@ -1,10 +1,68 @@
 {% extends "base.html" %}
 {% load portal %}
 {% load thumbnail %}
+
+<!-- Update your html tag to include the itemscope and itemtype attributes. --> 
+{% block html-meta %}itemscope itemtype="http://schema.org/Article"{% endblock %}
+{% block title %}{{ obj.nome }} | {{ block.super }}{% endblock %}
+
 {% block head-link %}
    {{ block.super }}
    {% portal_css %}
+
+   <!-- Place this data between the <head> tags of your website --> 
+   <meta name="description" content="Page description. No longer than 155 characters." />
+   
+   <!-- Google Authorship and Publisher Markup --> 
+   <link rel="author" href="https://plus.google.com/u/0/116079520313077873437/posts">
+   <link rel="publisher" href="https://plus.google.com/u/0/116079520313077873437/posts">
+   
+   <!-- Schema.org markup for Google+ --> 
+   <meta itemprop="name" content="{{ obj.nome }}"> 
+   <meta itemprop="description" content=""> 
+   {% if obj.get_image %}
+       <meta itemprop="image" content="http://{{ site.site.domain }}{{ obj.get_url_image }}">
+   {% endif %}
+   
+   <!-- Twitter Card data --> 
+   <meta name="twitter:card" content="summary_large_image"> 
+   <meta name="twitter:site" content="@escoladombosco"> 
+   <meta name="twitter:title" content="{{ obj.nome }}"> 
+   <meta name="twitter:description" content=""> 
+   <meta name="twitter:creator" content="@escoladombosco"> 
+   <!-- Twitter summary card with large image must be at least 280x150px --> 
+   {% if obj.get_image %}
+       <meta name="twitter:image:src" content="http://{{ site.site.domain }}{{ obj.get_url_image }}">
+   {% endif %}
+   
+   <!-- Open Graph data --> 
+   <meta property="og:title" content="{{ obj.nome }}" /> 
+   <meta property="og:type" content="article" /> 
+   <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+   {% if obj.get_image %}
+       <meta property="og:image" content="http://{{ site.site.domain }}{{ obj.get_url_image }}">
+   {% endif %}
+   <meta property="og:description" content="" /> 
+   <meta property="og:site_name" content="Escola Dom Bosco" /> 
+   <meta property="article:published_time" content="{{ obj.data_criacao }}" /> 
+   <meta property="article:modified_time" content="{{ obj.data_criacao }}" /> 
+   <meta property="article:section" content="{% if obj.tipo_publicacao %}{{ obj.tipo_publicacao }}{% else %}Galeria{% endif %}" /> 
+   <meta property="article:tag" content="" /> 
+   <meta property="fb:admins" content="617852674959301" />
+
+
 {% endblock %}
+{% block embed-scripts %}
+   <div id="fb-root"></div>
+   <script>(function(d, s, id) {
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) return;
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.0";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));</script>
+{% endblock %}
+
 {% block content %}
 <section class="col-md-8">
 
@@ -76,9 +134,15 @@
 
 	    <p class="social-share">
                 <label>Compartilhe:</label>                
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ request.build_absolute_uri }}" data-text="{{ obj.nome }}" data-via="escoladombosco">Tweet</a>
+                 <a class="social-icon social-icon-facebook" target="_blank" href="http://www.facebook.com/sharer/sharer.php?s=100;p[url]={{ request.build_absolute_uri }};{% if obj.get_image %}p[images][0]=http://{{ site.site.domain }}{{ obj.get_url_image }}{% endif %};p[title]={{ obj.nome }};"></a>
+                 <a target="_blank" href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }};text={{ obj.nome }};via=escoladombosco" class="social-icon social-icon-twitter"></a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                 <a class="social-icon social-icon-google" href="https://plus.google.com/share?url={{ request.build_absolute_uri }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
             </p>
+
+            <p>
+            </p>
+
 	    <p class="tags">
  
                 {% if obj.tipo_publicacao %}
@@ -97,7 +161,10 @@
 
 	    </p>
 
+        <div class="fb-comments" data-href="https://www.facebook.com/eDomBosco" data-numposts="5" data-colorscheme="light"></div> 
+
     </article>
+
 
     <article class="relacionados">
 

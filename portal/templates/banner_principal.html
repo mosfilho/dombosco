@@ -5,8 +5,9 @@ $('#main-carousel').carousel({
 })
 </script>
 <!--<div id="main-carousel" class="carousel slide" data-ride="carousel" style="height: {{ size.1 }}px; width: {{ size.0 }}px; margin-top: -21px">-->
-<div class="border-carousel" style="margin-top: -26px">
-<div id="main-carousel" class="carousel slide" data-ride="carousel" style="width: 100%;">
+<div class="border-carousel" style="margin-top: -26px; height: {{ size.1 }}px; width: {{ size.0}}px;">
+<div id="main-carousel" class="carousel slide" data-ride="carousel">
+
     <!-- Indicators -->
    <ol class="carousel-indicators">
      {% for banner in banners %}
@@ -18,7 +19,7 @@ $('#main-carousel').carousel({
       {% for banner in banners %}
          <div class="item {% if forloop.counter == 1 %}active{% endif %}">
          <a href="{{ banner.get_absolute_url }}">
-            <img src="{% thumbnail banner.get_image size crop %}" alt="{{ banner.nome }}" style="max-height: {{ size.1 }}px; width: 100%;">
+            <img src="{% thumbnail banner.get_image size crop quality=100 %}" alt="{{ banner.nome }}" style="width:100%; height: 100%">
             <div class="carousel-caption">
                 <h3>{{ banner.nome }}</h3>
             </div>

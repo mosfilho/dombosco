@@ -1,5 +1,5 @@
 <! DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" {% block html-meta %}{% endblock %}>
 {% load menus %}
 {% load static %}
 {% load i18n %}
@@ -9,10 +9,11 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <title></title>
+      <title>{% block title %}Escola Dom Bosco{% endblock %}</title>
 
       <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
       <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+      <link href='http://fonts.googleapis.com/css?family=Roboto:400,900,700,300' rel='stylesheet' type='text/css'>
 
       {% block head-link %}
          <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -27,11 +28,10 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]--> 
 
-      {% block css %}{% endblock %}
-
    </head>
 
    <body role="document">
+      {% block embed-scripts %}{% endblock %}
 
       <a href="javascript:void(0)" class="back-to-top"></a>
       <script>

@@ -23,7 +23,7 @@ def menu_list(context):
     return {'menus'   : parent_menus,
             'request' : context['request'],
             'site'    : context['site'] }
-register.inclusion_tag('menu_list.html', takes_context = True) (menu_list)
+register.inclusion_tag('navbar.html', takes_context = True) (menu_list)
 
 @register.simple_tag
 def menu_css(*args):

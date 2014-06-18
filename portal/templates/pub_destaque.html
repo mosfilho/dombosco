@@ -1,17 +1,46 @@
 {% load thumbnail %}
-{% if view = 'acessadas'%}
-   <p><small>mais acessadas:</small></p>
-{% elif view = 'destaque'%}
-   <p><small>em destaque:</small></p>
-{% endif %}
-{% for object in object_list %}
-   <article class="publicacao" {% if forloop.counter = 1 %}style="margin-top: 0;"{% endif %}>
-      <a href="{{ object.get_absolute_url }}" style="color: {{ object.tipo_publicacao.cor }};">
-      	 {% if object.get_image %}
-            <img src="{% thumbnail object.get_image size crop %}" class="thumbnail">
-         {% endif %}
-             <h5 class="titulo">{{ object }}</h5>
-         </a>
-         <p> <span class="data">{{ object.data_criacao }}</span> </p>
-   </article>
-{% endfor %}
+<div class="col-md-12 aside">
+     <h2>
+          <span class="glyphicon glyphicon-fire"></span>
+          {% if view = 'acessadas'%}
+             <span class="categoria">EM DESTAQUE</a>
+          {% elif view = 'destaque'%}
+             <span class="categoria">MAIS VISTOS</a>
+          {% endif %}
+     </h2>
+
+     {% for object in object_list %}
+          {% if forloop.counter = 1 %}
+          <div class="row">
+               <div class="col-md-12 article">
+                  <a href="{{ object.get_absolute_url }}">
+                      {% if object.tipo_publicacao %}
+                      <span class="categoria-banner" style="background: {{ object.tipo_publicacao.cor }}">{{ object.tipo_publicacao }}</span>
+                      {% endif %}
+                      <figure>
+                          <img src="{% thumbnail object.get_image 350x250 crop %}" alt="{{ object.nome }}">
+                          <figcaption>{{ object.nome }}</figcaption>
+                      </figure>
+                  </a>
+           </div>
+           {% else %}
+           <div class="col-md-12 sub-article">
+                 <a href="{{ object.get_absolute_url }}">
+                      {% if object.get_image %}
+                      <img src="{% thumbnail object.get_image 100x115 crop %}" alt="{{ object.nome }}">
+                      {% endif %}
+                      <p class="hora">
+                           <span class="glyphicon glyphicon-time"></span>
+                           publicado há {{ object.data_criacao|timesince }}
+                      </p>
+                      <p class="titulo">{{ object.nome }}</p>
+                </a>
+                {% if object.get_image %}
+                {% if object.tipo_publicacao %}
+                    <a href="{{ object.tipo_publicacao.get_absolute_url }}" class="categoria-artigo" style="background: {{ object.tipo_publicacao.cor }}">{{ object.tipo_publicacao }}</a>
+                {% endif %}
+                {% endif %}
+           </div>
+           {% endif %}
+     {% endfor %} 
+</div>

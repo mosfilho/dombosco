@@ -1,17 +1,27 @@
 {% load fullcalendar_tags %}
-<div class="col-md-12">
-    {% calendar_list %}
-</div> <br />
+{% load portal %}
+<aside class="col-md-4">
+    <div class="row">
 
-<div class="col-md-12">
-    {% include "facebook.html" %}
-</div> <br />
+        {% pub_acessadas %}
 
-<div class="col-md-12">
-    {% include "google+.html" %}
-</div> <br />
-    
-<div class="col-md-12">
-    {% include "twitter_feed.html" %}
-</div>
+        {% pub_destaque %}
+    </div>
 
+        <div class="col-md-12 aside">
+            {% calendar_list %}
+        </div> <br />
+        
+        <div class="col-md-12 aside">
+            {% include "facebook.html" %}
+        </div> <br />
+        
+        <div class="col-md-12 aside">
+            {% include "google+.html" %}
+        </div> <br />
+            
+        <div class="col-md-12 aside">
+            {% include "twitter_feed.html" %}
+        </div>
+
+</aside>

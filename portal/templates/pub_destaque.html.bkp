@@ -1,0 +1,17 @@
+{% load thumbnail %}
+{% if view = 'acessadas'%}
+   <p><small>mais acessadas:</small></p>
+{% elif view = 'destaque'%}
+   <p><small>em destaque:</small></p>
+{% endif %}
+{% for object in object_list %}
+   <article class="publicacao" {% if forloop.counter = 1 %}style="margin-top: 0;"{% endif %}>
+      <a href="{{ object.get_absolute_url }}" style="color: {{ object.tipo_publicacao.cor }};">
+      	 {% if object.get_image %}
+            <img src="{% thumbnail object.get_image size crop %}" class="thumbnail">
+         {% endif %}
+             <h5 class="titulo">{{ object }}</h5>
+         </a>
+         <p> <span class="data">{{ object.data_criacao }}</span> </p>
+   </article>
+{% endfor %}

@@ -5,6 +5,9 @@ from django.contrib.contenttypes.models import ContentType
 from portal.models import TipoPublicacao, Publicacao, Tag, TagItem, Galeria
 from django.core.paginator import Paginator
 
+def home(request):
+    return render_to_response('home.html', locals(), 
+        context_instance = RequestContext(request))
 
 def buscar(request):
     key = request.GET.get('q')

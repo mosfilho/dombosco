@@ -53,33 +53,42 @@ def pub_acessadas(context):
     """
     retorna as mais acessadas
     """
-    local = TabelaLayout.objects.get(id = 2)
-    size = [local.largura, local.altura]
-    return {'object_list' : Publicacao.objects.filter(esta_ativo = True).order_by('-numeroVisitas'),
-            'size' : size,
-            'view' : 'acessadas'}
+    try:
+        local = TabelaLayout.objects.get(id = 2)
+        size = [local.largura, local.altura]
+        return {'object_list' : Publicacao.objects.filter(esta_ativo = True).order_by('-numeroVisitas'),
+                'size' : size,
+                'view' : 'acessadas'}
+    except:
+       return None
 register.inclusion_tag('pub_destaque.html', takes_context = True) (pub_acessadas)
 
 def pub_layout():
     """
     retorna um array de id que esta com publicacao em destaque: banner, em destaque,...
     """
-    id_pub_layout = []
-    table = ContentType.objects.get_for_model(Publicacao)
-    banners = Layout.objects.filter(local = 1, content_type=table).order_by('-id').values('object_id')[:4]
-    for banner in banners:
-        id_pub_layout.append(banner['object_id'])
-    pubs_destaque = Layout.objects.filter(local = 2, content_type=table).order_by('-id').values('object_id')[:4]
-    for pub_destaque in pubs_destaque:
-        id_pub_layout.append(pub_destaque['object_id'])
-    return id_pub_layout
+    try:
+        id_pub_layout = []
+        table = ContentType.objects.get_for_model(Publicacao)
+        banners = Layout.objects.filter(local = 1, content_type=table).order_by('-id').values('object_id')[:4]
+        for banner in banners:
+            id_pub_layout.append(banner['object_id'])
+        pubs_destaque = Layout.objects.filter(local = 2, content_type=table).order_by('-id').values('object_id')[:4]
+        for pub_destaque in pubs_destaque:
+            id_pub_layout.append(pub_destaque['object_id'])
+        return id_pub_layout
+    except:
+        return None
 
 def pub_comum(context):
     """
     retorna todos tipo_publicacao
     """
-    return {'tipos_publicacao' : TipoPublicacao.objects.filter(esta_ativo = True).order_by('ordem'),
-            'teste' : pub_layout()}
+    try:
+        return {'tipos_publicacao' : TipoPublicacao.objects.filter(esta_ativo = True).order_by('ordem'),
+                'teste' : pub_layout()}
+    except:
+        return None
 register.inclusion_tag('pub_comum.html', takes_context = True) (pub_comum)
 
 @register.filter
@@ -121,12 +130,15 @@ def get_tags(obj):
 
 
 def galeria_destaque(context):
-    object_list = Galeria.objects.filter(esta_ativo = True).order_by('-id')[:4]
-    local = TabelaLayout.objects.get(id = 1)
-    #size = [local.largura, local.altura]
-    size = [300, 200]
-    return {'object_list' : object_list, 
-            'size'        : size}
+    try:
+        object_list = Galeria.objects.filter(esta_ativo = True).order_by('-id')[:4]
+        local = TabelaLayout.objects.get(id = 1)
+        #size = [local.largura, local.altura]
+        size = [300, 200]
+        return {'object_list' : object_list, 
+                'size'        : size}
+    except:
+        return None
 register.inclusion_tag('galeria_destaque.html', takes_context = True) (galeria_destaque)
 
 @register.filter

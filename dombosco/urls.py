@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'dombosco.views.home', name='home'),
+    url(r'^$', 'dombosco.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^teste/$', 'portal.views.test'),
     url(r'^admin/', include(admin.site.urls)),

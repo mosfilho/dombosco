@@ -157,3 +157,9 @@ def get_related_objects(obj):
     
     return [obj for obj in object_list]
 
+@register.assignment_tag
+def tp_publicacao():
+    try:
+        return [obj for obj in TipoPublicacao.objects.all()]
+    except:
+        return []

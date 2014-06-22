@@ -1,58 +1,36 @@
 {% load thumbnail %}
-<div class="row">
-   <p class="col-md-12 tipo-publicacao"><a href="/portal/galeria/" class="nome-categoria" ><span class="glyphicon glyphicon-picture"></span> Galeria de Imagens [veja +]</a></p>
-   
-   {% for object in object_list %}
-   
-      <div class="col-md-6">
-      {% if forloop.counter = 1 %}
-         <script>
-         $('#galeria-carousel').carousel({
-           interval: 2000
-         })
-         </script>
-   
-            <div class="border-carousel">
-               <div id="galeria-carousel" class="carousel slide" data-ride="carousel" style="min-height: {{ size.1 }}px;">
-                   <!-- Indicators -->
-                  <ol class="carousel-indicators">
-                     {% for image in object.get_images %}
-                        <li data-target="#galeria-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter == 1 %}class="active"{% endif %}></li>
-                     {% endfor %}
-                  </ol>
-                  <!-- Wrapper for slides -->
-                  <div class="carousel-inner">
-                     {% for image in object.get_images %}
-                        <div class="item {% if forloop.counter == 1 %}active{% endif %}">
-                        <a href="{{ object.get_absolute_url }}">
-                           <img src="{% thumbnail image.imagem size crop %}" alt="{{ object.nome }}" style="min-height: {{ size.1 }}px; width: 100%;">
-                           <div class="carousel-caption" style="height: 100px; padding-top:0;">
-                               <h3 style="font-size: 120%; margin-bottom: 20px;padding-top:0;">{{ object.nome }}</h3>
-                           </div>
+                <!-- GALLERY SECTION -->
 
+                <div class="col-md-12 section">
+
+                    <h2><a href="#" class="categoria">Galerias em Destaque</a></h2>
+
+                    <div class="col-md-6 article">
+                        <a href="{{ object_list.0.get_absolute_url }}">
+                            <figure>
+                                <img src="{% thumbnail object_list.0.get_image 342x249 crop %}">
+                                <figcaption>{{ object_list.0.nome }}</figcaption>
+                            </figure>
                         </a>
+                    </div>
+        
+                    <div class="col-md-6">
+                        <div class="row">
+                            {% for object in object_list %}
+                                {% if forloop.counter > 1 %}
+                                <div class="col-md-12 sub-article">
+                                    <a href="{{ object.get_absolute_url }}">
+                                         <img src="{% thumbnail object.get_image 100x76 crop %}">
+                                         <p class="hora">
+                                              <span class="glyphicon glyphicon-time"></span>
+                                              publicado há {{ object.data_criacao|timesince }}
+                                         </p>
+                                         <p class="titulo"><small>{{ object.nome }}</small></p>
+                                    </a>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
-                     {% endfor %}
-                   </div>
-                
-                   <!-- Controls -->
-                   <a class="left carousel-control" href="#galeria-carousel" data-slide="prev">
-                      <span class="glyphicon glyphicon-chevron-left"></span>
-                   </a>
-                   <a class="right carousel-control" href="#galeria-carousel" data-slide="next">
-                      <span class="glyphicon glyphicon-chevron-right"></span>
-                   </a>
-               </div>
-            </div>
-      {% else %}
-            <a href="{{ object.get_absolute_url }}" style="height: 70px; margin-bottom: 20px" class="col-xs-12">
-                 {% if object.get_image %}
-                     <img src="{% thumbnail object.get_image 70x70 crop %}" class="thumbnail" align="left" style="margin-right: 10px">
-                 {% endif %}
-                 <p class="data">{{ object.data_criacao }}</p>
-                 <h5 class="publicacao-secundaria">{{ object }}</h5>
-            </a>
-      {% endif %}
-      </div>
-   {% endfor %}
-</div>
+                    </div>
+        
+                </div><!-- section article -->

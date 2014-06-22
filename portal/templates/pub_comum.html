@@ -1,31 +1,39 @@
 {% load portal %}
 {% load thumbnail %}
 {% for tipo_publicacao in tipos_publicacao %}
-    <div class="col-md-12 publicacao-comum">
-    	<p class="tipo-publicacao">
-           <a href="{{ tipo_publicacao.get_absolute_url }}" class="nome-categoria" >
-              {% if tipo_publicacao.classe_icone %}<span class="{{ tipo_publicacao.classe_icone }}"></span>{% endif %} {{ tipo_publicacao }} [veja +]
-           </a>
-        </p>
-        <div class="row">
-        {% for publicacao in tipo_publicacao|pub_por_tipo %}
-            <div class="col-md-6">
-                <a href="{{ publicacao.get_absolute_url }}" style="color: {{ tipo_publicacao.cor }}">
-                    {% if forloop.counter = 1 %}
-                          {% if publicacao.get_image %}
-                             <img src="{% thumbnail publicacao.get_image 350x150 crop %}" style="width: 100%" class="thumbnail">
-                          {% endif %}
-                          <h3 class="publicacao-principal">{{ publicacao }}</h3>
-                    {% else %}
-                       {% if publicacao.get_image %}
-                           <img src="{% thumbnail publicacao.get_image 70x70 crop %}" class="thumbnail publicacao-secundaria">
-                       {% endif %}
-                       <p class="data">{{ publicacao.data_criacao }}</p>
-                       <h5 class="publicacao-secundaria">{{ publicacao }}</h5>
-                    {% endif %}
-                </a>
-             </div>
-        {% endfor %}
-        </div>
-    </div>
+ <div class="col-md-12 section" style="border-color: {{ tipo_publicacao.cor }}">
+
+      <h2><a href="{{ tipo_publicacao.get_absolute_url }}" class="categoria">{{ tipo_publicacao }}</a></h2>
+
+      {% for publicacao in tipo_publicacao|pub_por_tipo %}
+           {% if forloop.counter = 1 %}
+                    <div class="col-md-6 article">
+                        <a href="#">
+                            <figure>
+                                <img src="{% thumbnail publicacao.get_image 342x249 crop %}" alt="{{ publicacao.nome }}">
+                                <figcaption>{{ publicacao.nome }}</figcaption>
+                            </figure>
+                        </a>
+                    </div>
+            {% endif %}
+      {% endfor %}
+      <div class="col-md-6">
+      {% for publicacao in tipo_publicacao|pub_por_tipo %}
+           {% if forloop.counter > 1 %}
+                  <div class="row">
+                      <div class="col-md-12 sub-article">
+                          <a href="{{ publicacao.get_absolute_url }}">
+                               <img src="{% thumbnail publicacao.get_image 100x76 crop %}" alt="{{ publicacao.nome }}">
+                               <p class="hora">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                    {{ publicacao.data_criacao|timesince }}
+                               </p>
+                               <p class="titulo">{{ publicacao.nome }}</p>
+                          </a>
+                      </div>
+                  </div>
+            {% endif %}
+      {% endfor %}
+      </div>
+</div><!-- section article -->
 {% endfor %}

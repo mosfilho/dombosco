@@ -4,30 +4,26 @@
 {% block head-link %}
    {{ block.super }}
    {% portal_css %}
+   
+   {% fullcalendar_css %} 
+   {% fullcalendar_print_css %} 
+
 {% endblock %}
 {% block content %}
-
-   <div class="col-md-8" style="margin-bottom: 20px">
+ 
+   <div class="row">
       {% banner_principal %}
-   </div>
-   <div class="col-md-4">
-      {% pub_destaque %}
    </div>
 
    <div style="clear: both"></div>
 
-   <div class="row">
-      <div class="col-md-8">
-         {% pub_comum %}
-         <div style"clear: both"></div>
-         <div class="col-md-12">
+   <section class="col-md-8">
+        <div class="row">
             {% galeria_destaque %}
-         </div>
-      </div>
+            {% pub_comum %}
+        </div>
+   </section>
 
-      <div class="col-md-4">
-         {% include "social.html" %}
-      </div>
-   </div>
-
+   {% include "social.html" %}
+ 
 {% endblock %}

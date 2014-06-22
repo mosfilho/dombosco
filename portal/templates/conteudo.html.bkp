@@ -64,7 +64,7 @@
 {% endblock %}
 
 {% block content %}
-<section class="col-md-8 detalhes-publicacao" {% if obj.tipo_publicacao %}style="border-color: {{ obj.tipo_publicacao.cor }}"{% endif %}>
+<section class="col-md-8">
 
     <ol class="breadcrumb">
 
@@ -80,12 +80,11 @@
 
     </ol>
 
-    <article>
-
-	    <!--<h1 class="titulo" {% if obj.tipo_publicacao %} style="color: {{ obj.tipo_publicacao.cor }}"{% endif %} >{{ obj.nome }}</h1>-->
-	    <h1 class="titulo">{{ obj.nome }}</h1>
+    <article class="detalhes-publicacao">
 
 	    <p class="data">{{ obj.data_criacao }}</p>
+
+	    <h1 class="titulo" {% if obj.tipo_publicacao %} style="color: {{ obj.tipo_publicacao.cor }}"{% endif %} >{{ obj.nome }}</h1>
 
 	    <hr />
 
@@ -95,7 +94,7 @@
             {% if tabela = 'publicacao' %}
 	        <div class="texto">
      	            {% if obj.get_image %}
-     	               <img src="{{ obj.get_url_image }}" style="width: 100%">
+     	               <img src="{{ obj.get_url_image }}">
      	            {% endif %}
 	            {{ obj.texto|safe }}
 	        </div>
@@ -104,8 +103,8 @@
                 <div class="row">
                 {% for image in obj.get_all_images %}
                     <div class="col-lg-4 col-md-4 col-xs-6">
-                       <a href="#myModal" data-toggle="modal" data-img-url="{{ image.get_url_image }}" class="link-image">
-                          <img src="{{ image.get_url_image }}"  class="img-galeria">
+                       <a href="#myModal" data-toggle="modal" data-img-url="{{ image.get_url_image }}" class="img-galeria thumbnail">
+                          <img src="{{ image.get_url_image }}"> 
                        </a>
                     </div>
                 {% endfor %}
@@ -123,7 +122,7 @@
                     </div>
                   </div>
                 <script>
-                    $('a.link-image').click(function () {
+                    $('a.img-galeria').click(function () {
                          $('#myModal img').attr('src', $(this).attr('data-img-url'));
                      });
                 </script>
@@ -134,15 +133,15 @@
              {% include "agregacao.html" %}
 
 	    <p class="social-share">
-                <label style="float: left; margin-right: 10px;">Compartilhe:</label>                
+                <label>Compartilhe:</label>                
                  <a class="social-icon social-icon-facebook" target="_blank" href="http://www.facebook.com/sharer/sharer.php?s=100;p[url]={{ request.build_absolute_uri }};{% if obj.get_image %}p[images][0]=http://{{ site.site.domain }}{{ obj.get_url_image }}{% endif %};p[title]={{ obj.nome }};"></a>
                  <a target="_blank" href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }};text={{ obj.nome }};via=escoladombosco" class="social-icon social-icon-twitter"></a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                  <a class="social-icon social-icon-google" href="https://plus.google.com/share?url={{ request.build_absolute_uri }}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
             </p>
 
-            <div style="clear:both"></div>
-            <br />
+            <p>
+            </p>
 
 	    <p class="tags">
  
@@ -176,7 +175,7 @@
                 <div class="col-md-3 relacionado-item">
                     <a href="{{ relacionado.get_absolute_url }}" {% if relacionado.tipo_publicacao %}style="color:{{ relacionado.tipo_publicacao.cor }} !important"{% endif %}>
                         {% if relacionado.get_image %}
-                            <img src="{% thumbnail relacionado.get_image 120x70 crop %}" style="width:100%" class="hidden-xs">
+                            <img src="{% thumbnail relacionado.get_image 120x70 crop %}" style="width:100%" class="thumbnail hidden-xs">
                         {% endif  %}
                         <p>{{ relacionado.nome }} <span class="data">há {{ relacionado.data_criacao|timesince }}</span></p>
                     </a>
@@ -189,6 +188,7 @@
 
 </section>
 
-{% include "social.html" %}
-
+<aside class="col-md-4">
+     {% include "social.html" %}
+</aside>
 {% endblock %}

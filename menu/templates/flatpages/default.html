@@ -2,11 +2,9 @@
 {% block title %}{{ flatpage.title }} - {{ block.super }}{% endblock %}
 {% block breadcrumb %}  {% endblock %}
 {% block content %}
-<section class="col-md-8">
+<section class="col-md-8 section">
     <h1 class="titulo">{{ flatpage.title }}</h1>
     {{ flatpage.content }}
 </section>
-<aside class="col-md-4">
     {% include "social.html" %}
-</aside>
 {% endblock %}

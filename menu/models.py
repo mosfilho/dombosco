@@ -29,3 +29,9 @@ class Menu(FlatPage):
             return True
         else:
             return False
+
+    def get_parent(self):
+        return Menu.objects.get(id = self.pagina_pai)
+
+    def get_children(self):
+        return Menu.objects.get(pagina_pai = self.id)

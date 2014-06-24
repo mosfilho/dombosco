@@ -5,6 +5,15 @@ from fullcalendar.admin import CalendarEventAdminInline
 from . import aplicar_tags, aplicar_layout
 from datetime import datetime
 
+class TipoPublicacaoAdmin(admin.ModelAdmin):
+    model = TipoPublicacao
+
+    def save_model(self, request, obj, form, change):
+        obj.autor = request.user
+        obj.data_criacao = datetime.now()
+
+        super(TipoPublicacaoAdmin, self).save_model(request, obj, form, change)
+
 class TabelaLayoutAdmin(admin.ModelAdmin):
     model = TabelaLayout
     ordering = ('id',)
@@ -66,7 +75,7 @@ class LayoutAdmin(admin.ModelAdmin):
 admin.site.register(Galeria, GaleriaAdmin)
 admin.site.register(Publicacao, PublicacaoAdmin)
 admin.site.register(Agregador)
-admin.site.register(TipoPublicacao)
+admin.site.register(TipoPublicacao, TipoPublicacaoAdmin)
 admin.site.register(TabelaLayout, TabelaLayoutAdmin)
 admin.site.register(Tag)
 admin.site.register(Layout, LayoutAdmin)

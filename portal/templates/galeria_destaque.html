@@ -3,7 +3,9 @@
 
                 <div class="col-md-12 section">
 
-                    <h2><a href="#" class="categoria">Galerias em Destaque</a></h2>
+                    <h2><a href="/portal/galeria/" class="categoria">Galerias em Destaque</a></h2>
+
+                    {% if object_list %}
 
                     <div class="col-md-6 article">
                         <a href="{{ object_list.0.get_absolute_url }}">
@@ -32,5 +34,9 @@
                             {% endfor %}
                         </div>
                     </div>
-        
+                    
+                    {% else %}
+                    Sem galerias publicadas.
+                    {% endif %}
+
                 </div><!-- section article -->

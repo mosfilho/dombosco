@@ -1,40 +1,123 @@
-{% load thumbnail %}
-<script>
-$('#main-carousel').carousel({
-  interval: 2000
-})
-</script>
-<!--<div id="main-carousel" class="carousel slide" data-ride="carousel" style="height: {{ size.1 }}px; width: {{ size.0 }}px; margin-top: -21px">-->
-<div class="border-carousel" style="margin-top: -26px; height: {{ size.1 }}px; width: {{ size.0}}px;">
-<div id="main-carousel" class="carousel slide" data-ride="carousel">
+   {% load thumbnail %}
+   <!-- for main new -->
+   <div class="col-md-5">
+      
+      <script> $('#main_carousel1').carousel(); </script>
+      <div id="main_carousel1" class="carousel slide" data-ride="carousel">
+         <!-- Wrapper for slides -->
+         <div class="carousel-inner">
+               {% for banner in banners %}
+               <div class="item {% if forloop.counter = 1 %}active{% endif %}">
+                   <a href="{{ banner.get_absolute_url }}">
+                      {% if banner.tipo_publicacao %}
+                      <span class="categoria-banner" style="background: {{ banner.tipo_publicacao.cor }}">{{ banner.tipo_publicacao }}</span>
+                      {% endif %}
+                      <figure>
+                          <img src="{% thumbnail banner.get_image 458x450 crop %}" alt="{{ banner.nome }}">
+                          <figcaption>{{ banner.nome }} </figcaption>
+                      <figure>
+                   </a>
+               </div>
+               {% endfor %}
+          </div>
+          
+          <!-- Controls -->
+          <a class="left carousel-control" href="#main_carousel1" data-slide="prev">
+             <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#main_carousel1" data-slide="next">
+             <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+      </div><!-- carousel1 -->
 
-    <!-- Indicators -->
-   <ol class="carousel-indicators">
-     {% for banner in banners %}
-         <li data-target="#main-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter == 1 %}class="active"{% endif %}></li>
-     {% endfor %}
-   </ol>
-   <!-- Wrapper for slides -->
-   <div class="carousel-inner">
-      {% for banner in banners %}
-         <div class="item {% if forloop.counter == 1 %}active{% endif %}">
-         <a href="{{ banner.get_absolute_url }}">
-            <img src="{% thumbnail banner.get_image size crop quality=100 %}" alt="{{ banner.nome }}" style="width:100%; height: 100%">
-            <div class="carousel-caption">
-                <h3>{{ banner.nome }}</h3>
-            </div>
+  </div> <!-- first banner -->
 
-         </a>
-         </div>
-      {% endfor %}
-    </div>
-    
-    <!-- Controls -->
-    <a class="left carousel-control" href="#main-carousel" data-slide="prev">
-       <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a class="right carousel-control" href="#main-carousel" data-slide="next">
-       <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-</div>
-</div>
+  <div class="col-md-4">
+
+       <script> $('#main_carousel2').carousel(); </script>
+       <div id="main_carousel2" class="carousel slide" data-ride="carousel" style="margin-bottom: 20px">
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+               {% for banner in banners %}
+               <div class="item {% if forloop.counter = 1 %}active{% endif %}">
+                   <a href="{{ banner.get_absolute_url }}">
+                      {% if banner.tipo_publicacao %}
+                      <span class="categoria-banner" style="background: {{ banner.tipo_publicacao.cor }}">{{ banner.tipo_publicacao }}</span>
+                      {% endif %}
+                      <figure>
+                          <img src="{% thumbnail banner.get_image 360x215 crop %}" alt="{{ banner.nome }}">
+                          <figcaption>{{ banner.nome }} </figcaption>
+                      <figure>
+                   </a>
+               </div>
+               {% endfor %}
+           </div>
+           
+           <!-- Controls -->
+           <a class="left carousel-control" href="#main_carousel2" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+           </a>
+           <a class="right carousel-control" href="#main_carousel2" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+           </a>
+       </div><!-- carousel2 -->
+
+       <script> $('#main_carousel3').carousel(); </script>
+       <div id="main_carousel3" class="carousel slide" data-ride="carousel">
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+               {% for banner in banners %}
+               <div class="item {% if forloop.counter = 1 %}active{% endif %}">
+                   <a href="{{ banner.get_absolute_url }}">
+                      {% if banner.tipo_publicacao %}
+                      <span class="categoria-banner" style="background: {{ banner.tipo_publicacao.cor }}">{{ banner.tipo_publicacao }}</span>
+                      {% endif %}
+                      <figure>
+                          <img src="{% thumbnail banner.get_image 360x215 crop %}" alt="{{ banner.nome }}">
+                          <figcaption>{{ banner.nome }} </figcaption>
+                      <figure>
+                   </a>
+               </div>
+               {% endfor %}
+          </div>
+           
+           <!-- Controls -->
+           <a class="left carousel-control" href="#main_carousel3" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+           </a>
+           <a class="right carousel-control" href="#main_carousel3" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+           </a>
+       </div><!-- carousel2 -->
+
+  </div>
+  <div class="col-md-3">
+
+       <script> $('#main_carousel4').carousel(); </script>
+       <div id="main_carousel4" class="carousel slide" data-ride="carousel">
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+               {% for banner in banners %}
+               <div class="item {% if forloop.counter = 1 %}active{% endif %}">
+                   <a href="{{ banner.get_absolute_url }}">
+                      {% if banner.tipo_publicacao %}
+                      <span class="categoria-banner" style="background: {{ banner.tipo_publicacao.cor }}">{{ banner.tipo_publicacao }}</span>
+                      {% endif %}
+                      <figure>
+                          <img src="{% thumbnail banner.get_image 263x450 crop %}" alt="{{ banner.nome }}">
+                          <figcaption>{{ banner.nome }} </figcaption>
+                      <figure>
+                   </a>
+               </div>
+               {% endfor %}
+           </div>
+           
+           <!-- Controls -->
+           <a class="left carousel-control" href="#main_carousel4" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+           </a>
+           <a class="right carousel-control" href="#main_carousel4" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+           </a>
+       </div><!-- carousel4 -->
+   </div>

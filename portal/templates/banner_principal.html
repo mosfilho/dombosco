@@ -1,123 +1,39 @@
    {% load thumbnail %}
    <!-- for main new -->
-   <div class="col-md-5">
-      
-      <script> $('#main_carousel1').carousel(); </script>
-      <div id="main_carousel1" class="carousel slide" data-ride="carousel">
+   <div class="col-md-12">
+      {% if banners %} 
+      <script> $('#main-carousel').carousel(); </script>
+      <div id="main-carousel" class="carousel slide" data-ride="carousel">
          <!-- Wrapper for slides -->
          <div class="carousel-inner">
                {% for banner in banners %}
                <div class="item {% if forloop.counter = 1 %}active{% endif %}">
-                   <a href="{{ banner.get_absolute_url }}">
                       {% if banner.tipo_publicacao %}
-                      <span class="categoria-banner" style="background: {{ banner.tipo_publicacao.cor }}">{{ banner.tipo_publicacao }}</span>
+                      <a href="{{ banner.tipo_publicacao.get_absolute_url }}">
+                          <span class="categoria-banner" style="background: {{ banner.tipo_publicacao.cor }}">{{ banner.tipo_publicacao }}</span>
+                      </a>
                       {% endif %}
-                      <figure>
-                          <img src="{% thumbnail banner.get_image 458x450 crop %}" alt="{{ banner.nome }}">
-                          <figcaption>{{ banner.nome }} </figcaption>
-                      <figure>
-                   </a>
+                      <a href="{{ banner.get_absolute_url }}">
+                          <figure>
+                              <img src="{{ banner.get_url_image }}" alt="{{ banner.nome }}">
+                              <figcaption>{{ banner.nome }} </figcaption>
+                          <figure>
+                      </a>
                </div>
                {% endfor %}
           </div>
           
           <!-- Controls -->
-          <a class="left carousel-control" href="#main_carousel1" data-slide="prev">
+          <a class="left carousel-control" href="#main-carousel" data-slide="prev">
              <span class="glyphicon glyphicon-chevron-left"></span>
           </a>
-          <a class="right carousel-control" href="#main_carousel1" data-slide="next">
+          <a class="right carousel-control" href="#main-carousel" data-slide="next">
              <span class="glyphicon glyphicon-chevron-right"></span>
           </a>
       </div><!-- carousel1 -->
+      {% else %}
+      Sem publicações
+      {% endif %}
+      
 
   </div> <!-- first banner -->
-
-  <div class="col-md-4">
-
-       <script> $('#main_carousel2').carousel(); </script>
-       <div id="main_carousel2" class="carousel slide" data-ride="carousel" style="margin-bottom: 20px">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-               {% for banner in banners %}
-               <div class="item {% if forloop.counter = 1 %}active{% endif %}">
-                   <a href="{{ banner.get_absolute_url }}">
-                      {% if banner.tipo_publicacao %}
-                      <span class="categoria-banner" style="background: {{ banner.tipo_publicacao.cor }}">{{ banner.tipo_publicacao }}</span>
-                      {% endif %}
-                      <figure>
-                          <img src="{% thumbnail banner.get_image 360x215 crop %}" alt="{{ banner.nome }}">
-                          <figcaption>{{ banner.nome }} </figcaption>
-                      <figure>
-                   </a>
-               </div>
-               {% endfor %}
-           </div>
-           
-           <!-- Controls -->
-           <a class="left carousel-control" href="#main_carousel2" data-slide="prev">
-              <span class="glyphicon glyphicon-chevron-left"></span>
-           </a>
-           <a class="right carousel-control" href="#main_carousel2" data-slide="next">
-              <span class="glyphicon glyphicon-chevron-right"></span>
-           </a>
-       </div><!-- carousel2 -->
-
-       <script> $('#main_carousel3').carousel(); </script>
-       <div id="main_carousel3" class="carousel slide" data-ride="carousel">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-               {% for banner in banners %}
-               <div class="item {% if forloop.counter = 1 %}active{% endif %}">
-                   <a href="{{ banner.get_absolute_url }}">
-                      {% if banner.tipo_publicacao %}
-                      <span class="categoria-banner" style="background: {{ banner.tipo_publicacao.cor }}">{{ banner.tipo_publicacao }}</span>
-                      {% endif %}
-                      <figure>
-                          <img src="{% thumbnail banner.get_image 360x215 crop %}" alt="{{ banner.nome }}">
-                          <figcaption>{{ banner.nome }} </figcaption>
-                      <figure>
-                   </a>
-               </div>
-               {% endfor %}
-          </div>
-           
-           <!-- Controls -->
-           <a class="left carousel-control" href="#main_carousel3" data-slide="prev">
-              <span class="glyphicon glyphicon-chevron-left"></span>
-           </a>
-           <a class="right carousel-control" href="#main_carousel3" data-slide="next">
-              <span class="glyphicon glyphicon-chevron-right"></span>
-           </a>
-       </div><!-- carousel2 -->
-
-  </div>
-  <div class="col-md-3">
-
-       <script> $('#main_carousel4').carousel(); </script>
-       <div id="main_carousel4" class="carousel slide" data-ride="carousel">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-               {% for banner in banners %}
-               <div class="item {% if forloop.counter = 1 %}active{% endif %}">
-                   <a href="{{ banner.get_absolute_url }}">
-                      {% if banner.tipo_publicacao %}
-                      <span class="categoria-banner" style="background: {{ banner.tipo_publicacao.cor }}">{{ banner.tipo_publicacao }}</span>
-                      {% endif %}
-                      <figure>
-                          <img src="{% thumbnail banner.get_image 263x450 crop %}" alt="{{ banner.nome }}">
-                          <figcaption>{{ banner.nome }} </figcaption>
-                      <figure>
-                   </a>
-               </div>
-               {% endfor %}
-           </div>
-           
-           <!-- Controls -->
-           <a class="left carousel-control" href="#main_carousel4" data-slide="prev">
-              <span class="glyphicon glyphicon-chevron-left"></span>
-           </a>
-           <a class="right carousel-control" href="#main_carousel4" data-slide="next">
-              <span class="glyphicon glyphicon-chevron-right"></span>
-           </a>
-       </div><!-- carousel4 -->
-   </div>

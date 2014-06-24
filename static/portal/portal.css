@@ -5,21 +5,25 @@ span.categoria-banner{
    z-index: 5;
    position: absolute;
    right: 0;
+   top: 100;
+}
+a:hover span.categoria-banner{
+   text-decoration: underline;
 }
 
 figure {
    position: relative;
+   background: black;
 }
 
 figure figcaption {
    position: absolute;
-   bottom: 0;
-<<<<<<< HEAD
-   left: 0;
-   padding: 0;
+   padding: 10px;
    margin: 0;
    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0),rgba( 0, 0, 0, 1));   
-   height: 170px;
+}
+.carousel {
+   position: relative;
 }
 .carousel-caption h3 {
    font-weight: 900;
@@ -37,11 +41,28 @@ figure figcaption {
    display: block-inline;
 }
 
+#main-carousel{
+   margin-top: -20px;
+   height: 600px;
+   overflow: hidden;
+}
+#main-carousel img{
+   width: 100%;
+}
+#main-carousel .item {
+   height:inherit;
+}
+#main-carousel figcaption{
+   top: 0;
+   height: auto;
+   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1),rgba( 0, 0, 0, 0));   
+   font-size: 200%;
+   max-height: 200px;
+}
+
 article.publicacao{
    height: 80px;
    border-bottom: 1px dotted #eaeaea;
-=======
->>>>>>> 81393f3bcd4bdd033c04feaacf7a519bbf659bc6
    color: black;
    width: 100%;
    background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.9));
@@ -214,8 +235,11 @@ img.img-galeria {
 a {
    transition: easy .2s;
 }
+a img {
+   transition: opacity linear .2s;
+}
 a:hover > img {
-    opacity: .9;
+    opacity: .8;
 }
 
 /*

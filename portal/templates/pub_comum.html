@@ -8,7 +8,7 @@
       {% for publicacao in tipo_publicacao|pub_por_tipo %}
            {% if forloop.counter = 1 %}
                     <div class="col-md-6 article">
-                        <a href="#">
+                        <a href="{{ publicacao.get_absolute_url }}">
                             <figure>
                                 <img src="{% thumbnail publicacao.get_image 342x249 crop %}" alt="{{ publicacao.nome }}">
                                 <figcaption>{{ publicacao.nome }}</figcaption>

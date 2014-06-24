@@ -13,7 +13,7 @@ class MenuAdmin(FlatPageAdmin):
     form = MenuForm
     fieldsets = (
         (None, {'fields': ('title', 'url', 'pagina_pai', 'sites', 'esta_publicado')}),
-        ((u'Páginas Estáticas: ferramentas avançadas'), {'classes': ('collapse',), 'fields': ('content', 'registration_required', 'template_name')}),
+        ((u'Páginas Estáticas: ferramentas avançadas'), {'fields': ('content', 'template_name')}),
     )
     list_display = ('title', 'url', 'pagina_pai', 'esta_publicado', 'template_name')
     #list_filter = ('sites', 'enable_comments', 'registration_required')

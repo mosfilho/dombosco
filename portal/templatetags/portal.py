@@ -27,6 +27,22 @@ def banner_principal(context):
         return None
 register.inclusion_tag('banner_principal.html', takes_context = True) (banner_principal)
 
+def banner_secundario(context):
+    """
+    Include html with second banner. By default, the locale is 3
+    """
+    banners = []
+    try:
+        for layout in Layout.objects.filter(local = 3):
+            table = ContentType.objects.get_for_id(layout.content_type.id)
+            banners.append(table.get_object_for_this_type(pk=layout.object_id, esta_ativo = True))
+            size = [layout.local.largura, layout.local.altura]
+        return {'banners' : banners,
+                'size' : size}
+    except:
+        return None
+register.inclusion_tag('banner_secundario.html', takes_context = True) (banner_secundario)
+
 def pub_destaque(context):
     """
     Include html with hot publications. By default, the locale is 2

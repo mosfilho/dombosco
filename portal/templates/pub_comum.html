@@ -1,16 +1,17 @@
 {% load portal %}
 {% load thumbnail %}
+<div class="row">
 {% for tipo_publicacao in tipos_publicacao %}
- <div class="col-md-12 section" style="border-color: {{ tipo_publicacao.cor }}">
+ <div class="col-md-12 section">
 
-      <h2><a href="{{ tipo_publicacao.get_absolute_url }}" class="categoria">{{ tipo_publicacao }}</a></h2>
-
+      <h2><a href="{{ tipo_publicacao.get_absolute_url }}" class="categoria" style="color: {{ tipo_publicacao.cor }}">{{ tipo_publicacao }} <font style="font-size: 70%">[veja +]</font></a></h2>
+   <div class="row">
       {% for publicacao in tipo_publicacao|pub_por_tipo %}
            {% if forloop.counter = 1 %}
                     <div class="col-md-6 article">
                         <a href="{{ publicacao.get_absolute_url }}">
-                            <figure>
-                                <img src="{% thumbnail publicacao.get_image 342x249 crop %}" alt="{{ publicacao.nome }}">
+                            <figure style="max-width: 350px">
+                                <img src="{% thumbnail publicacao.get_image 350x249 crop %}" alt="{{ publicacao.nome }}" style="width: 100%">
                                 <figcaption>{{ publicacao.nome }}</figcaption>
                             </figure>
                         </a>
@@ -22,7 +23,7 @@
            {% if forloop.counter > 1 %}
                   <div class="row">
                       <div class="col-md-12 sub-article">
-                          <a href="{{ publicacao.get_absolute_url }}">
+                          <a href="{{ publicacao.get_absolute_url }}" style="color: {{ tipo_publicacao.cor }}">
                                <img src="{% thumbnail publicacao.get_image 100x76 crop %}" alt="{{ publicacao.nome }}">
                                <p class="hora">
                                     <span class="glyphicon glyphicon-time"></span>
@@ -35,5 +36,7 @@
             {% endif %}
       {% endfor %}
       </div>
+   </div>
 </div><!-- section article -->
 {% endfor %}
+</div><!-- section article -->

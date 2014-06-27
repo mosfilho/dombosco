@@ -2,84 +2,76 @@
 {% load portal %}
 {% load thumbnail %}
 
-<!-- navbar in top -->
-<nav class="navbar navbar-custom" role="navigation">
-<!-- Brand and toggle get grouped for better mobile display -->
-    <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-      
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-            {% for menu in menus %}
-                {% if menu.has_child %}
-                    <li class="dropdown">
-                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">{{ menu.title }}<b class="caret"></b></a>
-                       <ul class="dropdown-menu">
-                           {% for sub_menu in menu|get_submenus %}
-                               <li><a href="{{ sub_menu.get_absolute_url }}">{{ sub_menu.title }}</a></li>
-                           {% endfor %}
-                        </ul>
-                    </li>
-                {% else %}
-                    <li><a href="{{ menu.get_absolute_url }}">{{ menu.title }}</a></li>
-                {% endif %}
-                </li>
-            {% endfor %}
-            </ul>
-
-          <ul class="nav navbar-nav navbar-right">
-               <li class="dropdown">
-               {% if request.user.is_active %}
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ request.user }} <b class="caret"></b></a>
-               <ul class="dropdown-menu">
-                 <li><a href="{% url 'admin:index' %}">Administração</a></li>
-                 <li class="divider"></li>
-                 <li><a href="{% url 'admin:logout' %}">Sair</a></li>
-               </ul>
-               {% else %}
-                  <li><a href="{% url 'entrar' %}">Entrar</a></li>
-               {% endif %}
-             </li>
-           </ul>
-
-         </ul>
-        </div><!-- container -->
-    </div><!-- /.navbar-collapse -->
-</nav>
 <!-- subnavbar - logo and social links -->
 <div id="header">
-    <div class="container">
-        <a id="logo-site" href="/"></a>
-    </div>
-</div>
-<div class="main-menu">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <ul id="main-menu-items" class="sm sm-menu menu-efct">
-                     <li><a href="/calendario/">Calendário</a><li>
-                     <li><a href="/portal/publicacao/">Publicaçoes</a><li>
-                     <li><a href="/portal/galeria/">Galerias</a><li>
-                </ul>
-            </div>
-            <div class="col-lg-4 main-search-bar">
-                <form class="nvabar-form float-width" role="search" action="{% url 'buscar' %}">
-                    <div class="form-group float-width">
-                         <input class="form-control float-width" name="q" placeholder="Pesquisar publicações, galerias, eventos">
-                    </div>
-                    <a href="#">
-                         <i class="glyphicon glyphicon-search"></i>
-                    </a>
-                </form>
-            </div>
+    <div class="row">
+
+        <div class="hidden-xs col-md-3">
+            <a id="logo-site" href="/"></a>
         </div>
+
+        <div class="col-sm-9 section-navbar">
+            <!-- navbar in top -->
+            <nav class="navbar navbar-custom" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                      <a class="navbar-brand" href="/"></a>
+                    </div>
+                  
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                        {% for menu in menus %}
+                            {% if menu.has_child %}
+                                <li class="dropdown">
+                                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">{{ menu.title }}<b class="caret"></b></a>
+                                   <ul class="dropdown-menu">
+                                       {% for sub_menu in menu|get_submenus %}
+                                           <li><a href="{{ sub_menu.get_absolute_url }}">{{ sub_menu.title }}</a></li>
+                                       {% endfor %}
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <li><a href="{{ menu.get_absolute_url }}">{{ menu.title }}</a></li>
+                            {% endif %}
+                            </li>
+                        {% endfor %}
+                        </ul>
+
+                      <form class="navbar-form navbar-right" role="search" action="{% url 'buscar' %}">
+                          <div class="form-group">
+                            <input type="text" class="form-control" name="q" placeholder="Pesquisar...">
+                          </div>
+                      </form>
+            
+                      <ul class="nav navbar-nav navbar-right">
+                           <li class="dropdown">
+                           {% if request.user.is_active %}
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ request.user }} <b class="caret"></b></a>
+                           <ul class="dropdown-menu">
+                             <li><a href="{% url 'admin:index' %}">Administração</a></li>
+                             <li class="divider"></li>
+                             <li><a href="{% url 'admin:logout' %}">Sair</a></li>
+                           </ul>
+                           {% else %}
+                              <li><a href="{% url 'entrar' %}">Entrar</a></li>
+                           {% endif %}
+                         </li>
+
+
+                       </ul>
+            
+                     </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+        </div>
+
     </div>
+
 </div>

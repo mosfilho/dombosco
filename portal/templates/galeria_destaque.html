@@ -1,42 +1,48 @@
 {% load thumbnail %}
-                <!-- GALLERY SECTION -->
 
-                <div class="col-md-12 section">
+<div class="row"
+       <!-- GALLERY SECTION -->
 
-                    <h2><a href="/portal/galeria/" class="categoria">Galerias em Destaque</a></h2>
+       <div class="col-md-12 section">
+
+             <h2><a href="/portal/galeria/" class="categoria">Galerias em Destaque</a></h2>
 
                     {% if object_list %}
 
-                    <div class="col-md-6 article">
-                        <a href="{{ object_list.0.get_absolute_url }}">
-                            <figure>
-                                <img src="{% thumbnail object_list.0.get_image 342x249 crop %}">
-                                <figcaption>{{ object_list.0.nome }}</figcaption>
-                            </figure>
-                        </a>
-                    </div>
-        
-                    <div class="col-md-6">
-                        <div class="row">
-                            {% for object in object_list %}
-                                {% if forloop.counter > 1 %}
-                                <div class="col-md-12 sub-article">
-                                    <a href="{{ object.get_absolute_url }}">
-                                         <img src="{% thumbnail object.get_image 100x76 crop %}">
-                                         <p class="hora">
-                                              <span class="glyphicon glyphicon-time"></span>
-                                              publicado há {{ object.data_criacao|timesince }}
-                                         </p>
-                                         <p class="titulo"><small>{{ object.nome }}</small></p>
-                                    </a>
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                    
+ 			<div class="row">
+
+                    		<div class="col-md-6 article" style="max-width: 342px">
+                        		<a href="{{ object_list.0.get_absolute_url }}">
+                            		<figure>
+                                		<img src="{% thumbnail object_list.0.get_image 342x249 crop %}">
+                                		<figcaption>{{ object_list.0.nome }}</figcaption>
+                            		</figure>
+                        		</a>
+                    		</div>
+        		
+                    		<div class="col-md-6">
+                        		<div class="row">
+                            		{% for object in object_list %}
+                                		{% if forloop.counter > 1 %}
+                                		<div class="col-md-12 sub-article">
+                                    		<a href="{{ object.get_absolute_url }}">
+                                         		<img src="{% thumbnail object.get_image 100x76 crop %}">
+                                         		<p class="hora">
+                                              		<span class="glyphicon glyphicon-time"></span>
+                                              		publicado há {{ object.data_criacao|timesince }}
+                                         		</p>
+                                         		<p class="titulo"><small>{{ object.nome }}</small></p>
+                                    		</a>
+                                		</div>
+                                		{% endif %}
+                            		{% endfor %}
+                        		</div>
+                    		</div>
+               		</div>
+                    		
                     {% else %}
-                    Sem galerias publicadas.
+                    	Sem galerias publicadas.
                     {% endif %}
 
                 </div><!-- section article -->
+</div><!-- row  -->

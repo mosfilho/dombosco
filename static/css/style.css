@@ -3,7 +3,7 @@
 */
 
 body {
-    background: #f2f2f2;
+    background: #fff;
 }
 #header {
     background: #fff;
@@ -11,21 +11,23 @@ body {
 }
 a#logo-site {
     background: url('../img/logo-site.png') no-repeat center center;
-    width: 359px;
-    height: 110px;
+    width: 400px;
+    height: 70px;
     display: block;
 }
 .footer {
-   background: #303030;
+   background: #0087d0;
    color: #e9e9e9;
    padding: 20px 0px 20px 0px;
    margin-top: 20px;
-   border-top: 3px solid #0087d0;
+   border-top: 3px solid gray;
 }
 footer {
-   background: #121212;
+   background: #133984;
    color: #ccc;
    padding: 20px 0px 20px 0px;
+   box-shadow: 0px 0px 5px 1px #000;
+   z-index: 99;
 }
 
 span.categoria-banner{
@@ -57,7 +59,6 @@ figure figcaption {
 }
 
 .section {
-    border-top: 2px solid #0087d0;
     background: white;
     padding-right: 0;
     margin-bottom: 30px;

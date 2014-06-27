@@ -4,6 +4,12 @@
       {% if banners %} 
       <script> $('#main-carousel').carousel(); </script>
       <div id="main-carousel" class="carousel slide" data-ride="carousel">
+         <!-- Indicators -->
+         <ol class="carousel-indicators">
+           {% for banner in banners %}
+               <li data-target="#main-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.counter = 1 %}class="active"{% endif %}></li>
+           {% endfor %}
+         </ol>
          <!-- Wrapper for slides -->
          <div class="carousel-inner">
                {% for banner in banners %}

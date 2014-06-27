@@ -3,9 +3,10 @@ span.categoria-banner{
    padding: 10px;
    color: #fff;
    z-index: 5;
-   position: absolute;
+   top: 0;
    right: 0;
-   top: 100;
+   border-radius: 100px 0px 0px 100px;
+   text-indent: 10px;
 }
 a:hover span.categoria-banner{
    text-decoration: underline;
@@ -40,19 +41,25 @@ figure figcaption {
    bottom: -5px;
    display: block-inline;
 }
-
-#main-carousel{
-   margin-top: -20px;
-   height: 600px;
+#second-carousel{
+   max-height: 400px;
    overflow: hidden;
 }
-#main-carousel img{
+
+#main-carousel{
+   max-height: 600px;
+   overflow: hidden;
+}
+#main-carousel img, #second-carousel img {
    width: 100%;
 }
-#main-carousel .item {
-   height:inherit;
+#main-carousel .item , #main-carousel figure,
+#second-carousel .item , #second-carousel figure {
+   height: inherit;
+   position: relative;
 }
-#main-carousel figcaption{
+#main-carousel figcaption,
+#second-carousel figcaption{
    top: 0;
    height: auto;
    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1),rgba( 0, 0, 0, 0));   
@@ -76,7 +83,6 @@ article.publicacao{
 }
 
 .section {
-    border-top: 2px solid #0087d0;
     background: white;
     padding-right: 0;
     margin-bottom: 30px;

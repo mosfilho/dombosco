@@ -1,0 +1,41 @@
+{% load portal %}
+{% load thumbnail %}
+ <div class="col-md-12 section" style="border-color: {{ tipo_publicacao.cor }}; padding: 0; max-height: 400px;">
+   <!-- for second new -->
+      {% if banners %} 
+      <script> $('#second-carousel').carousel(); </script>
+      <div id="second-carousel" class="carousel slide" data-ride="carousel">
+         <!-- Wrapper for slides -->
+         <div class="carousel-inner">
+               {% for banner in banners %}
+               <div class="item {% if forloop.counter = 1 %}active{% endif %}">
+                      {% if banner.tipo_publicacao %}
+                      <a href="{{ banner.tipo_publicacao.get_absolute_url }}">
+                          <span class="categoria-banner" style="background: {{ banner.tipo_publicacao.cor }}">{{ banner.tipo_publicacao }}</span>
+                      </a>
+                      {% endif %}
+                      <a href="{{ banner.get_absolute_url }}">
+                          <figure>
+                              <img src="{{ banner.get_url_image }}" alt="{{ banner.nome }}">
+                              <figcaption>{{ banner.nome }} </figcaption>
+                          <figure>
+                      </a>
+               </div>
+               {% endfor %}
+          </div>
+          
+          <!-- Controls -->
+          <a class="left carousel-control" href="#second-carousel" data-slide="prev">
+             <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#second-carousel" data-slide="next">
+             <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+      </div><!-- carousel1 -->
+      {% else %}
+      Sem publicações
+      {% endif %}
+      
+
+
+</div><!-- section article -->

@@ -11,11 +11,11 @@
        <div class="row">
        {% for object in objects %}
            <div class="col-xs-12 lista-item" >
-               <a href="{{ object.get_absolute_url }}" {% if object.tipo_publicacao %}style="color: {{ object.tipo_publicacao.cor }}"{% endif %}>
+               <a href="{{ object.get_absolute_url }}">
                     {% if object.get_image %}
                          <img src="{% thumbnail object.get_image 250x150 crop %}">
                     {% endif %}
-                    <h2>{{ object }}</h2>
+                    <h2 {% if object.tipo_publicacao %}style="color: {{ object.tipo_publicacao.cor }}"{% endif %}>{{ object }}</h2>
                </a>
                <p class="data"><span class="glyphicon glyphicon-time"></span> publicado à {{ object.data_criacao|timesince }}</p>
                   {% if object|get_tags %}
